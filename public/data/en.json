@@ -1,0 +1,91 @@
+{
+    "home": {
+    "title": "Welcome to My Portfolio",
+    "subtitle": "Software Developer",
+    "description": "I am a passionate software developer with a focus on creating innovative solutions."
+    },
+    "aboutMe": {
+      "title": "About Me",
+      "name": "Your Name",
+      "profession": "Software Developer",
+      "description": "A passionate developer with a love for creating innovative solutions."
+    },
+    "education": {
+        "title": "Education",
+        "items": [
+        {
+            "institution": "University of Example",
+            "degree": "Bachelor's Degree in Computer Science",
+            "years": "2020-2024"
+        },
+        {
+            "institution": "Example High School",
+            "degree": "High School Diploma",
+            "years": "2015-2020"
+        }
+        ]
+    },
+    "workExperience": {
+      "title": "Work Experience",
+      "items": 
+        [
+        {
+            "jobTitle": "Frontend Developer",
+            "company": "Example Company",
+            "years": "2023-Present",
+            "description": "Developed user interfaces using React and Tailwind CSS."
+        },
+        {
+            "jobTitle": "Intern",
+            "company": "Tech Startup",
+            "years": "2022-2023",
+            "description": "Assisted in creating a website and worked on backend APIs."
+        }
+        ]
+    },
+
+    "skill": {
+      "title": "Skills",
+      "items":
+        [
+            {
+                "name": "JavaScript",
+                "level": "Advanced"
+            },
+            {
+                "name": "React",
+                "level": "Intermediate"
+            },
+            {
+                "name": "Tailwind CSS",
+                "level": "Advanced"
+            }
+        ]
+    },
+    "project": [],
+    "contact": {
+      "title": "Contact",
+      "email": "your.email@example.com",
+      "linkedin": "https://www.linkedin.com/in/yourname"
+    },
+    "reference": {
+        "title": "References",
+        "items":
+        [
+            {
+                "name": "John Doe",
+                "relationship": "Former Manager",
+                "contact": "john.doe@example.com",
+                "description": "John was my manager at Example Company and can speak to my skills as a frontend developer."
+            },
+            {
+                "name": "Jane Smith",
+                "relationship": "University Professor",
+                "contact": "jane.smith@example.com",
+                "description": "Jane was my professor in several Computer Science courses and can speak to my academic capabilities."
+            }
+        ]
+    }
+
+}
+  

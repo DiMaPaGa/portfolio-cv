@@ -1,0 +1,42 @@
+
+---
+import type { Translations } from '../types/Translations';
+
+const { reference } = Astro.props as { reference: Translations['reference'] }; // Extraemos el subtipo de Translations
+console.log("Idioma en Reference:", reference); // Depuración opcional
+---
+
+<section id="reference" class="py-10">
+  <h2 class="text-3xl font-bold mb-4">
+    {reference.title}
+  </h2>
+  <ul class="space-y-6">
+    {reference.items.map((item: Translations['reference']['items'][0]) => (
+      <li
+        data-key={item.name}
+        class="flex items-start space-x-4 bg-white p-4 shadow rounded-lg border hover:shadow-md transition"
+      >
+        {/* Mostrar foto solo si está definida */}
+        {item.photo && (
+          <img
+            src={item.photo}
+            alt={`Foto de ${item.name}`}
+            class="w-16 h-16 object-cover rounded-full"
+          />
+        )}
+        <div>
+          <p class="font-semibold text-lg">{item.name}</p>
+          <p class="text-sm text-gray-600">{item.relationship}</p>
+          <p class="text-gray-700 mt-2">{item.description}</p>
+          {item.contact && (
+            <p class="text-sm text-blue-500 mt-2">
+              <a href={`mailto:${item.contact}`} class="underline">
+                {item.contact}
+              </a>
+            </p>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>
