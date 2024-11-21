@@ -1,0 +1,22 @@
+---
+const { contact } = Astro.props;  // Recibimos el idioma desde Layout
+console.log("Idioma en Contact:", contact); // Agrega esto para depurar
+---
+
+<section id="contact" class="py-10">
+    <h2 class="text-3xl font-bold mb-4">{contact.title}</h2>
+  <p>
+    Email: 
+    <a href={`mailto:${contact.email}`} class="text-blue-500 underline">
+      {contact.email}
+    </a>
+  </p>
+  <p>
+    LinkedIn: 
+    <a href={contact.linkedin} class="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
+      {contact.linkedin}
+    </a>
+  </p>
+</section>
+
+

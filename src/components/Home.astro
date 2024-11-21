@@ -1,0 +1,14 @@
+
+---
+const { home } = Astro.props;  // Recibimos el idioma desde Layout
+console.log("Idioma en Home:", home); // Agrega esto para depurar
+---
+
+<section id="home" class="py-10 text-center bg-gray-200">
+  <h1 class="text-5xl font-bold mb-4">{home.title}</h1>
+  <p class="text-lg">{home.subtitle}</p>
+  <p>{home.description}</p> <!-- Agregué la descripción si quieres mostrarla también -->
+</section>
+
+
+
