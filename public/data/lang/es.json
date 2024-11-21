@@ -1,0 +1,14 @@
+{
+    "navbar": {
+      "aboutMe": "Sobre Mí",
+      "education": "Educación",
+      "workExperience": "Experiencia",
+      "skill": "Habilidades",
+      "project": "Proyectos",
+      "reference": "Referencias",
+      "contact": "Contacto"
+    },
+    "footer": {
+      "copyright": "© 2024 Tu Nombre. Todos los derechos reservados."
+    }
+}

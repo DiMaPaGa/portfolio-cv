@@ -1,0 +1,22 @@
+
+---
+const { education } = Astro.props;  // Recibimos el idioma desde Layout
+console.log("Idioma en Contact:", education); // Agrega esto para depurar
+---
+
+<section id="education" class="py-10">
+  <h2 class="text-3xl font-bold mb-4">
+    {education.title}
+  </h2>
+  <ul class="space-y-4">
+    {education.items.map(item => (
+      <li key={item.institution}>
+        <p class="font-semibold">{item.institution}</p>
+        <p>{item.degree}</p>
+        <p>{item.years}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+

@@ -1,0 +1,26 @@
+
+---
+import type { Translations } from '../types/Translations';
+
+const { skill } = Astro.props as { skill: Translations['skill'] };  // Definimos el tipo de `skill` explícitamente
+console.log("Idioma en Skill:", skill); // Depuración opcional
+---
+
+<section id="skill" class="py-10">
+  <h2 class="text-3xl font-bold mb-4">
+    {skill.title}
+  </h2>
+  <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    {skill.items.map((item: Translations['skill']['items'][0]) => (
+      <li
+        data-key={item.name}
+        class="border rounded p-4 bg-white shadow hover:shadow-md transition"
+      >
+        <p class="font-semibold text-lg">{item.name}</p>
+        <p class="text-sm text-gray-600 italic">{item.level}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+

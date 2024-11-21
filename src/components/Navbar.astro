@@ -1,0 +1,20 @@
+---
+const { navbar } = Astro.props;
+console.log("navbar en Navbar:", navbar); // Verifica que las traducciones estén disponibles
+
+---
+
+<nav class="bg-blue-600 p-4 text-white">
+  <ul class="flex justify-center space-x-8">
+    <li><a href="#aboutMe" class="hover:underline">{navbar.aboutMe}</a></li>
+    <li><a href="#education" class="hover:underline">{navbar.education}</a></li>
+    <li><a href="#workExperience" class="hover:underline">{navbar.workExperience}</a></li>
+    <li><a href="#skill" class="hover:underline">{navbar.skill}</a></li>
+    <li><a href="#project" class="hover:underline">{navbar.project}</a></li>
+    <li><a href="#reference" class="hover:underline">{navbar.reference}</a></li>
+    <li><a href="#contact" class="hover:underline">{navbar.contact}</a></li>
+  </ul>
+</nav>
+
+
+

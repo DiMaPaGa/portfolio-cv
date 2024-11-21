@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Home from '../components/Home.astro';
+import AboutMe from '../components/AboutMe.astro';
+import Education from '../components/Education.astro';
+import WorkExperience from '../components/WorkExperience.astro';
+import Skill from '../components/Skill.astro';
+import Project from '../components/Project.astro';
+import Reference from '../components/Reference.astro';
+import Contact from '../components/Contact.astro';
+
+import type { Translations } from '../types/Translations.ts'; 
+
+
+// Determinar el idioma (por ejemplo, "es" para español o "en" para inglés)
+const lang = "es"; // Puedes cambiarlo aquí o hacerlo dinámico según la selección del usuario
+
+// Importar datos directamente según el idioma
+let translations = {} as Translations;
+if (lang === "es") {
+  const module= await import('../../public/data/es.json');
+  translations = module.default;
+} else if (lang === "en") {
+  const module= await import('../../public/data/en.json');
+  translations = module.default;
+}
+---
+
+<Layout layoutLang={lang}>
+  <Home home={translations.home} />
+  <AboutMe aboutMe={translations.aboutMe} />
+  <Education education={translations.education} />
+  <WorkExperience workExperience={translations.workExperience} />
+  <Skill skill={translations.skill} />
+  <Project project={translations.project} />
+  <Reference reference={translations.reference} />
+  <Contact contact={translations.contact} />
+</Layout>

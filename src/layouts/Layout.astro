@@ -1,0 +1,38 @@
+---
+import type { TranslationsLayout } from '../types/TranslationsLayout.ts';
+const { title = "Portfolio CV", layoutLang  } = Astro.props;
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+// Importar datos directamente según el idioma
+let translationsLayout: TranslationsLayout = {} as TranslationsLayout;
+if (layoutLang === "es") {
+  const module= await import('../../public/data/lang/es.json');
+  translationsLayout = module.default;
+} else if (layoutLang === "en") {
+  const module= await import('../../public/data/lang/en.json');
+  translationsLayout = module.default;
+  
+}
+---
+
+<!DOCTYPE html>
+<html lang={layoutLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Barra de navegación -->
+    <Navbar navbar={translationsLayout.navbar} />
+
+    <!-- Contenido principal -->
+    <main>
+      <slot lang={layoutLang}/> <!-- Aquí irá el contenido específico de cada sección -->
+    </main>
+
+    <!-- Pie de página -->
+    <Footer footer={translationsLayout.footer} />
+  </body>
+</html>

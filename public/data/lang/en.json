@@ -1,0 +1,14 @@
+{
+    "navbar": {
+      "aboutMe": "About Me",
+      "education": "Education",
+      "workExperience": "Work Experience",
+      "skill": "Skills",
+      "project": "Projects",
+      "reference": "References",
+      "contact": "Contact"
+    },
+    "footer": {
+      "copyright": "© 2024 Your Name. All rights reserved."
+    }
+}

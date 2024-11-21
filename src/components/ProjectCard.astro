@@ -1,0 +1,35 @@
+
+---
+
+import type { ProjectModel } from '../types/ProjectModel';
+import Project from './Project.astro';
+
+const { projectContent } = Astro.props as { projectContent: ProjectModel }; // Extraemos el subtipo de Translations
+console.log("Idioma en projectContent:", projectContent); // Depuración opcional
+---
+
+<section id="project" class="py-10">
+  <h2 class="text-3xl font-bold mb-4">
+    {projectContent.projectName}
+  </h2>
+  <p class="text-lg">{projectContent.description}</p>
+  <a class="text-blue-500 hover:underline" href={projectContent.repositoryUrl}>{projectContent.repositoryUrl}</a>
+        {projectContent.picture && (
+          <img
+            src={projectContent.picture}
+            alt={`Foto de ${projectContent.projectName}`}
+            class="w-16 h-16 object-cover rounded-full"
+          />
+        )}
+</section>
+
+
+
+
+
+
+
+
+
+
+
