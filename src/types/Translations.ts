@@ -1,3 +1,4 @@
+import type { ProjectModel } from "./ProjectModel";
 
 export interface Translations {
     home: {
@@ -31,17 +32,51 @@ export interface Translations {
     };
     skill: {
       title: string;
-      items: Array<{
-        name: string;
-        level: string;
-      }>;
+      categories: {
+        frontend: {
+          title: string;
+          items: Array<{
+            name: string;
+            level: string;
+          }>;
+        };
+        backend: {
+          title: string;
+          items: Array<{
+            name: string;
+            level: string;
+          }>;
+        };
+        devops: {
+          title: string;
+          items: Array<{
+            name: string;
+            level: string;
+          }>;
+        };
+      };
     };
-    project: any[]; // Deja esto como un array vacío si no tienes proyectos definidos.
+    project:{
+        title: string; 
+        items: Array<ProjectModel
+          >
+    };
     contact: {
-      title: string;
-      email: string;
-      linkedin: string;
-    };
+        form: {
+            title: string;
+            nameLabel: string;
+            namePlaceholder: string;
+            emailLabel: string;
+            emailPlaceholder: string;
+            messageLabel: string;
+            messagePlaceholder: string;
+            submitButton: string;
+            nameError: string;
+            emailError: string;
+            messageError: string;
+            confirmationMessage: string;
+    }
+    },
     reference: {
       title: string;
       items: Array<{

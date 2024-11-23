@@ -1,35 +1,33 @@
-
 ---
 
 import type { ProjectModel } from '../types/ProjectModel';
-import Project from './Project.astro';
 
-const { projectContent } = Astro.props as { projectContent: ProjectModel }; // Extraemos el subtipo de Translations
-console.log("Idioma en projectContent:", projectContent); // Depuración opcional
+const { projectContent, testMode } = Astro.props as { projectContent: ProjectModel, testMode: boolean }; 
+
+
 ---
 
-<section id="project" class="py-10">
+<section id="project" class="py-10 bg-blue-100">
   <h2 class="text-3xl font-bold mb-4">
     {projectContent.projectName}
   </h2>
-  <p class="text-lg">{projectContent.description}</p>
-  <a class="text-blue-500 hover:underline" href={projectContent.repositoryUrl}>{projectContent.repositoryUrl}</a>
-        {projectContent.picture && (
-          <img
-            src={projectContent.picture}
-            alt={`Foto de ${projectContent.projectName}`}
-            class="w-16 h-16 object-cover rounded-full"
-          />
-        )}
+  <p class="text-lg">{projectContent.description || "No description"}</p>
+  <p>
+    <strong>Tech:</strong> {projectContent.technologies.length > 0 ? projectContent.technologies.join(", ") : "No includes"}
+  </p>
+  {projectContent.repositoryUrl && (
+    <a class="text-blue-500 hover:underline" href={projectContent.repositoryUrl}>
+      RepositoryUrl
+    </a>
+  )}
+
+  {projectContent.picture && (
+    <img
+      src={projectContent.picture}
+      alt={`Imagen de ${projectContent.projectName}`}
+      class="w-32 h-32 object-cover rounded-lg shadow-md mx-auto mt-4"
+    />
+  )}
+  
 </section>
-
-
-
-
-
-
-
-
-
-
 

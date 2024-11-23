@@ -1,6 +1,5 @@
 ---
 const { navbar } = Astro.props;
-console.log("navbar en Navbar:", navbar); // Verifica que las traducciones estén disponibles
 
 ---
 
@@ -13,8 +12,9 @@ console.log("navbar en Navbar:", navbar); // Verifica que las traducciones esté
     <li><a href="#project" class="hover:underline">{navbar.project}</a></li>
     <li><a href="#reference" class="hover:underline">{navbar.reference}</a></li>
     <li><a href="#contact" class="hover:underline">{navbar.contact}</a></li>
+    <li><a href="/" class="hover:underline">{navbar.lang}</a></li>
+
   </ul>
+  
+
 </nav>
-
-
-

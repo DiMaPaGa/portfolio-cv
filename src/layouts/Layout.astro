@@ -1,19 +1,7 @@
 ---
-import type { TranslationsLayout } from '../types/TranslationsLayout.ts';
-const { title = "Portfolio CV", layoutLang  } = Astro.props;
+const { title = "Portfolio CV", layoutLang, navbar, footer } = Astro.props;
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-
-// Importar datos directamente según el idioma
-let translationsLayout: TranslationsLayout = {} as TranslationsLayout;
-if (layoutLang === "es") {
-  const module= await import('../../public/data/lang/es.json');
-  translationsLayout = module.default;
-} else if (layoutLang === "en") {
-  const module= await import('../../public/data/lang/en.json');
-  translationsLayout = module.default;
-  
-}
 ---
 
 <!DOCTYPE html>
@@ -25,14 +13,16 @@ if (layoutLang === "es") {
   </head>
   <body class="bg-gray-100 font-sans">
     <!-- Barra de navegación -->
-    <Navbar navbar={translationsLayout.navbar} />
+    <Navbar navbar={navbar} />
 
     <!-- Contenido principal -->
     <main>
-      <slot lang={layoutLang}/> <!-- Aquí irá el contenido específico de cada sección -->
+      <!-- Aquí usamos el slot donde los componentes hijos serán insertados -->
+      <slot />
     </main>
 
     <!-- Pie de página -->
-    <Footer footer={translationsLayout.footer} />
+    <Footer footer={footer} />
   </body>
 </html>
+

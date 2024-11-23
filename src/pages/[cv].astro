@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Home from '../components/Home.astro';
+import AboutMe from '../components/AboutMe.astro';
+import Education from '../components/Education.astro';
+import WorkExperience from '../components/WorkExperience.astro';
+import Skill from '../components/Skill.astro';
+import Project from '../components/Project.astro';
+import Reference from '../components/Reference.astro';
+import Contact from '../components/Contact.astro';
+
+import type { Translations } from '../types/Translations.ts'; 
+import type { TranslationsLayout } from '../types/TranslationsLayout';
+
+
+export async function getStaticPaths() {
+  return [
+    { params: { cv: 'es' } }, // Ruta /es
+    { params: { cv: 'en' } }, // Ruta /en
+  ];
+}
+const { cv } = Astro.params;
+const lang = (cv === 'es' || cv === 'en') ? cv : 'es';
+
+// Importar las traducciones según el idioma detectado
+let translations = {} as Translations;
+if (lang === 'es') {
+  const module = await import('../../public/data/es.json');
+  translations = module.default;
+} else if (lang === 'en') {
+  const module = await import('../../public/data/en.json');
+  translations = module.default;
+}
+
+// Importar las traducciones del layout (de ../../public/data/lang/)
+let translationsLayout = {} as TranslationsLayout;
+if (lang === 'es') {
+  const module = await import('../../public/data/lang/es.json'); // Traducciones del layout
+  translationsLayout = module.default;
+} else if (lang === 'en') {
+  const module = await import('../../public/data/lang/en.json'); // Traducciones del layout
+  translationsLayout = module.default;
+}
+
+---
+
+<!-- Renderizar el contenido con las traducciones cargadas -->
+<Layout layoutLang={lang} navbar={translationsLayout.navbar} footer={translationsLayout.footer}>
+  <Home home={translations.home} />
+  <AboutMe aboutMe={translations.aboutMe} />
+  <Education education={translations.education} />
+  <WorkExperience workExperience={translations.workExperience} />
+  <Skill skill={translations.skill} />
+  <Project project={translations.project} />
+  <Reference reference={translations.reference} />
+  <Contact contact={translations.contact} />
+</Layout>

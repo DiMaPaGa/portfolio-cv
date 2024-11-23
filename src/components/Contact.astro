@@ -1,22 +1,154 @@
 ---
 const { contact } = Astro.props;  // Recibimos el idioma desde Layout
-console.log("Idioma en Contact:", contact); // Agrega esto para depurar
 ---
 
-<section id="contact" class="py-10">
-    <h2 class="text-3xl font-bold mb-4">{contact.title}</h2>
-  <p>
-    Email: 
-    <a href={`mailto:${contact.email}`} class="text-blue-500 underline">
-      {contact.email}
-    </a>
-  </p>
-  <p>
-    LinkedIn: 
-    <a href={contact.linkedin} class="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-      {contact.linkedin}
-    </a>
-  </p>
-</section>
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-semibold text-center mb-6">{contact.form?.title || "Contacta conmigo"}</h2>
+  <form id="contactForm">
+    <!-- Nombre -->
+    <div class="mb-4">
+      <label for="name" class="block text-gray-700 font-medium mb-2">{contact.form?.nameLabel || "Nombre:"}</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder={contact.form?.namePlaceholder || "Introduce tu nombre"}
+        required
+      />
+      <small id="nameError" class="text-red-500 text-sm hidden">{contact.form?.nameError || "El nombre debe comenzar con mayúscula y el resto en minúsculas."}</small>
+    </div>
 
+    <!-- Email -->
+    <div class="mb-4">
+      <label for="email" class="block text-gray-700 font-medium mb-2">{contact.form?.emailLabel || "Email:"}</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder={contact.form?.emailPlaceholder || "Introduce tu email"}
+        required
+      />
+      <small id="emailError" class="text-red-500 text-sm hidden">{contact.form?.emailError || "El email debe ser valido."}</small>
+    </div>
+
+    <!-- Mensaje -->
+    <div class="mb-4">
+      <label for="message" class="block text-gray-700 font-medium mb-2">{contact.form?.messageLabel || "Mensaje:"}</label>
+      <textarea
+        id="message"
+        name="message"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder={contact.form?.messagePlaceholder || "Escribe tu mensaje"}
+        required
+      ></textarea>
+      <small id="messageError" class="text-red-500 text-sm hidden">{contact.form?.messageError || "El mensaje debe tener al menos 20 caracteres."}</small>
+    </div>
+
+    <!-- Botón de Enviar -->
+    <button
+      type="submit"
+      id="submitButton"
+      class="w-full py-3 bg-blue-600 text-white font-medium rounded-md disabled:bg-gray-400"
+      disabled
+    >
+      {contact.form?.submitButton || "Enviar"}
+    </button>
+  </form>
+
+  <!-- Mensaje de confirmación -->
+  <div id="confirmationMessage" class="hidden text-center text-green-600 mt-4">
+    <p>{contact.form?.confirmationMessage || "¡Gracias por tu mensaje!Nos pondremos en contacto contigo pronto."}</p>
+  </div>
+</div>
+
+<script>
+  // Tipado de los elementos del DOM
+  const form = document.getElementById("contactForm") as HTMLFormElement | null;
+  const submitButton = document.getElementById("submitButton") as HTMLButtonElement | null;
+  const confirmationMessage = document.getElementById("confirmationMessage") as HTMLDivElement | null;
+
+  // Funciones de validación con tipos explícitos
+  const validateName = (name: string): boolean => /^[A-Z][a-z]*$/.test(name);
+  const validateEmail = (email: string): boolean => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+  const validateMessage = (message: string): boolean => message.length >= 20;
+
+  // Función para manejar el envío del formulario
+  const handleSubmit = (event: Event): void => {
+    event.preventDefault(); // Evita el comportamiento por defecto (enviar el formulario)
+
+    if (validateForm()) {
+      // Muestra el mensaje de confirmación
+      if (confirmationMessage) {
+        confirmationMessage.classList.remove("hidden");
+      }
+
+      // Limpia el formulario (opcional)
+      if (form) {
+        form.reset();
+      }
+
+      // Se puede agregar la lógica para enviar los datos del formulario a un servidor aquí
+    }
+  };
+
+  // Función para validar el formulario
+  const validateForm = (): boolean => {
+    if (!form || !submitButton) return false;
+
+    const nameInput = document.getElementById("name") as HTMLInputElement | null;
+    const emailInput = document.getElementById("email") as HTMLInputElement | null;
+    const messageInput = document.getElementById("message") as HTMLTextAreaElement | null;
+
+    if (!nameInput || !emailInput || !messageInput) return false;
+
+    const name = nameInput.value;
+    const email = emailInput.value;
+    const message = messageInput.value;
+
+    let isValid = true;
+
+    // Validación de Nombre
+    if (!validateName(name)) {
+      document.getElementById("nameError")!.classList.remove("hidden");
+      isValid = false;
+    } else {
+      document.getElementById("nameError")!.classList.add("hidden");
+    }
+
+    // Validación de Email
+    if (!validateEmail(email)) {
+      document.getElementById("emailError")!.classList.remove("hidden");
+      isValid = false;
+    } else {
+      document.getElementById("emailError")!.classList.add("hidden");
+    }
+
+    // Validación de Mensaje
+    if (!validateMessage(message)) {
+      document.getElementById("messageError")!.classList.remove("hidden");
+      isValid = false;
+    } else {
+      document.getElementById("messageError")!.classList.add("hidden");
+    }
+
+    // Habilitar/deshabilitar el botón de enviar
+    if (submitButton) {
+      submitButton.disabled = !isValid;
+    }
+
+    return isValid;
+  };
+
+  // Agregar escuchadores de eventos para validar en tiempo real
+  if (form) {
+    form.addEventListener("input", validateForm);
+  }
+
+  // Asociar el envío del formulario con el manejador de eventos
+  if (form) {
+    form.addEventListener("submit", handleSubmit);
+  }
+</script>
 

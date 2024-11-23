@@ -2,11 +2,12 @@
     "home": {
     "title": "Welcome to My Portfolio",
     "subtitle": "Software Developer",
-    "description": "I am a passionate software developer with a focus on creating innovative solutions."
+    "description": "I am a passionate software developer with a focus on creating innovative solutions.",
+    "disponibility": "Available for work"
     },
     "aboutMe": {
       "title": "About Me",
-      "name": "Your Name",
+      "name": "Diana Pascual García",
       "profession": "Software Developer",
       "description": "A passionate developer with a love for creating innovative solutions."
     },
@@ -43,30 +44,55 @@
         }
         ]
     },
-
     "skill": {
-      "title": "Skills",
-      "items":
-        [
-            {
-                "name": "JavaScript",
-                "level": "Advanced"
+        "title": "Habilidades",
+        "categories": {
+            "frontend": {
+              "title": "Front-end",
+              "items": [
+                { "name": "HTML", "level": "Avanzado" },
+                { "name": "CSS", "level": "Intermedio" },
+                { "name": "JavaScript", "level": "Avanzado" },
+                { "name": "React", "level": "Avanzado" }
+              ]
             },
-            {
-                "name": "React",
-                "level": "Intermediate"
+            "backend": {
+              "title": "Back-end",
+              "items": [
+                { "name": "Node.js", "level": "Avanzado" },
+                { "name": "Express", "level": "Intermedio" },
+                { "name": "Python", "level": "Intermedio" }
+              ]
             },
-            {
-                "name": "Tailwind CSS",
-                "level": "Advanced"
+            "devops": {
+              "title": "DevOps",
+              "items": [
+                { "name": "Docker", "level": "Avanzado" },
+                { "name": "Kubernetes", "level": "Intermedio" },
+                { "name": "AWS", "level": "Intermedio" }
+              ]
             }
-        ]
+        }
     },
-    "project": [],
+    "project":{
+        "title": "Projects", 
+        "items":[]
+    },
     "contact": {
-      "title": "Contact",
-      "email": "your.email@example.com",
-      "linkedin": "https://www.linkedin.com/in/yourname"
+        "form": {
+            "title": "Contact Me",
+            "nameLabel": "Name",
+            "namePlaceholder": "Introduce your name",
+            "emailLabel": "Email",
+            "emailPlaceholder": "Introduce your email",
+            "messageLabel": "Message",
+            "messagePlaceholder": "Write your message",
+            "submitButton": "Send",
+            "nameError": "The name must begin with a capital letter and the rest in lowercase.",
+            "emailError": "Enter a valid email.",
+            "messageError": "The message must have at least 20 characters.",
+            "confirmationMessage": "Thank you for your message! We will contact you soon."
+        }
     },
     "reference": {
         "title": "References",

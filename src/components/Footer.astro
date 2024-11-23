@@ -2,6 +2,6 @@
 const { footer } = Astro.props;
 ---
 <footer class="bg-blue-600 p-4 text-white">
-  <p class="text-center">{footer.copyright}</p>
+  <p class="text-center">{footer?.copyright || "© Todos los derechos reservados"}</p>
 </footer>
 

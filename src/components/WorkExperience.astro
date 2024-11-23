@@ -2,14 +2,15 @@
 ---
 import type { Translations } from '../types/Translations.ts';
 const { workExperience } = Astro.props as { workExperience: Translations['workExperience'] };  // Recibimos el idioma desde Layout
-console.log("Idioma en workExperience:", workExperience); // Agrega esto para depurar
 ---
 
 <section id="workExperience" class="py-10">
   <h2 class="text-3xl font-bold mb-4">
     {workExperience.title}
   </h2>
+  {workExperience?.items?.length ? (
   <ul class="space-y-6">
+    
     {workExperience.items.map(job => ( (item: Translations['workExperience']['items'][0]) =>
       <li data-key={`${job.company}-${job.years}`} class="bg-white p-4 shadow rounded-lg border hover:shadow-md transition">
         <p class="font-semibold text-lg">{job.jobTitle} - <span class="text-indigo-600">{job.company}</span></p>
@@ -17,7 +18,9 @@ console.log("Idioma en workExperience:", workExperience); // Agrega esto para de
         <p class="text-gray-700 mt-2">{job.description}</p>
       </li>
     ))}
-  </ul>
+  </ul> ) : (
+    <p>No information.</p>
+  )}
 </section>
 
 

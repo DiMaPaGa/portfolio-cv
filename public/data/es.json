@@ -2,12 +2,13 @@
     "home": {
     "title": "Bienvenido a mi Portafolio",
     "subtitle": "Desarrollador de Software",
-    "description": "Soy un apasionado desarrollador de software con un enfoque en crear soluciones innovadoras."
+    "description": "Soy un apasionado desarrollador de software con un enfoque en crear soluciones innovadoras.",
+    "disponibility": "Disponible para trabajar"
     },
     "aboutMe": {
       "title": "Sobre Mi",
-      "name": "Tu Nombre",
-      "photo": "/path/to/photo.jpg",
+      "name": "Diana Pascual García",
+      "photo": "../../public/images/iconUser.png",
       "profession": "Desarrollador de Software",
       "description": "Un apasionado desarrollador con un amor por crear soluciones innovadoras."
     },
@@ -45,27 +46,50 @@
     },  
     "skill": {
         "title": "Habilidades",
-        "items": 
-        [
-            {
-                "name": "JavaScript",
-                "level": "Avanzado"
+        "categories": {
+            "frontend": {
+              "title": "Front-end",
+              "items": [
+                { "name": "HTML", "level": "Avanzado" },
+                { "name": "CSS", "level": "Intermedio" },
+                { "name": "JavaScript", "level": "Avanzado" }
+              ]
             },
-            {
-                "name": "React",
-                "level": "Intermedio"
+            "backend": {
+              "title": "Back-end",
+              "items": [
+                { "name": "Node.js", "level": "Avanzado" },
+                { "name": "Express", "level": "Intermedio" }
+              ]
             },
-            {
-                "name": "Tailwind CSS",
-                "level": "Avanzado"
+            "devops": {
+              "title": "DevOps",
+              "items": [
+                { "name": "Docker", "level": "Avanzado" },
+                { "name": "Kubernetes", "level": "Intermedio" }
+              ]
             }
-        ]
+        }
     },
-    "project": [],
+    "project":{
+        "title": "Proyectos", 
+        "items":[]
+    },
     "contact": {
-      "title": "Contacto",
-      "email": "tu.email@ejemplo.com",
-      "linkedin": "https://www.linkedin.com/in/tunombre"
+      "form": {
+            "title": "Contacta conmigo",
+            "nameLabel": "Nombre",
+            "namePlaceholder": "Introduce tu nombre",
+            "emailLabel": "Email",
+            "emailPlaceholder": "Introduce tu email",
+            "messageLabel": "Mensaje",
+            "messagePlaceholder": "Escribe tu mensaje",
+            "submitButton": "Enviar",
+            "nameError": "El nombre debe comenzar con mayúscula y el resto en minúsculas.",
+            "emailError": "Introduce un email válido.",
+            "messageError": "El mensaje debe tener al menos 20 caracteres.",
+            "confirmationMessage": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
+    }
     },
     "reference": {
         "title": "Referencias",

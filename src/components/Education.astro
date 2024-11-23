@@ -1,22 +1,25 @@
 
 ---
-const { education } = Astro.props;  // Recibimos el idioma desde Layout
-console.log("Idioma en Contact:", education); // Agrega esto para depurar
+import type { Translations } from '../types/Translations';
+const { education } = Astro.props as { education: Translations['education'] };  // Recibimos el idioma desde Layout
 ---
 
 <section id="education" class="py-10">
   <h2 class="text-3xl font-bold mb-4">
     {education.title}
   </h2>
+  {education?.items?.length ? (
   <ul class="space-y-4">
-    {education.items.map(item => (
-      <li key={item.institution}>
+    {education.items.map(item  => (
+      <li data-key={item.institution}>
         <p class="font-semibold">{item.institution}</p>
         <p>{item.degree}</p>
         <p>{item.years}</p>
       </li>
     ))}
-  </ul>
+  </ul>) : (
+    <p>No information.</p>
+  )}
 </section>
 
 

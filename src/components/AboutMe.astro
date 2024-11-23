@@ -1,16 +1,18 @@
 ---
 const { aboutMe } = Astro.props; 
-console.log("Idioma en AboutMe:", aboutMe); // Agrega esto para depurar
+
 ---
 
 <section id="aboutMe" class="py-10">
-  <h2 class="text-3xl font-bold mb-4">{aboutMe.title}</h2>
-  <h3 class="text-2xl font-bold mb-4">{aboutMe.name}</h3>
-  <p class="text-lg">{aboutMe.profession}</p>
-  <p>{aboutMe.description}</p>
+
+  <h2 class="text-3xl font-bold mb-4">{aboutMe?.title || "Sobre Mi"}</h2>
+  
+  <h3 class="text-2xl font-bold mb-4">{aboutMe?.name || "Diana Pascual García" }</h3>
+  <p class="text-lg">{aboutMe?.profession || "Desarrolladora de Software"}</p>
+  <p>{aboutMe?.description || "Soy un apasionada desarrolladora de software con un enfoque en crear soluciones innovadoras."}</p>
 
   {aboutMe.photo && ( 
-    <img src={aboutMe.photo} alt={`Foto de ${aboutMe.name}`} class="rounded-full w-32 h-32 object-cover mt-4" />
+    <img src={aboutMe?.photo || "../../public/images/iconUser.png"} alt={`Foto de ${aboutMe.name}`} class="rounded-full w-32 h-32 object-cover mt-4" />
   )}
 </section>
 

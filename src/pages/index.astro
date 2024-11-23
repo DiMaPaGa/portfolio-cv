@@ -1,38 +1,50 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Home from '../components/Home.astro';
-import AboutMe from '../components/AboutMe.astro';
-import Education from '../components/Education.astro';
-import WorkExperience from '../components/WorkExperience.astro';
-import Skill from '../components/Skill.astro';
-import Project from '../components/Project.astro';
-import Reference from '../components/Reference.astro';
-import Contact from '../components/Contact.astro';
 
-import type { Translations } from '../types/Translations.ts'; 
-
-
-// Determinar el idioma (por ejemplo, "es" para español o "en" para inglés)
-const lang = "es"; // Puedes cambiarlo aquí o hacerlo dinámico según la selección del usuario
-
-// Importar datos directamente según el idioma
-let translations = {} as Translations;
-if (lang === "es") {
-  const module= await import('../../public/data/es.json');
-  translations = module.default;
-} else if (lang === "en") {
-  const module= await import('../../public/data/en.json');
-  translations = module.default;
-}
 ---
 
-<Layout layoutLang={lang}>
-  <Home home={translations.home} />
-  <AboutMe aboutMe={translations.aboutMe} />
-  <Education education={translations.education} />
-  <WorkExperience workExperience={translations.workExperience} />
-  <Skill skill={translations.skill} />
-  <Project project={translations.project} />
-  <Reference reference={translations.reference} />
-  <Contact contact={translations.contact} />
-</Layout>
+<html>
+  <head>
+    <title>Selección de Idioma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Selecciona un idioma para visualizar el CV." />
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-4xl w-full px-4">
+     
+
+      <!-- Contenedor de columnas -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Columna para Español -->
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-center mb-8">Bienvenido</h1>
+            <p class="text-lg text-center mb-12">Para ver el currículum en Español</p>
+          <p class="text-lg font-semibold mb-4">Pulsa la imagen:</p>
+          <a href="/es">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"
+              alt="Bandera de España para acceder al CV en español"
+              class="w-32 h-20 mx-auto rounded-md shadow-md hover:shadow-lg hover:scale-105 transition"
+            />
+          </a>
+        </div>
+
+        <!-- Columna para Inglés -->
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-center mb-8">Welcome</h1>
+            
+            <p class="text-lg text-center mb-12">To view the CV in English</p>
+          <p class="text-lg font-semibold mb-4">Clic on picture:</p>
+          <a href="/en">
+            <img
+    src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
+    alt="Flag of the United Kingdom"
+    class="w-32 h-20 mx-auto rounded-md shadow-md hover:shadow-lg hover:scale-105 transition"
+  />
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

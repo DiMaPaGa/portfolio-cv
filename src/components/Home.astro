@@ -1,13 +1,14 @@
 
 ---
 const { home } = Astro.props;  // Recibimos el idioma desde Layout
-console.log("Idioma en Home:", home); // Agrega esto para depurar
+
 ---
 
 <section id="home" class="py-10 text-center bg-gray-200">
-  <h1 class="text-5xl font-bold mb-4">{home.title}</h1>
-  <p class="text-lg">{home.subtitle}</p>
-  <p>{home.description}</p> <!-- Agregué la descripción si quieres mostrarla también -->
+  <h1 class="text-5xl font-bold mb-4">{home?.title || "Bienvenido"}</h1>
+  <a href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" target="_blank" rel="noopener" class="flex items-center transition md:justify-center md:hover:scale-105"> <div class="flex items-center "> <span class="relative inline-flex overflow-hidden rounded-full p-[1px]"> <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#51E4B8_0%,#21554E_50%,#51E4B8_100%)]"></span> <div class="inline-flex items-center justify-center w-full px-3 py-1 text-sm text-green-800 bg-green-100 rounded-full cursor-pointer dark:bg-gray-800 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap"> {home?.disponibility || "Disponible para trabajar"} </div> </span> </div> </a>
+  <p class="text-lg">{home?.subtitle || "Desarrollador Full Stack"}</p>
+  <p>{home?.description || "Desarrolladora entusiasmada con el mundo de la programación"}</p> <!-- Agregué la descripción si quieres mostrarla también -->
 </section>
 
 
