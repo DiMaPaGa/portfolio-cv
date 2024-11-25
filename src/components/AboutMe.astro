@@ -1,19 +1,28 @@
 ---
+// // Desestructuramos la propiedad 'aboutMe' desde 'Astro.props' para acceder a la información
 const { aboutMe } = Astro.props; 
 
 ---
 
-<section id="aboutMe" class="py-10">
+<section id="aboutMe" class="py-10 bg-[#ebd9d3]">
 
+  <!--Título de la sección, si existe 'aboutMe.title', se usa, de lo contrario, se usa el valor por defecto-->
   <h2 class="text-3xl font-bold mb-4">{aboutMe?.title || "Sobre Mi"}</h2>
   
+  <!--Nombre del usuario, si 'aboutMe.name' está definido, se usa, de lo contrario, el valor predeterminado-->
   <h3 class="text-2xl font-bold mb-4">{aboutMe?.name || "Diana Pascual García" }</h3>
+
+  <!-- Profesión del usuario, con un valor predeterminado si no existe 'aboutMe.profession'-->
   <p class="text-lg">{aboutMe?.profession || "Desarrolladora de Software"}</p>
+
+  <!-- Descripción del usuario, si no se pasa 'aboutMe.description', se usa la predeterminada -->
   <p>{aboutMe?.description || "Soy un apasionada desarrolladora de software con un enfoque en crear soluciones innovadoras."}</p>
 
+  <!-- Verifica si existe una foto de perfil en 'aboutMe.photo', si existe, la muestra, de lo contrario, muestra una imagen por defecto -->
   {aboutMe.photo && ( 
-    <img src={aboutMe?.photo || "../../public/images/iconUser.png"} alt={`Foto de ${aboutMe.name}`} class="rounded-full w-32 h-32 object-cover mt-4" />
+    <img src={aboutMe?.photo || "../../public/images/iconUser.png"} alt={`Foto de ${aboutMe.name}`} class="rounded-full w-48 h-48 object-cover mt-4" />
   )}
+  
 </section>
 
 

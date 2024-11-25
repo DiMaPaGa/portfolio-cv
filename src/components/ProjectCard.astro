@@ -1,26 +1,30 @@
 ---
-
+// Importaciones de tipado
 import type { ProjectModel } from '../types/ProjectModel';
 
-const { projectContent, testMode } = Astro.props as { projectContent: ProjectModel, testMode: boolean }; 
-
+// Desestructuración de las props: projectContent y testMode (booleano)
+const { projectContent, testMode } = Astro.props as { projectContent: ProjectModel, testMode: boolean };
 
 ---
 
 <section id="project" class="py-10 bg-blue-100">
-  <h2 class="text-3xl font-bold mb-4">
-    {projectContent.projectName}
-  </h2>
+  <!-- Título del proyecto -->
+  <h2 class="text-3xl font-bold mb-4">{projectContent.projectName}</h2>
+
+  <!-- Descripción del proyecto con texto predeterminado si el proyecto no tiene descripción -->
   <p class="text-lg">{projectContent.description || "No description"}</p>
-  <p>
-    <strong>Tech:</strong> {projectContent.technologies.length > 0 ? projectContent.technologies.join(", ") : "No includes"}
-  </p>
+
+  <!-- Tecnologías usadas en el proyecto con texto predeterminado si el proyecto no tiene tecnologías -->
+  <p><strong>Tech:</strong> {projectContent.technologies.length > 0 ? projectContent.technologies.join(", ") : "No includes"}</p>
+
+  <!-- URL del repositorio del proyecto si existe -->
   {projectContent.repositoryUrl && (
     <a class="text-blue-500 hover:underline" href={projectContent.repositoryUrl}>
       RepositoryUrl
     </a>
   )}
 
+  <!-- Imagen del proyecto si existe -->
   {projectContent.picture && (
     <img
       src={projectContent.picture}
@@ -28,6 +32,18 @@ const { projectContent, testMode } = Astro.props as { projectContent: ProjectMod
       class="w-32 h-32 object-cover rounded-lg shadow-md mx-auto mt-4"
     />
   )}
+
+  <!-- Botón de eliminación del proyecto si se encuentra en testMode: true -->
+  {testMode && (
+    <button
+      id={`deleteButton-${projectContent.projectId}`}
+      class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+      aria-label={`Eliminar proyecto ${projectContent.projectName}`}
+    >
+      Eliminar Proyecto
+    </button>
+  )}
+  </section>
+
   
-</section>
 

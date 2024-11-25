@@ -7,7 +7,8 @@
       "project": "Proyectos",
       "reference": "Referencias",
       "contact": "Contacto",
-      "lang": "Volver a la Selección de Idiomas"
+      "lang": "Selecciona Idioma",
+      "admin":"Administración"
     },
     "footer": {
       "copyright": "© 2024 Tu Nombre. Todos los derechos reservados."

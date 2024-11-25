@@ -1,13 +1,20 @@
 ---
-const { contact } = Astro.props;  // Recibimos el idioma desde Layout
+// Desestructuramos la propiedad 'contact' desde 'Astro.props' para acceder a la información
+const { contact } = Astro.props;  
 ---
 
-<div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+<div id="contact" class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+  <!-- Título del formulario de contacto, muestra un valor predeterminado si no se pasa 'contact.form?.title' -->
   <h2 class="text-2xl font-semibold text-center mb-6">{contact.form?.title || "Contacta conmigo"}</h2>
+
+  <!-- Inicio del formulario de contacto -->
   <form id="contactForm">
-    <!-- Nombre -->
+    <!-- Campo de Nombre -->
     <div class="mb-4">
+      <!-- Etiqueta del campo de nombre, con valor predeterminado en caso de que no se pase 'contact.form?.nameLabel' -->
       <label for="name" class="block text-gray-700 font-medium mb-2">{contact.form?.nameLabel || "Nombre:"}</label>
+      
+      <!-- Campo de entrada para el nombre con un placeholder predeterminado en caso de que no se pase 'contact.form?.namePlaceholder' -->
       <input
         type="text"
         id="name"
@@ -19,8 +26,9 @@ const { contact } = Astro.props;  // Recibimos el idioma desde Layout
       <small id="nameError" class="text-red-500 text-sm hidden">{contact.form?.nameError || "El nombre debe comenzar con mayúscula y el resto en minúsculas."}</small>
     </div>
 
-    <!-- Email -->
+    <!-- Campo de Email -->
     <div class="mb-4">
+      <!-- Etiqueta del campo de email con un placeholder predeterminado en caso de que no se pase 'contact.form?.emailPlaceholder' -->
       <label for="email" class="block text-gray-700 font-medium mb-2">{contact.form?.emailLabel || "Email:"}</label>
       <input
         type="email"
@@ -30,12 +38,16 @@ const { contact } = Astro.props;  // Recibimos el idioma desde Layout
         placeholder={contact.form?.emailPlaceholder || "Introduce tu email"}
         required
       />
+      <!-- Mensaje de error para el email, inicialmente oculto -->
       <small id="emailError" class="text-red-500 text-sm hidden">{contact.form?.emailError || "El email debe ser valido."}</small>
     </div>
 
-    <!-- Mensaje -->
+    <!-- Campo de Mensaje -->
     <div class="mb-4">
+      <!-- Etiqueta del campo de mensaje con detección del idioma -->
       <label for="message" class="block text-gray-700 font-medium mb-2">{contact.form?.messageLabel || "Mensaje:"}</label>
+
+      <!-- Área de texto para el mensaje con un placeholder predeterminado en caso de que no se pase 'contact.form?.messagePlaceholder' -->
       <textarea
         id="message"
         name="message"
@@ -43,6 +55,8 @@ const { contact } = Astro.props;  // Recibimos el idioma desde Layout
         placeholder={contact.form?.messagePlaceholder || "Escribe tu mensaje"}
         required
       ></textarea>
+
+      <!-- Mensaje de error para el mensaje, inicialmente oculto -->
       <small id="messageError" class="text-red-500 text-sm hidden">{contact.form?.messageError || "El mensaje debe tener al menos 20 caracteres."}</small>
     </div>
 
@@ -53,50 +67,57 @@ const { contact } = Astro.props;  // Recibimos el idioma desde Layout
       class="w-full py-3 bg-blue-600 text-white font-medium rounded-md disabled:bg-gray-400"
       disabled
     >
+      <!-- El texto del botón se adapta según el idioma (con valor predeterminado) -->
       {contact.form?.submitButton || "Enviar"}
     </button>
   </form>
 
-  <!-- Mensaje de confirmación -->
+  <!-- Mensaje de confirmación, inicialmente oculto -->
   <div id="confirmationMessage" class="hidden text-center text-green-600 mt-4">
     <p>{contact.form?.confirmationMessage || "¡Gracias por tu mensaje!Nos pondremos en contacto contigo pronto."}</p>
   </div>
 </div>
 
 <script>
-  // Tipado de los elementos del DOM
+  // Tipado de los elementos del DOM, para trabajar con TypeScript
   const form = document.getElementById("contactForm") as HTMLFormElement | null;
   const submitButton = document.getElementById("submitButton") as HTMLButtonElement | null;
   const confirmationMessage = document.getElementById("confirmationMessage") as HTMLDivElement | null;
 
   // Funciones de validación con tipos explícitos
+
+  // Valida si el nombre sigue el formato de empezar con mayúscula
   const validateName = (name: string): boolean => /^[A-Z][a-z]*$/.test(name);
+  // Valida si el email tiene el formato correcto
   const validateEmail = (email: string): boolean => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+  // Valida si el mensaje tiene al menos 20 caracteres
   const validateMessage = (message: string): boolean => message.length >= 20;
 
-  // Función para manejar el envío del formulario
+  /**
+   * Función para manejar el envío del formulario evitando el comportamiento por defecto.
+   * Si el formulario es válido, muestra el mensaje de confirmación y limpia el formulario.
+   *  */ 
   const handleSubmit = (event: Event): void => {
-    event.preventDefault(); // Evita el comportamiento por defecto (enviar el formulario)
+    event.preventDefault(); 
 
     if (validateForm()) {
-      // Muestra el mensaje de confirmación
+    
       if (confirmationMessage) {
         confirmationMessage.classList.remove("hidden");
       }
 
-      // Limpia el formulario (opcional)
       if (form) {
         form.reset();
       }
 
-      // Se puede agregar la lógica para enviar los datos del formulario a un servidor aquí
     }
   };
 
-  // Función para validar el formulario
+  // Función para validar todos los campos del formulario
   const validateForm = (): boolean => {
     if (!form || !submitButton) return false;
 
+    // Obtiene los valores de los campos
     const nameInput = document.getElementById("name") as HTMLInputElement | null;
     const emailInput = document.getElementById("email") as HTMLInputElement | null;
     const messageInput = document.getElementById("message") as HTMLTextAreaElement | null;
@@ -133,7 +154,7 @@ const { contact } = Astro.props;  // Recibimos el idioma desde Layout
       document.getElementById("messageError")!.classList.add("hidden");
     }
 
-    // Habilitar/deshabilitar el botón de enviar
+    // Habilitar/deshabilitar el botón de enviar según la validez del formulario
     if (submitButton) {
       submitButton.disabled = !isValid;
     }

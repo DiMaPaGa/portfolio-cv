@@ -1,13 +1,18 @@
-
 ---
+// Importación de tipado
 import type { Translations } from '../types/Translations.ts';
+// Desestructuración de las props y extraemos el subtipo de Translations para workExperience
 const { workExperience } = Astro.props as { workExperience: Translations['workExperience'] };  // Recibimos el idioma desde Layout
 ---
 
 <section id="workExperience" class="py-10">
+
+  <!-- Título de la sección de Experiencia Laboral -->
   <h2 class="text-3xl font-bold mb-4">
     {workExperience.title}
   </h2>
+
+  <!-- Se comprueba si hay elementos en 'workExperience.items' para mostrar. Si lo hay se muestran y si no se muestra 'No information.' -->
   {workExperience?.items?.length ? (
   <ul class="space-y-6">
     

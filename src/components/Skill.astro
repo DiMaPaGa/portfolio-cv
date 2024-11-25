@@ -1,13 +1,15 @@
-
 ---
+// Importación de tipado
 import type { Translations } from '../types/Translations';
-
-const { skill } = Astro.props as { skill: Translations['skill'] };  // Definimos el tipo de `skill` explícitamente
+// Desestructuración de las props definiendo el subtipo de skill explícitamente
+const { skill } = Astro.props as { skill: Translations['skill'] };  
 ---
 
 <section id="skill" class="py-10">
+  <!-- Título de la sección de Habilidades -->
   <h2 class="text-3xl font-bold mb-4">{skill.title}</h2>
 
+  <!-- Se comprueba si hay elementos en 'skill.categories' para mostrar por cada categoría y si no, no se muestran -->
   {skill.categories?.frontend && (
     <div>
       <h3 class="text-2xl font-semibold mb-4">{skill.categories.frontend.title}</h3>

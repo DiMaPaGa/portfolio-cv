@@ -1,13 +1,16 @@
-
 ---
+// Importación del tipado y desestructuración de las props
 import type { Translations } from '../types/Translations';
-const { education } = Astro.props as { education: Translations['education'] };  // Recibimos el idioma desde Layout
+const { education } = Astro.props as { education: Translations['education'] }; 
 ---
 
 <section id="education" class="py-10">
+  <!-- Título de la sección de Educación -->
   <h2 class="text-3xl font-bold mb-4">
     {education.title}
   </h2>
+
+  <!-- Se comprueba si hay elementos en 'education.items' para mostrar. Si lo hay se muestran y si no se muestra 'No information.' -->
   {education?.items?.length ? (
   <ul class="space-y-4">
     {education.items.map(item  => (

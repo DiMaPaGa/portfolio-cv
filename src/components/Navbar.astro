@@ -1,20 +1,118 @@
 ---
+//Desestructuramos la propiedad 'navbar' desde 'Astro.props' para acceder a la información
 const { navbar } = Astro.props;
-
 ---
 
-<nav class="bg-blue-600 p-4 text-white">
-  <ul class="flex justify-center space-x-8">
-    <li><a href="#aboutMe" class="hover:underline">{navbar.aboutMe}</a></li>
-    <li><a href="#education" class="hover:underline">{navbar.education}</a></li>
-    <li><a href="#workExperience" class="hover:underline">{navbar.workExperience}</a></li>
-    <li><a href="#skill" class="hover:underline">{navbar.skill}</a></li>
-    <li><a href="#project" class="hover:underline">{navbar.project}</a></li>
-    <li><a href="#reference" class="hover:underline">{navbar.reference}</a></li>
-    <li><a href="#contact" class="hover:underline">{navbar.contact}</a></li>
-    <li><a href="/" class="hover:underline">{navbar.lang}</a></li>
+<nav class="bg-[#559687] text-[#D3EBE5] fixed top-0 left-0 w-full z-10 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo o Título -->
+      <div class="flex-shrink-0 text-xl font-bold">
+        <!-- Enlace que vuelve al inicio de la página -->
+        <a href="#" id="logo-link" class="text-[#D3EBE5] hover:text-[#D3EBE5])">CV</a>
+      </div>
 
-  </ul>
-  
+      <!-- Menú hamburguesa (solo visible en pantallas pequeñas y medianas hasta 1020 px) -->
+      <div class="-mr-2 flex lg:hidden">
+        <button
+          id="hamburger-btn"
+          class="inline-flex items-center justify-center p-2 rounded-md text-[#D3EBE5] hover:bg-[#EBD9D3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#D3EBE5] focus:ring-[#D3EBE5]"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Abrir menú</span>
+          <!-- Ícono de hamburguesa -->
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
 
+      <!-- Menú de navegación (solo visible en pantallas grandes) -->
+      <div id="navbar" class="hidden lg:flex lg:items-center lg:space-x-6">
+        <a href="#aboutMe" class="hover:underline">{navbar.aboutMe}</a>
+        <a href="#education" class="hover:underline">{navbar.education}</a>
+        <a href="#workExperience" class="hover:underline">{navbar.workExperience}</a>
+        <a href="#skill" class="hover:underline">{navbar.skill}</a>
+        <a href="#project" class="hover:underline">{navbar.project}</a>
+        <a href="#reference" class="hover:underline">{navbar.reference}</a>
+        <a href="#contact" class="hover:underline">{navbar.contact}</a>
+        <a href="/" class="hover:underline">{navbar.lang}</a>
+        <a href="/admin/login" class="hover:underline">{navbar.admin}</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú desplegable para dispositivos pequeños (solo visible en pantallas pequeñas) -->
+  <div id="mobile-menu" class="lg:hidden bg-[#559687] space-y-2 py-2 px-4 hidden">
+    <a href="#aboutMe" class="block hover:underline">{navbar.aboutMe}</a>
+    <a href="#education" class="block hover:underline">{navbar.education}</a>
+    <a href="#workExperience" class="block hover:underline">{navbar.workExperience}</a>
+    <a href="#skill" class="block hover:underline">{navbar.skill}</a>
+    <a href="#project" class="block hover:underline">{navbar.project}</a>
+    <a href="#reference" class="block hover:underline">{navbar.reference}</a>
+    <a href="#contact" class="block hover:underline">{navbar.contact}</a>
+    <a href="/" class="block hover:underline">{navbar.lang}</a>
+    <a href="/admin/login" class="block hover:underline">{navbar.admin}</a>
+  </div>
 </nav>
+
+<!-- Script de manejo de menú hamburguesa -->
+<script type="module" astro-client:load>
+  // Obtener elementos del DOM
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navbar = document.getElementById('navbar');
+  const logoLink = document.getElementById('logo-link');  // Enlace "CV"
+
+  // Escuchar clic en el botón de hamburguesa
+  hamburgerBtn.addEventListener('click', function() {
+    // Alternar visibilidad del menú móvil
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Desplazamiento suave al hacer clic en los enlaces del menú móvil (solo enlaces internos)
+  const links = document.querySelectorAll('#mobile-menu a');
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = link.getAttribute('href');
+
+      // Verificar si el enlace es interno (es decir, solo empieza con '#')
+      if (href.startsWith('#')) {
+        e.preventDefault();  // Prevenir el comportamiento por defecto del enlace
+
+        const targetElement = document.querySelector(href);
+
+        // Desplazar el contenido de forma suave
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+
+          // Cerrar el menú móvil después de hacer clic en una opción
+          mobileMenu.classList.add('hidden');
+        }
+      }
+      // Si el enlace no es interno (es decir, es externo como el idioma o el login),
+      // no prevenimos el comportamiento por defecto y no ocultamos el menú
+    });
+  });
+
+  // Desplazamiento suave al hacer clic en el logo "CV" para volver al inicio
+  logoLink.addEventListener('click', function(e) {
+    e.preventDefault();  // Prevenir que el enlace realice su acción predeterminada
+    window.scrollTo({
+      top: 0,  // Desplazarnos a la parte superior de la página
+      behavior: 'smooth'  // Desplazamiento suave
+    });
+  });
+</script>

@@ -1,15 +1,57 @@
-
 ---
+// Desestructuramos la propiedad 'home' desde 'Astro.props' para acceder a la información
 const { home } = Astro.props;  // Recibimos el idioma desde Layout
 
 ---
 
-<section id="home" class="py-10 text-center bg-gray-200">
-  <h1 class="text-5xl font-bold mb-4">{home?.title || "Bienvenido"}</h1>
-  <a href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" target="_blank" rel="noopener" class="flex items-center transition md:justify-center md:hover:scale-105"> <div class="flex items-center "> <span class="relative inline-flex overflow-hidden rounded-full p-[1px]"> <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#51E4B8_0%,#21554E_50%,#51E4B8_100%)]"></span> <div class="inline-flex items-center justify-center w-full px-3 py-1 text-sm text-green-800 bg-green-100 rounded-full cursor-pointer dark:bg-gray-800 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap"> {home?.disponibility || "Disponible para trabajar"} </div> </span> </div> </a>
-  <p class="text-lg">{home?.subtitle || "Desarrollador Full Stack"}</p>
-  <p>{home?.description || "Desarrolladora entusiasmada con el mundo de la programación"}</p> <!-- Agregué la descripción si quieres mostrarla también -->
+<section id="home" class="py-10 text-center bg-[#D3EBE5] min-h-screen flex flex-col justify-center animate-slide-up">
+  <!-- Título de la sección, si existe 'home.title', se usa, de lo contrario, se usa el valor por defecto-->
+  <h1 class="text-5xl font-bold mb-4 text-[#6B3B2B] font-poppins">{home?.title || "Bienvenido"}</h1>
+
+  <!-- Enlace para redirigir a LinkedIn -->
+  <a href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" target="_blank" rel="noopener" class="flex items-center transition md:justify-center md:hover:scale-105">
+    <div class="flex items-center">
+      <span class="relative inline-flex overflow-hidden rounded-full p-[1px]">
+        <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#51E4B8_0%,#21554E_50%,#51E4B8_100%)]"></span>
+        <div class="inline-flex items-center justify-center w-full px-3 py-1 text-sm text-[#559687] font-poppins bg-[#EBD9D3] rounded-full cursor-pointer dark:bg-gray-800 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap">
+          {home?.disponibility || "Disponible para trabajar"}
+        </div>
+      </span>
+    </div>
+  </a>
+  
+  <!-- Subtítulo, si 'home.subtitle' existe, se usa, de lo contrario, se usa el valor por defecto -->
+  <p class="text-lg font-poppins text-[#6B3B2B]">{home?.subtitle || "Desarrolladora Full Stack"}</p>
+
+  <!-- Descripción, si 'home.description' existe, se usa, de lo contrario, se usa el valor por defecto -->
+  <p class="font-montserrat text-[#6B3B2B]">{home?.description || "Desarrolladora entusiasmada con el mundo de la programación"}</p>
 </section>
 
+<style>
+  /* Animación de deslizamiento desde abajo usando Tailwind */
+  @keyframes slideUp {
+    0% {
+      transform: translateY(100vh); /* Empieza desde debajo de la pantalla */
+      opacity: 0; /* Invisible al inicio */
+    }
+    100% {
+      transform: translateY(0); /* Se desliza hasta su posición original */
+      opacity: 1; /* Se vuelve visible */
+    }
+  }
 
+  /* Clase de animación personalizada */
+  .animate-slide-up {
+    animation: slideUp 1s ease-out; /* Duración de 1 segundo y animación suave */
+  }
+
+  /* Aplicación de las fuentes y la paleta de colores */
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+</style>
 

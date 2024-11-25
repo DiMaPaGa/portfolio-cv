@@ -1,28 +1,33 @@
 {
     "home": {
     "title": "Welcome to My Portfolio",
-    "subtitle": "Software Developer",
+    "subtitle": "Web Developer",
     "description": "I am a passionate software developer with a focus on creating innovative solutions.",
     "disponibility": "Available for work"
     },
     "aboutMe": {
       "title": "About Me",
       "name": "Diana Pascual García",
-      "profession": "Software Developer",
-      "description": "A passionate developer with a love for creating innovative solutions."
+      "profession": "Web Developer",
+      "description": "I am seeking opportunities to apply my skills in web development and new technologies. My diverse experience and focus on quality and problem-solving prepare me to contribute effectively to web development projects. I bring dedication, commitment, professionalism, and teamwork experience, ready to adapt and prove my value in this field."
     },
     "education": {
         "title": "Education",
         "items": [
         {
-            "institution": "University of Example",
-            "degree": "Bachelor's Degree in Computer Science",
-            "years": "2020-2024"
+            "institution": "IES.Vedruna. Seville",
+            "degree": "Higher Technician in Web Application Development. ",
+            "years": "2023-2025"
         },
         {
-            "institution": "Example High School",
-            "degree": "High School Diploma",
-            "years": "2015-2020"
+            "institution": "University of Seville",
+            "degree": "Master's Degree in Health Psychology.",
+            "years": "2011-2013"
+        },
+        {
+            "institution": "University of Seville",
+            "degree": "Bachelor’s Degree in Psychology.",
+            "years": "2002-2007"
         }
         ]
     },
@@ -30,46 +35,62 @@
       "title": "Work Experience",
       "items": 
         [
-        {
-            "jobTitle": "Frontend Developer",
-            "company": "Example Company",
-            "years": "2023-Present",
-            "description": "Developed user interfaces using React and Tailwind CSS."
-        },
-        {
-            "jobTitle": "Intern",
-            "company": "Tech Startup",
-            "years": "2022-2023",
-            "description": "Assisted in creating a website and worked on backend APIs."
-        }
+          {
+              "jobTitle": "DUAL Internship in Web Application Development",
+              "company": "NTT DATA",
+              "years": "2024-Present",
+              "description": "Advanced Java programming, Configuration and management of Maven. Implementation of SLF4J + Logback. Testing with JUnit and Mockito. Code quality validation with SonarLint. Environment and tool updates."
+          },
+          {
+              "jobTitle": "Residence Director",
+              "company": "ATUREM",
+              "years": "2017-2023",
+              "description": "Staff seleccion and management. Training design and delivery. Customer service and issue resolution."
+          },
+          {
+              "jobTitle": "Psychologist",
+              "company": "ATUREM",
+              "years": "2014-2017",
+              "description": "Quality team member. Trainer for family and self-management programs. Responsible for the Equality Plan. Data analysis and publication writer."
+          },
+          {
+              "jobTitle": "Research Staff",
+              "company": "University of Seville and Oregon State University",
+              "years": "2008-2012",
+              "description": "Design of training and intervention programs. Various research tasks, including reference and database management. Participation in published documents. Family consultant and research assistant. "
+          }
         ]
     },
     "skill": {
-        "title": "Habilidades",
+        "title": "Skills",
         "categories": {
             "frontend": {
               "title": "Front-end",
               "items": [
-                { "name": "HTML", "level": "Avanzado" },
-                { "name": "CSS", "level": "Intermedio" },
-                { "name": "JavaScript", "level": "Avanzado" },
-                { "name": "React", "level": "Avanzado" }
+                { "name": "HTML", "level": "Advanced" },
+                { "name": "CSS", "level": "Advanced" },
+                { "name": "JavaScript", "level": "Intermediate" },
+                { "name": "Tailwind CSS", "level": "Intermediate" },
+                { "name": "Astro", "level": "Basic" }
               ]
             },
             "backend": {
               "title": "Back-end",
               "items": [
-                { "name": "Node.js", "level": "Avanzado" },
-                { "name": "Express", "level": "Intermedio" },
-                { "name": "Python", "level": "Intermedio" }
+                { "name": "Node.js", "level": "Intermediate" },
+                { "name": "Java", "level": "Intermediate" },
+                { "name": "PHP ", "level": "Intermediate" },
+                { "name": "Spring Boot", "level": "Intermediate" },
+                { "name": "MySQL", "level": "Intermediate" },
+                { "name": "REST APIs", "level": "Intermediate"}
               ]
             },
             "devops": {
               "title": "DevOps",
               "items": [
-                { "name": "Docker", "level": "Avanzado" },
-                { "name": "Kubernetes", "level": "Intermedio" },
-                { "name": "AWS", "level": "Intermedio" }
+                { "name": "GitHub Actions", "level": "Basic" },
+                { "name": "Microsoft Azure", "level": "Basic" },
+                { "name": "Git", "level": "Intermediate" }
               ]
             }
         }
@@ -99,16 +120,16 @@
         "items":
         [
             {
-                "name": "John Doe",
-                "relationship": "Former Manager",
-                "contact": "john.doe@example.com",
-                "description": "John was my manager at Example Company and can speak to my skills as a frontend developer."
+                "name": "Joaquin Borrego Fernandez",
+                "relationship": "Teacher at IES Vedruna and Software Developer at Babel",
+                "contact": "joaquin.borrego@vedruna.es",
+                "description": "Joaquin was my teacher and tutor in the second course of Higher Technician in Web Application Development and can speak to my skills as a web developer."
             },
             {
-                "name": "Jane Smith",
-                "relationship": "University Professor",
-                "contact": "jane.smith@example.com",
-                "description": "Jane was my professor in several Computer Science courses and can speak to my academic capabilities."
+                "name": "José Carlos Moreno Martín",
+                "relationship": "Teacher at IES Vedruna",
+                "contact": "josecarlos.moreno@vedruna.es",
+                "description": "José Carlos was my professor throughout the Higher Technician in Web Application Development and can tell you about my evolution in this field"
             }
         ]
     }

@@ -1,27 +1,30 @@
 ---
+// Importación de componentes
 const { title = "Portfolio CV", layoutLang, navbar, footer } = Astro.props;
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <!DOCTYPE html>
-<html lang={layoutLang}>
+<!-- Define el idioma de la página para accesibilidad y SEO -->
+<html lang={layoutLang}> 
   <head>
-    <meta charset="UTF-8" />
+    <!-- Especifica la codificación de caracteres para soportar caracteres especiales -->
+    <meta charset="UTF-8" /> 
+    <!-- Permite que la página se adapte correctamente a dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <!-- Título dinámico de la página, se obtiene de las props -->
+    <title>{title}</title> 
   </head>
   <body class="bg-gray-100 font-sans">
-    <!-- Barra de navegación -->
+    <!-- Barra de navegación: Importa y renderiza el componente Navbar, que recibe los datos desde las props -->
     <Navbar navbar={navbar} />
 
-    <!-- Contenido principal -->
+    <!-- Contenido principal: Aquí se inserta el contenido dinámico de las páginas hijas -->
     <main>
-      <!-- Aquí usamos el slot donde los componentes hijos serán insertados -->
       <slot />
     </main>
-
-    <!-- Pie de página -->
+    <!-- Pie de página: Importa y renderiza el componente Footer, que también recibe datos desde las props -->
     <Footer footer={footer} />
   </body>
 </html>

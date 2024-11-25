@@ -1,5 +1,17 @@
+// Importación de los tipos para el modelo de proyecto (definidos en los archivos .ts)
 import type { ProjectModel } from "./ProjectModel";
 
+/**
+ * Interfaz que define el tipado de las traducciones del cv completo:
+ *    home: Interfaz que define el tipado de las traducciones del componente Home.
+ *    aboutMe: Interfaz que define el tipado de las traducciones del componente AboutMe.
+ *    education: Interfaz que define el tipado de las traducciones del componente Education.
+ *    workExperience: Interfaz que define el tipado de las traducciones del componente WorkExperience.
+ *    skill: Interfaz que define el tipado de las traducciones del componente Skill.
+ *    project: Interfaz que define el tipado de las traducciones del componente Project.
+ *    contact: Interfaz que define el tipado de las traducciones del componente Contact.
+ *    reference: Interfaz que define el tipado de las traducciones del componente Reference.
+ **/
 export interface Translations {
     home: {
       title: string;

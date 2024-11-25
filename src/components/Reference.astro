@@ -1,22 +1,24 @@
-
 ---
+// Importación de tipado
 import type { Translations } from '../types/Translations';
-
-const { reference } = Astro.props as { reference: Translations['reference'] }; // Extraemos el subtipo de Translations
+// Desestructuración de las props y extraemos el subtipo de Translations
+const { reference } = Astro.props as { reference: Translations['reference'] };
 
 ---
 
 <section id="reference" class="py-10">
+  <!-- Título de la sección de Referencias -->
   <h2 class="text-3xl font-bold mb-4">
     {reference.title}
   </h2>
   <ul class="space-y-6">
+    <!-- Mapeo de items de la referencia mostrando la foto solo si está definida-->
     {reference.items.map((item: Translations['reference']['items'][0]) => (
       <li
         data-key={item.name}
         class="flex items-start space-x-4 bg-white p-4 shadow rounded-lg border hover:shadow-md transition"
       >
-        {/* Mostrar foto solo si está definida */}
+        
         {item.photo && (
           <img
             src={item.photo}
