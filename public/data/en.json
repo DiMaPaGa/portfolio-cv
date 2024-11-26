@@ -67,30 +67,30 @@
             "frontend": {
               "title": "Front-end",
               "items": [
-                { "name": "HTML", "level": "Advanced" },
-                { "name": "CSS", "level": "Advanced" },
-                { "name": "JavaScript", "level": "Intermediate" },
-                { "name": "Tailwind CSS", "level": "Intermediate" },
-                { "name": "Astro", "level": "Basic" }
+                { "name": "HTML", "level": 3, "logo":"../../public/images/html.png"},
+                { "name": "CSS", "level": 3, "logo":"../../public/images/css.png"},
+                { "name": "JavaScript", "level": 2, "logo":"../../public/images/js.png"},
+                { "name": "Tailwind CSS", "level": 2, "logo":"../../public/images/tailwind.png"},
+                { "name": "Astro", "level": 1, "logo":"../../public/images/astro.png"}
               ]
             },
             "backend": {
               "title": "Back-end",
               "items": [
-                { "name": "Node.js", "level": "Intermediate" },
-                { "name": "Java", "level": "Intermediate" },
-                { "name": "PHP ", "level": "Intermediate" },
-                { "name": "Spring Boot", "level": "Intermediate" },
-                { "name": "MySQL", "level": "Intermediate" },
-                { "name": "REST APIs", "level": "Intermediate"}
+                { "name": "Node.js", "level": 2,"logo":"../../public/images/node.png"},
+                { "name": "Java", "level": 2, "logo":"../../public/images/java.png"},
+                { "name": "PHP ", "level": 2, "logo":"../../public/images/php.png"},
+                { "name": "Spring Boot", "level": 2, "logo":"../../public/images/spring.png"},
+                { "name": "MySQL", "level": 2, "logo":"../../public/images/mySQL.png"},
+                { "name": "REST APIs", "level": 2, "logo":"../../public/images/api.png"}
               ]
             },
             "devops": {
               "title": "DevOps",
               "items": [
-                { "name": "GitHub Actions", "level": "Basic" },
-                { "name": "Microsoft Azure", "level": "Basic" },
-                { "name": "Git", "level": "Intermediate" }
+                { "name": "GitHub Actions", "level": 1, "logo":"../../public/images/github.png"},
+                { "name": "Microsoft Azure", "level": 1, "logo":"../../public/images/azure.png"},
+                { "name": "Git", "level": 2, "logo":"../../public/images/git.png"}
               ]
             }
         }

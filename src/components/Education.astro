@@ -4,25 +4,54 @@ import type { Translations } from '../types/Translations';
 const { education } = Astro.props as { education: Translations['education'] }; 
 ---
 
-<section id="education" class="py-10">
+<section id="education" class="py-24 bg-greenLight">
   <!-- Título de la sección de Educación -->
-  <h2 class="text-3xl font-bold mb-4">
+  <h2 class="text-4xl font-poppins font-bold text-brown mb-6 text-center">
     {education.title}
   </h2>
 
-  <!-- Se comprueba si hay elementos en 'education.items' para mostrar. Si lo hay se muestran y si no se muestra 'No information.' -->
   {education?.items?.length ? (
-  <ul class="space-y-4">
-    {education.items.map(item  => (
-      <li data-key={item.institution}>
-        <p class="font-semibold">{item.institution}</p>
-        <p>{item.degree}</p>
-        <p>{item.years}</p>
-      </li>
-    ))}
-  </ul>) : (
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Línea vertical que conecta todos los puntos -->
+      <div class="absolute inset-0 w-px bg-brown dark:bg-rose -z-10" />
+      
+      <div class="space-y-8">
+        {education.items.map((item, index) => (
+          <div data-key={item.institution} class="flex items-start">
+            <!-- Punto de la línea de tiempo -->
+            <div class="w-6 h-6 rounded-full bg-green text-rose border-2 border-rose dark:border-brown relative z-1">
+              {/* Aquí va el punto */}
+            </div>
+
+            <!-- Información de la Institución y Título -->
+            <div class="ml-6">
+              <h4 class="text-xl font-semibold mb-1.5 font-poppins text-brown">{item.institution}</h4>
+              <p class="text-lg md:text-xl font-montserrat text-brown text-justify leading-relaxed">{item.degree}</p>
+              <p class="text-sm text-brown dark:text-rose font-montserrat leading-relaxed">{item.years}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : (
     <p>No information.</p>
   )}
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

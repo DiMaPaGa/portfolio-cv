@@ -4,25 +4,50 @@ const { aboutMe } = Astro.props;
 
 ---
 
-<section id="aboutMe" class="py-10 bg-[#ebd9d3]">
+<section id="aboutMe" class="py-24 bg-rose text-center md:text-left">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center md:items-start gap-10">
+    <!-- Columna de la imagen -->
+    {aboutMe.photo && (
+      <div class="relative flex-shrink-0">
+        <!-- Imagen por defecto -->
+        <img
+          src={aboutMe.photo || "../../public/images/iconUser.png"} 
+          alt={`Foto de ${aboutMe.name}`}
+          class="rounded-full w-48 h-48 sm:w-60 sm:h-60 object-cover shadow-lg transition-all duration-300 ease-in-out"
+        />
+        <!-- Imagen que aparece al hacer hover -->
+        <img
+          src="../../public/images/diana2.png" 
+          alt={`Foto alternativa de ${aboutMe.name}`}
+          class="absolute inset-0 rounded-full w-full h-full object-cover opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100"
+        />
+      </div>
+    )}
 
-  <!--Título de la sección, si existe 'aboutMe.title', se usa, de lo contrario, se usa el valor por defecto-->
-  <h2 class="text-3xl font-bold mb-4">{aboutMe?.title || "Sobre Mi"}</h2>
-  
-  <!--Nombre del usuario, si 'aboutMe.name' está definido, se usa, de lo contrario, el valor predeterminado-->
-  <h3 class="text-2xl font-bold mb-4">{aboutMe?.name || "Diana Pascual García" }</h3>
+    <!-- Columna del texto -->
+    <div>
+      <!-- Título -->
+      <h2 class="text-4xl font-poppins font-bold text-brown mb-6">
+        {aboutMe?.title || "Sobre Mí"}
+      </h2>
 
-  <!-- Profesión del usuario, con un valor predeterminado si no existe 'aboutMe.profession'-->
-  <p class="text-lg">{aboutMe?.profession || "Desarrolladora de Software"}</p>
+      <!-- Nombre -->
+      <h3 class="text-2xl font-poppins font-semibold text-green mb-4">
+        {aboutMe?.name || "Diana Pascual García"}
+      </h3>
 
-  <!-- Descripción del usuario, si no se pasa 'aboutMe.description', se usa la predeterminada -->
-  <p>{aboutMe?.description || "Soy un apasionada desarrolladora de software con un enfoque en crear soluciones innovadoras."}</p>
+      <!-- Profesión -->
+      <p class="text-xl font-bold font-poppins text-brown mb-4">
+        {aboutMe?.profession || "Desarrolladora de Software"}
+      </p>
 
-  <!-- Verifica si existe una foto de perfil en 'aboutMe.photo', si existe, la muestra, de lo contrario, muestra una imagen por defecto -->
-  {aboutMe.photo && ( 
-    <img src={aboutMe?.photo || "../../public/images/iconUser.png"} alt={`Foto de ${aboutMe.name}`} class="rounded-full w-48 h-48 object-cover mt-4" />
-  )}
-  
+      <!-- Descripción -->
+      <p class="text-lg md:text-xl font-montserrat text-brown text-justify leading-relaxed">
+        {aboutMe?.description ||
+          "Soy una apasionada desarrolladora de software con un enfoque en crear soluciones innovadoras."}
+      </p>
+    </div>
+  </div>
 </section>
 
 

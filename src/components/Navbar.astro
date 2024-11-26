@@ -3,20 +3,20 @@
 const { navbar } = Astro.props;
 ---
 
-<nav class="bg-[#559687] text-[#D3EBE5] fixed top-0 left-0 w-full z-10 shadow-md">
+<nav class="bg-green text-greenLight fixed top-0 left-0 w-full z-10 shadow-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo o Título -->
-      <div class="flex-shrink-0 text-xl font-bold">
+      <div class="flex-shrink-0 text-xl font-bold font-poppins">
         <!-- Enlace que vuelve al inicio de la página -->
-        <a href="#" id="logo-link" class="text-[#D3EBE5] hover:text-[#D3EBE5])">CV</a>
+        <a href="#" id="logo-link" class="text-greenLight hover:text-greenLight ">CV</a>
       </div>
 
       <!-- Menú hamburguesa (solo visible en pantallas pequeñas y medianas hasta 1020 px) -->
       <div class="-mr-2 flex lg:hidden">
         <button
           id="hamburger-btn"
-          class="inline-flex items-center justify-center p-2 rounded-md text-[#D3EBE5] hover:bg-[#EBD9D3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#D3EBE5] focus:ring-[#D3EBE5]"
+          class="inline-flex items-center justify-center p-2 rounded-md text-greenLight hover:bg-rose focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-greenLight focus:ring-greenLight"
           aria-expanded="false"
         >
           <span class="sr-only">Abrir menú</span>
@@ -40,7 +40,7 @@ const { navbar } = Astro.props;
       </div>
 
       <!-- Menú de navegación (solo visible en pantallas grandes) -->
-      <div id="navbar" class="hidden lg:flex lg:items-center lg:space-x-6">
+      <div id="navbar" class="hidden lg:flex lg:items-center lg:space-x-6 font-poppins">
         <a href="#aboutMe" class="hover:underline">{navbar.aboutMe}</a>
         <a href="#education" class="hover:underline">{navbar.education}</a>
         <a href="#workExperience" class="hover:underline">{navbar.workExperience}</a>
@@ -55,7 +55,7 @@ const { navbar } = Astro.props;
   </div>
 
   <!-- Menú desplegable para dispositivos pequeños (solo visible en pantallas pequeñas) -->
-  <div id="mobile-menu" class="lg:hidden bg-[#559687] space-y-2 py-2 px-4 hidden">
+  <div id="mobile-menu" class="lg:hidden bg-green space-y-2 py-2 px-4 hidden font-poppins">
     <a href="#aboutMe" class="block hover:underline">{navbar.aboutMe}</a>
     <a href="#education" class="block hover:underline">{navbar.education}</a>
     <a href="#workExperience" class="block hover:underline">{navbar.workExperience}</a>

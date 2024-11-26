@@ -66,55 +66,62 @@ await loadProjects();
 
 <section
   id="project"
-  class="py-10 text-center bg-gray-100"
+  class="py-24 text-center bg-rose"
   data-current-page={currentPage}
   data-total-pages={totalPages}
   data-page-size={pageSize}
   data-test-mode={testMode}
 >
-  <h2 class="text-3xl font-bold mb-4">{project.title}</h2>
+  <h2 class="text-4xl font-poppins font-bold text-brown mb-6 text-center">{project.title}</h2>
 
-  <!-- Filtro por tipo de búsqueda -->
-<div class="mb-6">
-  <label for="filterSelect" class="block text-sm font-medium text-gray-700">Filtrar por:</label>
-  <select id="filterSelect" class="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-    <option value="PROJECT" selected>Proyecto</option>
-    <option value="TECH">Tecnología</option>
-  </select>
-</div>
+  <!-- Contenedor de los filtros -->
+  <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
+    <!-- Filtro por tipo de búsqueda -->
+    <div class="flex items-center gap-3">
+      <select
+        id="filterSelect"
+        name="filterType"
+        class="w-full md:w-auto h-10 border-2 border-green focus:outline-none focus:border-green text-green rounded px-3 tracking-wider"
+      >
+        <option value="PROJECT" selected>Project</option>
+        <option value="TECH">Technology</option>
+      </select>
+    </div>
 
-  <!-- Filtro por nombre de proyecto -->
-  <div class="mb-6" id="projectFilter">
-    <input
-      id="projectSearchInput"
-      type="text"
-      placeholder="Buscar por proyectos..."
-      class="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-    <button
-      id="searchButton"
-      class="mt-2 w-full md:w-1/2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
-    >
-      Buscar
-    </button>
+    <!-- Filtro por nombre de proyecto -->
+    <div id="projectFilter" class="flex items-center gap-0">
+      <input
+        id="projectSearchInput"
+        type="text"
+        placeholder="Search by projects"
+        class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-green focus:outline-none focus:border-green"
+      />
+      <button
+        id="searchButton"
+        type="button"
+        class="bg-green text-rose rounded-r px-4 py-2"
+      >
+        Search
+      </button>
+    </div>
+
+    <!-- Filtro por tecnología -->
+    <div id="techFilter" class="flex items-center gap-3" style="display: none;">
+      <input
+        id="techSearchInput"
+        type="text"
+        placeholder="Search by technologies"
+        class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-blue-500 focus:outline-none focus:border-blue-500"
+      />
+      <button
+        id="techSearchButton"
+        type="button"
+        class="bg-blue-500 text-white rounded-r px-4 py-2"
+      >
+        Buscar
+      </button>
+    </div>
   </div>
-
-    <!-- Filtro por nombre de tecnologia -->
-  <div class="mb-6" id="techFilter" style="display: none;">
-    <input
-      id="techSearchInput"
-      type="text"
-      placeholder="Buscar por tecnologías..."
-      class="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-    <button
-      id="techSearchButton"
-      class="mt-2 w-full md:w-1/2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
-    >
-      Buscar
-    </button>
-  </div>
-  
   <div id="projectsContainer">
     {
       projects.length === 0 ? (
@@ -272,46 +279,69 @@ const updateProjects = async (page, filter) => {
       const projects = data.data.content;
 
       // Limpiar y actualizar el contenedor de proyectos
-      projectsContainer.innerHTML = "";
-      if (projects.length === 0) {
-        projectsContainer.innerHTML = "<p>No hay proyectos disponibles.</p>";
-      } else {
-        const grid = document.createElement("div");
-        grid.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
+projectsContainer.innerHTML = "";
+if (projects.length === 0) {
+  projectsContainer.innerHTML = "<p>No hay proyectos disponibles.</p>";
+} else {
+  const grid = document.createElement("div");
+  grid.className = "px-20 justify-center grid grid-cols-1 md:grid-cols-2 gap-2";
 
-        // Crear cards dinámicamente (simulando el componente ProjectCard)
-        projects.forEach((project) => {
-          const card = document.createElement("div");
-          const imgDisplay = project.picture ? "block" : "none";
-          const showDeleteButton = testMode ? "inline" : "none";
-          card.className = "card py-4 px-6 bg-white shadow-md rounded";
-          card.innerHTML = `
-            <section id="project" class="py-10 bg-blue-100" id="project-${project.projectId}">
-              <h2 class="text-3xl font-bold mb-4">${project.projectName}</h2>
-              <p class="text-lg">${project.description}</p>
-              <p><strong>Tech:</strong> ${project.technologies.length > 0 ?project.technologies.join(", ") : "No includes"}</p>
-              <a class="text-blue-500 hover:underline" href="${project.repositoryUrl}">RepositoryUrl</a>
-             
-              <img
-                style="display: ${imgDisplay};"
-                src=${project.picture}
-                alt={'Imagen de ${project.projectName}}
-                class="w-32 h-32 object-cover rounded-lg shadow-md mx-auto mt-4"/>
- 
-              <button
-                id=deleteButton-${project.projectId}
-                style="display: ${showDeleteButton};"
-                class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
-                aria-label="Eliminar proyecto ${project.projectName}">
-                Eliminar Proyecto
-              </button> 
-            </section>
-          `;
-          grid.appendChild(card);
-        });
+  // Crear cards dinámicamente
+  projects.forEach((project) => {
+    const card = document.createElement("div");
+    const imgDisplay = project.picture ? "block" : "none";
+    const showDeleteButton = testMode ? "inline" : "none";
+    card.className = "relative rounded-lg overflow-hidden shadow-lg group";
 
-        projectsContainer.appendChild(grid);
-      }
+    card.innerHTML = `
+      <section id="project" class="py-10 bg-blue-100" id="project-${project.projectId}">
+        
+        <!-- Imagen del Proyecto como fondo (cubre toda la card) -->
+        <div class="relative w-full h-64">
+          <img
+            style="display: ${imgDisplay};"
+            src="${project.picture}"
+            alt="Imagen de ${project.projectName}"
+            class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"
+          />
+        </div>
+
+        <!-- Título del Proyecto (sobre la imagen) -->
+        <div class="absolute inset-0 flex flex-col justify-center items-start text-white bg-black bg-opacity-50 p-4">
+          <h2 class="text-2xl font-semibold">${project.projectName}</h2>
+        </div>
+
+        <!-- Información adicional que aparece al hacer hover -->
+        <div class="absolute inset-0 flex flex-col justify-start items-start bg-white opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300">
+          <!-- Descripción del Proyecto -->
+          <p class="text-lg mb-4">${project.description || "No description"}</p>
+
+          <!-- Tecnologías usadas -->
+          <p><strong>Tech:</strong> ${project.technologies.length > 0 ? project.technologies.join(", ") : "No includes"}</p>
+
+          <!-- Enlace al repositorio -->
+          ${project.repositoryUrl ? `<a class="text-blue-500 hover:underline" href="${project.repositoryUrl}">Repository URL</a>` : ""}
+
+          <!-- Botón de eliminación si es necesario -->
+          ${testMode ? `
+            <button
+              id="deleteButton-${project.projectId}"
+              class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+              aria-label="Eliminar proyecto ${project.projectName}"
+            >
+              Eliminar Proyecto
+            </button>
+          ` : ""}
+        </div>
+      </section>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  projectsContainer.appendChild(grid);
+}
+
 
       // Aquí después de agregar los nuevos proyectos, volver a asignar el evento a los botones de eliminar
       projects.forEach((project) => {

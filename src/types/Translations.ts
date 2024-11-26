@@ -38,6 +38,7 @@ export interface Translations {
       items: Array<{
         jobTitle: string;
         company: string;
+        image?: string;
         years: string;
         description: string;
       }>;
@@ -49,21 +50,24 @@ export interface Translations {
           title: string;
           items: Array<{
             name: string;
-            level: string;
+            level: number;
+            logo?: string;
           }>;
         };
         backend: {
           title: string;
           items: Array<{
             name: string;
-            level: string;
+            level: number;
+            logo?: string;
           }>;
         };
         devops: {
           title: string;
           items: Array<{
             name: string;
-            level: string;
+            level: number;
+            logo?: string;
           }>;
         };
       };

@@ -7,43 +7,58 @@ const { projectContent, testMode } = Astro.props as { projectContent: ProjectMod
 
 ---
 
-<section id="project" class="py-10 bg-blue-100">
-  <!-- Título del proyecto -->
-  <h2 class="text-3xl font-bold mb-4">{projectContent.projectName}</h2>
+<section id="project" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <!-- Card contenedor -->
+  <div class="relative max-w-sm rounded-lg overflow-hidden shadow-lg group">
+    
+    <!-- Imagen del Proyecto como fondo (cubre toda la card) -->
+    <div class="relative w-full h-64">
+      {projectContent.picture && (
+        <img
+          src={projectContent.picture}
+          alt={`Imagen de ${projectContent.projectName}`}
+          class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"
+        />
+      )}
+    </div>
 
-  <!-- Descripción del proyecto con texto predeterminado si el proyecto no tiene descripción -->
-  <p class="text-lg">{projectContent.description || "No description"}</p>
+    <!-- Título del Proyecto (sobre la imagen) -->
+    <div class="absolute inset-0 flex flex-col justify-center items-start text-white bg-black bg-opacity-50 p-4">
+      <h2 class="text-2xl font-semibold">{projectContent.projectName}</h2>
+    </div>
 
-  <!-- Tecnologías usadas en el proyecto con texto predeterminado si el proyecto no tiene tecnologías -->
-  <p><strong>Tech:</strong> {projectContent.technologies.length > 0 ? projectContent.technologies.join(", ") : "No includes"}</p>
+    <!-- Información adicional que aparece al hacer hover -->
+    <div class="absolute inset-0 flex flex-col justify-start items-start bg-white opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300">
+      <!-- Descripción del Proyecto -->
+      <p class="text-lg mb-4">{projectContent.description || "No description"}</p>
 
-  <!-- URL del repositorio del proyecto si existe -->
-  {projectContent.repositoryUrl && (
-    <a class="text-blue-500 hover:underline" href={projectContent.repositoryUrl}>
-      RepositoryUrl
-    </a>
-  )}
+      <!-- Tecnologías usadas -->
+      <p><strong>Tech:</strong> {projectContent.technologies.length > 0 ? projectContent.technologies.join(", ") : "No includes"}</p>
 
-  <!-- Imagen del proyecto si existe -->
-  {projectContent.picture && (
-    <img
-      src={projectContent.picture}
-      alt={`Imagen de ${projectContent.projectName}`}
-      class="w-32 h-32 object-cover rounded-lg shadow-md mx-auto mt-4"
-    />
-  )}
+      <!-- Enlace al repositorio -->
+      {projectContent.repositoryUrl && (
+        <a class="text-blue-500 hover:underline" href={projectContent.repositoryUrl}>
+          Repository URL
+        </a>
+      )}
+      
+      <!-- Botón de eliminación si es necesario -->
+      {testMode && (
+        <button
+          id={`deleteButton-${projectContent.projectId}`}
+          class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+          aria-label={`Eliminar proyecto ${projectContent.projectName}`}
+        >
+          Eliminar Proyecto
+        </button>
+      )}
+    </div>
+  </div>
+</section>
 
-  <!-- Botón de eliminación del proyecto si se encuentra en testMode: true -->
-  {testMode && (
-    <button
-      id={`deleteButton-${projectContent.projectId}`}
-      class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
-      aria-label={`Eliminar proyecto ${projectContent.projectName}`}
-    >
-      Eliminar Proyecto
-    </button>
-  )}
-  </section>
+
+
+
 
   
 
