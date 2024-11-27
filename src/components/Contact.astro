@@ -2,81 +2,110 @@
 // Desestructuramos la propiedad 'contact' desde 'Astro.props' para acceder a la información
 const { contact } = Astro.props;  
 ---
+<!-- Se elige generar un section -->
+<section id="contact" class="py-24 bg-greenLight">
+  <div id="contact" class="max-w-lg mx-auto p-8 bg-rose shadow-lg rounded-md border border-greenLight">
+    <!-- Título del formulario de contacto -->
+    <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown">{contact.form?.title || "Contáctame"}</h2>
 
-<div id="contact" class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-  <!-- Título del formulario de contacto, muestra un valor predeterminado si no se pasa 'contact.form?.title' -->
-  <h2 class="text-2xl font-semibold text-center mb-6">{contact.form?.title || "Contacta conmigo"}</h2>
+    <!-- Inicio del formulario de contacto -->
+    <form id="contactForm" class="space-y-6">
+      <!-- Campo de Nombre -->
+      <div class="flex gap-4">
+        <div class="w-1/2">
+          <label for="name" class="block mb-1 text-sm font-semibold text-brown font-poppins">
+            {contact.form?.nameLabel || "Nombre:"}
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="w-full border-b-2 border-brown focus:outline-none p-1 bg-rose"
+            placeholder={contact.form?.namePlaceholder || "Introduce tu nombre"}
+            required
+          />
+          <!-- Mensaje de error -->
+          <small id="nameError" class="text-red-500 text-xs hidden">
+            {contact.form?.nameError || "El nombre debe comenzar con mayúscula."}
+          </small>
+        </div>
+        <!-- Campo de Apellido -->
+        <div class="w-1/2">
+          <label for="surname" class="block mb-1 text-sm font-semibold text-brown font-poppins">
+            {contact.form?.surnameLabel || "Apellido:"}
+          </label>
+          <input
+            type="text"
+            id="surname"
+            name="surname"
+            class="w-full border-b-2 border-brown focus:outline-none p-1 bg-rose"
+            placeholder={contact.form?.surnamePlaceholder || "Introduce tu apellido"}
+          />
+          <!-- Mensaje de error -->
+          <small id="surnameError" class="text-red-500 text-xs hidden">
+            {contact.form?.surnameError || "El nombre debe comenzar con mayúscula."}
+          </small>
+        </div>
+      </div>
 
-  <!-- Inicio del formulario de contacto -->
-  <form id="contactForm">
-    <!-- Campo de Nombre -->
-    <div class="mb-4">
-      <!-- Etiqueta del campo de nombre, con valor predeterminado en caso de que no se pase 'contact.form?.nameLabel' -->
-      <label for="name" class="block text-gray-700 font-medium mb-2">{contact.form?.nameLabel || "Nombre:"}</label>
-      
-      <!-- Campo de entrada para el nombre con un placeholder predeterminado en caso de que no se pase 'contact.form?.namePlaceholder' -->
-      <input
-        type="text"
-        id="name"
-        name="name"
-        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder={contact.form?.namePlaceholder || "Introduce tu nombre"}
-        required
-      />
-      <small id="nameError" class="text-red-500 text-sm hidden">{contact.form?.nameError || "El nombre debe comenzar con mayúscula y el resto en minúsculas."}</small>
-    </div>
+      <!-- Campo de Email -->
+      <div>
+        <label for="email" class="block mb-1 text-sm font-semibold text-brown font-poppins">
+          {contact.form?.emailLabel || "Email:"}
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="w-full border-b-2 border-brown focus:outline-none p-1 bg-rose"
+          placeholder={contact.form?.emailPlaceholder || "Introduce tu email"}
+          required
+        />
+        <!-- Mensaje de error -->
+        <small id="emailError" class="text-red-500 text-xs hidden">
+          {contact.form?.emailError || "El email debe ser válido."}
+        </small>
+      </div>
 
-    <!-- Campo de Email -->
-    <div class="mb-4">
-      <!-- Etiqueta del campo de email con un placeholder predeterminado en caso de que no se pase 'contact.form?.emailPlaceholder' -->
-      <label for="email" class="block text-gray-700 font-medium mb-2">{contact.form?.emailLabel || "Email:"}</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder={contact.form?.emailPlaceholder || "Introduce tu email"}
-        required
-      />
-      <!-- Mensaje de error para el email, inicialmente oculto -->
-      <small id="emailError" class="text-red-500 text-sm hidden">{contact.form?.emailError || "El email debe ser valido."}</small>
-    </div>
+      <!-- Campo de Mensaje -->
+      <div>
+        <label for="message" class="block mb-1 text-sm font-semibold text-brown font-poppins">
+          {contact.form?.messageLabel || "Mensaje:"}
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          class="w-full border-b-2 border-brown focus:border-black focus:outline-none p-1 h-24 resize-none bg-rose"
+          placeholder={contact.form?.messagePlaceholder || "Escribe tu mensaje"}
+          required
+        >
+        </textarea>
+        <!-- Mensaje de error -->
+        <small id="messageError" class="text-red-500 text-xs hidden">
+          {contact.form?.messageError || "El mensaje debe tener al menos 20 caracteres."}
+        </small>
+      </div>
 
-    <!-- Campo de Mensaje -->
-    <div class="mb-4">
-      <!-- Etiqueta del campo de mensaje con detección del idioma -->
-      <label for="message" class="block text-gray-700 font-medium mb-2">{contact.form?.messageLabel || "Mensaje:"}</label>
+      <!-- Botón de Enviar -->
+      <button
+        type="submit"
+        id="submitButton"
+        class="w-full bg-brown text-rose font-semibold font-poppins py-3 rounded-md hover:bg-brownLight disabled:bg-gray-400 transition"
+        disabled
+      >
+        {contact.form?.submitButton || "Enviar"}
+      </button>
+    </form>
 
-      <!-- Área de texto para el mensaje con un placeholder predeterminado en caso de que no se pase 'contact.form?.messagePlaceholder' -->
-      <textarea
-        id="message"
-        name="message"
-        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder={contact.form?.messagePlaceholder || "Escribe tu mensaje"}
-        required
-      ></textarea>
-
-      <!-- Mensaje de error para el mensaje, inicialmente oculto -->
-      <small id="messageError" class="text-red-500 text-sm hidden">{contact.form?.messageError || "El mensaje debe tener al menos 20 caracteres."}</small>
-    </div>
-
-    <!-- Botón de Enviar -->
-    <button
-      type="submit"
-      id="submitButton"
-      class="w-full py-3 bg-blue-600 text-white font-medium rounded-md disabled:bg-gray-400"
-      disabled
+    <!-- Mensaje de confirmación -->
+    <div
+      id="confirmationMessage"
+      class="hidden text-center text-green mt-4"
     >
-      <!-- El texto del botón se adapta según el idioma (con valor predeterminado) -->
-      {contact.form?.submitButton || "Enviar"}
-    </button>
-  </form>
-
-  <!-- Mensaje de confirmación, inicialmente oculto -->
-  <div id="confirmationMessage" class="hidden text-center text-green-600 mt-4">
-    <p>{contact.form?.confirmationMessage || "¡Gracias por tu mensaje!Nos pondremos en contacto contigo pronto."}</p>
+      <p>{contact.form?.confirmationMessage || "¡Gracias por tu mensaje!"}</p>
+    </div>
   </div>
-</div>
+</section>
 
 <script>
   // Tipado de los elementos del DOM, para trabajar con TypeScript
@@ -88,6 +117,8 @@ const { contact } = Astro.props;
 
   // Valida si el nombre sigue el formato de empezar con mayúscula
   const validateName = (name: string): boolean => /^[A-Z][a-z]*$/.test(name);
+  // Valida si el apellido sigue el formato de empezar con mayúscula
+  const validateSurname = (surname: string): boolean => /^[A-Z][a-z]*$/.test(surname);
   // Valida si el email tiene el formato correcto
   const validateEmail = (email: string): boolean => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
   // Valida si el mensaje tiene al menos 20 caracteres
@@ -96,6 +127,8 @@ const { contact } = Astro.props;
   /**
    * Función para manejar el envío del formulario evitando el comportamiento por defecto.
    * Si el formulario es válido, muestra el mensaje de confirmación y limpia el formulario.
+   * El mensaje se muestra durante 5 segundos y luego se oculta.
+   * También se controla que el botón de envio del formulario se deshabilite al reiniciar el formulario.
    *  */ 
   const handleSubmit = (event: Event): void => {
     event.preventDefault(); 
@@ -104,14 +137,23 @@ const { contact } = Astro.props;
     
       if (confirmationMessage) {
         confirmationMessage.classList.remove("hidden");
+
+        // Después de 5 segundos, ocultamos el mensaje de confirmación
+      setTimeout(() => {
+        confirmationMessage.classList.add("hidden");
+      }, 5000); // 5000 ms = 5 segundos
       }
 
       if (form) {
         form.reset();
-      }
-
-    }
-  };
+      
+          // Después de reiniciar el formulario, deshabilitamos el botón de envío nuevamente
+          if (submitButton) {
+                  submitButton.disabled = true;  // Deshabilitamos el botón al resetear
+                }
+          }
+   } 
+};
 
   // Función para validar todos los campos del formulario
   const validateForm = (): boolean => {
@@ -119,12 +161,14 @@ const { contact } = Astro.props;
 
     // Obtiene los valores de los campos
     const nameInput = document.getElementById("name") as HTMLInputElement | null;
+    const surnameInput = document.getElementById("surname") as HTMLInputElement | null;
     const emailInput = document.getElementById("email") as HTMLInputElement | null;
     const messageInput = document.getElementById("message") as HTMLTextAreaElement | null;
 
-    if (!nameInput || !emailInput || !messageInput) return false;
+    if (!nameInput || !surnameInput || !emailInput || !messageInput) return false;
 
     const name = nameInput.value;
+    const surname = surnameInput.value;
     const email = emailInput.value;
     const message = messageInput.value;
 
@@ -136,6 +180,14 @@ const { contact } = Astro.props;
       isValid = false;
     } else {
       document.getElementById("nameError")!.classList.add("hidden");
+    }
+
+    // Validación de Apellido
+    if (!validateName(surname)) {
+      document.getElementById("surnameError")!.classList.remove("hidden");
+      isValid = false;
+    } else {
+      document.getElementById("surnameError")!.classList.add("hidden");
     }
 
     // Validación de Email
@@ -171,5 +223,7 @@ const { contact } = Astro.props;
   if (form) {
     form.addEventListener("submit", handleSubmit);
   }
+
+
 </script>
 

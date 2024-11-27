@@ -52,6 +52,13 @@ export default {
 			'.pop-down-child:hover': {
 			  transform: 'translateY(-5px)',
 			},
+			'.option-hover-green': {
+          		'&:hover': {
+            		'background-color': '#559687',
+            		'color': '#EBD9D3',
+		  		},
+		  	},
+			
 		  });
 		},
 	  ],

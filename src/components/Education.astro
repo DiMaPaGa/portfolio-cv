@@ -3,18 +3,17 @@
 import type { Translations } from '../types/Translations';
 const { education } = Astro.props as { education: Translations['education'] }; 
 ---
-
+<!-- Eleccion de section -->
 <section id="education" class="py-24 bg-greenLight">
   <!-- Título de la sección de Educación -->
   <h2 class="text-4xl font-poppins font-bold text-brown mb-6 text-center">
     {education.title}
   </h2>
 
+  <!-- Comprobamos si hay elementos en 'education.items' para mostrar. Si los hay, se muestran, si no, se muestra 'No information.' -->
   {education?.items?.length ? (
     <div class="relative max-w-4xl mx-auto">
-      <!-- Línea vertical que conecta todos los puntos -->
-      <div class="absolute inset-0 w-px bg-brown dark:bg-rose -z-10" />
-      
+      <!--Contenedor para cada hito-->
       <div class="space-y-8">
         {education.items.map((item, index) => (
           <div data-key={item.institution} class="flex items-start">

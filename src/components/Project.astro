@@ -66,13 +66,13 @@ await loadProjects();
 
 <section
   id="project"
-  class="py-24 text-center bg-rose"
+  class="py-24 text-center bg-rose text-brown min-h-[70vh] md:min-h-screen"
   data-current-page={currentPage}
   data-total-pages={totalPages}
   data-page-size={pageSize}
   data-test-mode={testMode}
 >
-  <h2 class="text-4xl font-poppins font-bold text-brown mb-6 text-center">{project.title}</h2>
+  <h2 class="text-4xl font-poppins font-bold mb-6 text-center text-brown">{project.title}</h2>
 
   <!-- Contenedor de los filtros -->
   <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
@@ -111,12 +111,12 @@ await loadProjects();
         id="techSearchInput"
         type="text"
         placeholder="Search by technologies"
-        class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-blue-500 focus:outline-none focus:border-blue-500"
+        class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-green focus:outline-none focus:border-green"
       />
       <button
         id="techSearchButton"
         type="button"
-        class="bg-blue-500 text-white rounded-r px-4 py-2"
+        class="bg-green text-rose rounded-r px-4 py-2"
       >
         Buscar
       </button>
@@ -127,7 +127,7 @@ await loadProjects();
       projects.length === 0 ? (
         <p>No hay proyectos disponibles.</p>
       ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 gap-x-0">
           {projects.map((project: ProjectModel) => {
             return <ProjectCard projectContent={project} testMode={testMode} />;
           })}
@@ -137,12 +137,12 @@ await loadProjects();
   </div>
 
   <!-- Paginación -->
-  <div class="mt-4 flex justify-center gap-4">
+  <div class="mt-10 flex justify-center gap-4">
     <!-- Botón Anterior -->
     <button
       id="prevButton"
       disabled={currentPage === 0}
-      class={`py-2 px-4 rounded ${currentPage === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700 text-white"}`}
+      class={`py-2 px-4 rounded ${currentPage === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-green hover:bg-greenLight text-rose"}`}
     >
       Anterior
     </button>
@@ -157,7 +157,7 @@ await loadProjects();
     <button
       id="nextButton"
       disabled={currentPage + 1 >= totalPages}
-      class={`py-2 px-4 rounded ${currentPage + 1 >= totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700 text-white"}`}
+      class={`py-2 px-4 rounded ${currentPage + 1 >= totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-green hover:bg-greenLight text-rose"}`}
     >
       Siguiente
     </button>
@@ -279,12 +279,12 @@ const updateProjects = async (page, filter) => {
       const projects = data.data.content;
 
       // Limpiar y actualizar el contenedor de proyectos
-projectsContainer.innerHTML = "";
-if (projects.length === 0) {
-  projectsContainer.innerHTML = "<p>No hay proyectos disponibles.</p>";
-} else {
+  projectsContainer.innerHTML = "";
+  if (projects.length === 0) {
+    projectsContainer.innerHTML = "<p>No hay proyectos disponibles.</p>";
+  } else {
   const grid = document.createElement("div");
-  grid.className = "px-20 justify-center grid grid-cols-1 md:grid-cols-2 gap-2";
+  grid.className = "px-20 justify-center grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-20";
 
   // Crear cards dinámicamente
   projects.forEach((project) => {
@@ -294,10 +294,10 @@ if (projects.length === 0) {
     card.className = "relative rounded-lg overflow-hidden shadow-lg group";
 
     card.innerHTML = `
-      <section id="project" class="py-10 bg-blue-100" id="project-${project.projectId}">
+      <section id="project" class="py-10" id="project-${project.projectId}">
         
         <!-- Imagen del Proyecto como fondo (cubre toda la card) -->
-        <div class="relative w-full h-64">
+        <div class="relative w-full h-48">
           <img
             style="display: ${imgDisplay};"
             src="${project.picture}"
@@ -307,20 +307,20 @@ if (projects.length === 0) {
         </div>
 
         <!-- Título del Proyecto (sobre la imagen) -->
-        <div class="absolute inset-0 flex flex-col justify-center items-start text-white bg-black bg-opacity-50 p-4">
-          <h2 class="text-2xl font-semibold">${project.projectName}</h2>
+        <div class="absolute inset-0 flex flex-col justify-center items-start text-greenLight bg-brown bg-opacity-60 p-4">
+          <h2 class="text-3xl font-semibold font-poppins">${project.projectName}</h2>
         </div>
 
         <!-- Información adicional que aparece al hacer hover -->
-        <div class="absolute inset-0 flex flex-col justify-start items-start bg-white opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300">
+        <div class="absolute inset-0 flex flex-col justify-start items-start bg-greenLight opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300">
           <!-- Descripción del Proyecto -->
-          <p class="text-lg mb-4">${project.description || "No description"}</p>
+          <p class="text-brown text-lg font-montserrat mb-4">${project.description || "No description"}</p>
 
           <!-- Tecnologías usadas -->
-          <p><strong>Tech:</strong> ${project.technologies.length > 0 ? project.technologies.join(", ") : "No includes"}</p>
+          <p class="text-md text-brown font-montserrat mb-4"><strong>Tech:</strong> ${project.technologies.length > 0 ? project.technologies.join(", ") : "No includes"}</p>
 
           <!-- Enlace al repositorio -->
-          ${project.repositoryUrl ? `<a class="text-blue-500 hover:underline" href="${project.repositoryUrl}">Repository URL</a>` : ""}
+          ${project.repositoryUrl ? `<a class="text-green hover:underline text-md font-montserrat" href="${project.repositoryUrl}">Repository URL</a>` : ""}
 
           <!-- Botón de eliminación si es necesario -->
           ${testMode ? `
@@ -407,14 +407,14 @@ if (projects.length === 0) {
       prevButton.className =
         currentPage === 0
           ? "py-2 px-4 rounded bg-gray-400 cursor-not-allowed"
-          : "py-2 px-4 rounded bg-blue-500 hover:bg-blue-700 text-white";
+          : "py-2 px-4 rounded bg-green hover:bg-greenLight text-rose";
     }
 
     if (nextButton) {
       nextButton.className =
         currentPage + 1 >= totalPages
           ? "py-2 px-4 rounded bg-gray-400 cursor-not-allowed"
-          : "py-2 px-4 rounded bg-blue-500 hover:bg-blue-700 text-white";
+          : "py-2 px-4 rounded bg-green hover:bg-greenLight text-rose";
     }
   };
 

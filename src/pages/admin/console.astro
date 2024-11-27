@@ -4,81 +4,88 @@
 <!-- Define el idioma de la página para accesibilidad y SEO -->
 <html lang="es">
   <head>
-    <!-- Codificación de caracteres para soportar caracteres especiales -->
     <meta charset="UTF-8" />
-    <!-- Ajusta la página para dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Título de la página -->
     <title>Login</title>
   </head>
-  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <body class="bg-[url('/images/fondoDeg.png')] bg-cover flex flex-col justify-between min-h-screen">
     <!-- Contenedor principal para la consola de administración -->
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <!-- Título de la consola -->
-        <h2 class="text-2xl font-semibold mb-6 text-center">
-            Consola de administración
-        </h2>
-        <!-- Sección principal de la consola -->
-        <section class="h-screen flex items-center justify-center bg-gray-100">
-            <!-- Contenido de la consola -->
-            <h3 class="text-2xl font-bold text-gray-800">
-            Bienvenido a la consola de administración          
-            </h3>
-            <!-- Enlace para regresar al inicio -->
-            <a href="/" class="text-blue-500 hover:text-blue-700">
-                Ir al inicio
-            </a>
-        </section>
+  <div class="p-8 rounded-lg shadow-lg w-11/12 max-w-md mx-auto bg-[url('/images/fondoDeg.png')] min-h-[50vh] flex flex-col justify-center mt-12 sm:mt-16 md:mt-20 lg:mt-24">
+    <!-- Título de la consola -->
+      <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-center text-brown font-montserrat">
+        CONSOLA DE ADMINISTRACIÓN
+      </h2>
 
-        <!-- Verificación del token de sesión -->
-        <script>
-            /**
-             * Función para verificar la validez del token almacenado en localStorage.
-             * Si el token no es válido o ha expirado, redirige al usuario al login.
-             */
-            const checkTokenValidity = () => {
-            const tokenString = localStorage.getItem("fakeToken");
-            console.log("comprobacion de token");
-
-            // Si no existe un token, redirige al login
-            if (!tokenString) {
-                window.location.href = "/admin/login";
-                return;
-            }
-
-            try {
-                // Intenta parsear el token a un objeto JSON
-                const token = JSON.parse(tokenString);
-                // Hora actual en milisegundos
-                const currentTime = new Date().getTime();
-
-                // Si la hora actual supera la fecha de expiración del token, redirige al usuario a la pantalla de login
-                if (currentTime > token.exp) {
-                alert(
-                    "La sesión ha expirado, por favor inicia sesión nuevamente."
-                );
-                // Elimina el token del almacenamiento local.
-                localStorage.removeItem("fakeToken");
-                // Redirige al usuario a la pantalla de login.
-                window.location.href = "/admin/login";
-                }
-            } catch (error) {
-                // Si ocurre un error (por ejemplo, el token está corrupto), redirige al login
-                console.error("Error al verificar el token:", error);
-                window.location.href = "/admin/login";
-            }
-            };
-
-            // Comprueba el token inmediatamente al cargar la página
-            checkTokenValidity();
-           /**
-             * Configura un intervalo para comprobar la validez del token cada 10 segundos (10000 ms).
-             * Esto asegura que el token se valide periódicamente mientras el usuario esté en esta página.
-             */
-            setInterval(checkTokenValidity, 10000);
-            // Si se prefiere comprobar cada minuto, se intercambia la linea anterior por:
-            // setInterval(checkTokenValidity, 60000);
-        </script>
+      <!-- Sección principal de la consola -->
+      <section class="flex flex-col items-center justify-center space-y-6 flex-grow">
+        <!-- Contenido de la consola -->
+        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-brown font-montserrat text-center">
+          Estamos en construcción
+        </h3>
+        
+        <!-- Ícono de Git o cualquier imagen que quieres mostrar -->
+        <img 
+          src="/images/construccion.webp" 
+          alt="Imagen de Diana" 
+          class="w-48 sm:w-64 md:w-72 lg:w-80 h-auto rounded-full mx-auto mb-4" 
+        />
+        
+        <!-- Enlace para regresar al inicio -->
+        <a 
+          href="/" 
+          class="text-blue-500 hover:text-blue-700 text-base md:text-lg font-semibold"
+        >
+          Ir al inicio
+        </a>
+      </section>
     </div>
+
+    <script>
+      /**
+       * Función para verificar la validez del token almacenado en localStorage.
+       * Si el token no es válido o ha expirado, redirige al usuario al login.
+       */
+      const checkTokenValidity = () => {
+        const tokenString = localStorage.getItem("fakeToken");
+        console.log("comprobacion de token");
+
+        // Si no existe un token, redirige al login
+        if (!tokenString) {
+          window.location.href = "/admin/login";
+          return;
+        }
+
+        try {
+          // Intenta parsear el token a un objeto JSON
+          const token = JSON.parse(tokenString);
+          // Hora actual en milisegundos
+          const currentTime = new Date().getTime();
+
+          // Si la hora actual supera la fecha de expiración del token, redirige al usuario a la pantalla de login
+          if (currentTime > token.exp) {
+            alert(
+              "La sesión ha expirado, por favor inicia sesión nuevamente."
+            );
+            // Elimina el token del almacenamiento local.
+            localStorage.removeItem("fakeToken");
+            // Redirige al usuario a la pantalla de login.
+            window.location.href = "/admin/login";
+          }
+        } catch (error) {
+          // Si ocurre un error (por ejemplo, el token está corrupto), redirige al login
+          console.error("Error al verificar el token:", error);
+          window.location.href = "/admin/login";
+        }
+      };
+
+      // Comprueba el token inmediatamente al cargar la página
+      checkTokenValidity();
+
+      /**
+       * Configura un intervalo para comprobar la validez del token cada 10 segundos (10000 ms).
+       * Esto asegura que el token se valide periódicamente mientras el usuario esté en esta página.
+       */
+      setInterval(checkTokenValidity, 10000);
+    </script>
   </body>
 </html>

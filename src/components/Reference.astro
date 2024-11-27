@@ -6,33 +6,47 @@ const { reference } = Astro.props as { reference: Translations['reference'] };
 
 ---
 
-<section id="reference" class="py-10">
-  <!-- Título de la sección de Referencias -->
-  <h2 class="text-3xl font-bold mb-4">
+<section id="reference" class="py-24 px-4 bg-greenLight">
+  <!-- Título de la sección -->
+  <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown">
     {reference.title}
   </h2>
-  <ul class="space-y-6">
-    <!-- Mapeo de items de la referencia mostrando la foto solo si está definida-->
+  <ul class="space-y-12 flex flex-col items-center">
     {reference.items.map((item: Translations['reference']['items'][0]) => (
       <li
         data-key={item.name}
-        class="flex items-start space-x-4 bg-white p-4 shadow rounded-lg border hover:shadow-md transition"
+        class="relative bg-green text-greenLight p-6 rounded-lg shadow-md overflow-visible max-w-xl w-full"
       >
-        
+        <!-- Comillas decorativas -->
+        <div class="absolute top-4 right-4 text-8xl font-bold opacity-20">
+          “
+        </div>
+
+        <!-- Foto sobresaliendo del borde -->
         {item.photo && (
           <img
             src={item.photo}
             alt={`Foto de ${item.name}`}
-            class="w-16 h-16 object-cover rounded-full"
+            class="absolute -top-10 -left-10 w-20 h-20 object-cover rounded-full border-4 border-greenLight shadow-lg"
           />
         )}
-        <div>
-          <p class="font-semibold text-lg">{item.name}</p>
-          <p class="text-sm text-gray-600">{item.relationship}</p>
-          <p class="text-gray-700 mt-2">{item.description}</p>
+
+        <!-- Texto de la cita -->
+        <div class="pl-24">
+          <p class="text-2xl text-rose leading-relaxed font-montserrat">
+            {item.description}
+          </p>
+          <p class="mt-4 font-semibold">
+            {item.name},{' '}
+            <span class="text-md text-greenLightfont-montserrat">{item.relationship}</span>
+          </p>
+          <!-- Correo electrónico -->
           {item.contact && (
-            <p class="text-sm text-blue-500 mt-2">
-              <a href={`mailto:${item.contact}`} class="underline">
+            <p class="mt-4">
+              <a
+                href={`mailto:${item.contact}`}
+                class="text-rose underline hover:text-greenLight text-md font-montserrat"
+              >
                 {item.contact}
               </a>
             </p>
@@ -42,3 +56,4 @@ const { reference } = Astro.props as { reference: Translations['reference'] };
     ))}
   </ul>
 </section>
+

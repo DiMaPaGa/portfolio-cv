@@ -82,12 +82,15 @@ export interface Translations {
             title: string;
             nameLabel: string;
             namePlaceholder: string;
+            surnameLabel: string;
+            surnamePlaceholder: string;
             emailLabel: string;
             emailPlaceholder: string;
             messageLabel: string;
             messagePlaceholder: string;
             submitButton: string;
             nameError: string;
+            surnameError: string;
             emailError: string;
             messageError: string;
             confirmationMessage: string;

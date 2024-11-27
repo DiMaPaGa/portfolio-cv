@@ -11,7 +11,7 @@ const { home } = Astro.props;  // Recibimos el idioma desde Layout
 
   <!-- Título de la sección -->
   <h1 
-    class="text-3xl md:text-5xl font-bold mb-4 text-brown font-poppins drop-shadow-lg">
+    class="text-3xl md:text-5xl font-bold mb-4 text-rose font-poppins drop-shadow-lg">
     {home?.title || "Bienvenido"}
   </h1>
 
@@ -37,12 +37,12 @@ const { home } = Astro.props;  // Recibimos el idioma desde Layout
   </a>
   
   <!-- Subtítulo -->
-  <p class="text-lg md:text-3xl font-bold font-poppins text-brown mt-6 drop-shadow-lg">
+  <p class="text-lg md:text-3xl font-bold font-poppins text-rose mt-6 drop-shadow-lg">
     {home?.subtitle || "Desarrolladora Full Stack"}
   </p>
 
   <!-- Descripción -->
-  <p class="font-montserrat text-brown mt-4 text-lg md:text-xl drop-shadow-lg">
+  <p class="font-montserrat text-rose mt-4 text-lg md:text-xl drop-shadow-lg">
     {home?.description.split('\n').map((line:string) => (
       <>
         {line}

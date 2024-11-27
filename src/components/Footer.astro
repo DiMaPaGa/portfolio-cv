@@ -1,9 +1,46 @@
 ---
-// Desestructuramos la propiedad 'footer' desde 'Astro.props' para acceder a la información del pie de página
+// Importación del tipado y desestructuración de las props
 const { footer } = Astro.props;
 ---
-<footer class="bg-blue-600 p-4 text-white">
-  <!-- Descripción del pie de página, si no se pasa 'footer.copyright', se usa la predeterminada -->
-  <p class="text-center">{footer?.copyright || "© Todos los derechos reservados"}</p>
+<!-- Pie de página -->
+<footer class="bg-green p-4 text-rose flex justify-between items-center">
+  <!-- Parte izquierda: Nombre y copyright -->
+  <div class="flex items-center">
+    <p class="text-sm font-bold font-montserrat">{footer?.copyright || "© Todos los derechos reservados"}</p>
+  </div>
+
+  <!-- Parte derecha: Iconos sociales y de correo -->
+  <div class="flex gap-6">
+    <!-- Icono de GitHub -->
+    <a href="https://github.com/DiMaPaGa/portfolio-cv" target="_blank" rel="noopener noreferrer">
+      <img src="../../public/images/giticon.png" alt="GitHub" class="w-6 h-6 hover:opacity-80 transition-opacity" />
+    </a>
+
+    <!-- Icono de LinkedIn -->
+    <a href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" target="_blank" rel="noopener noreferrer">
+      <img src="../../public/images/linkedin.png" alt="LinkedIn" class="w-6 h-6 hover:opacity-80 transition-opacity" />
+    </a>
+
+    <!-- Icono de Correo (copiar email y abrir cliente de correo) -->
+    <button id="emailButton" class="w-6 h-6 hover:opacity-80 transition-opacity">
+      <img src="/images/correo.png" alt="Correo" class="w-6 h-6" />
+    </button>
+  </div>
 </footer>
+
+<script is:inline>
+  // Función para copiar el correo al portapapeles y abrir el cliente de correo
+  document.getElementById('emailButton').addEventListener('click', () => {
+    const email = 'dianamariapascual@gmail.com';
+
+    // Copiar el correo al portapapeles
+    navigator.clipboard.writeText(email).then(() => {
+      alert('Correo copiado: ' + email); // Alerta de confirmación
+      window.location.href = `mailto:${email}`; // Abre el cliente de correo
+    }).catch(err => {
+      console.error('Error al copiar al portapapeles: ', err);
+    });
+  });
+</script>
+
 
