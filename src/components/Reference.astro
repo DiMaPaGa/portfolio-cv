@@ -5,12 +5,13 @@ import type { Translations } from '../types/Translations';
 const { reference } = Astro.props as { reference: Translations['reference'] };
 
 ---
-
+<!-- Seccion de Referencias -->
 <section id="reference" class="py-24 px-4 bg-greenLight">
   <!-- Título de la sección -->
   <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown">
     {reference.title}
   </h2>
+  <!-- Lista no ordenada de referencias -->
   <ul class="space-y-12 flex flex-col items-center">
     {reference.items.map((item: Translations['reference']['items'][0]) => (
       <li
@@ -40,6 +41,7 @@ const { reference } = Astro.props as { reference: Translations['reference'] };
             {item.name},{' '}
             <span class="text-md text-greenLightfont-montserrat">{item.relationship}</span>
           </p>
+          
           <!-- Correo electrónico -->
           {item.contact && (
             <p class="mt-4">

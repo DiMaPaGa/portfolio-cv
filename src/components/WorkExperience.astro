@@ -4,7 +4,7 @@ import type { Translations } from '../types/Translations.ts';
 // Desestructuración de las props y extraemos el subtipo de Translations para workExperience
 const { workExperience } = Astro.props as { workExperience: Translations['workExperience'] };  // Recibimos el idioma desde Layout
 ---
-
+<!-- Sección de Experiencia Laboral -->
 <section id="workExperience" class="py-24 bg-rose">
   <!-- Título de la sección de Experiencia Laboral -->
   <h2 class="text-4xl font-poppins font-bold mb-6 text-center text-brown">
@@ -20,7 +20,7 @@ const { workExperience } = Astro.props as { workExperience: Translations['workEx
           class="pop-down-child text-sm leading-6 mx-auto max-w-[90%] sm:max-w-[70%] bg-greenLight rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300"
         >
           <figure class="relative flex flex-col-reverse">
-            <!-- Descripción -->
+            <!-- Descripción con salto de linea -->
             <p class="mt-6 md:text-xl text-brown font-montserrat">
               {job.description.split('\n').map((line: string, idx: number) => (
                 <span data-key={idx}>
@@ -32,15 +32,15 @@ const { workExperience } = Astro.props as { workExperience: Translations['workEx
 
             <!-- Figcaption -->
             <figcaption class="flex items-center space-x-4 mt-4">
-              <!-- Imagen -->
+              <!-- Imagen con carga lazy y asincrónica para mejora de rendimiento en la carga-->
               <img 
                 src={job.image} 
                 alt={job.company} 
                 class="flex-none w-14 h-14 rounded-full object-contain" 
-                loading="lazy" 
+                loading="lazy"
                 decoding="async" 
               />
-              <!-- Detalles -->
+              <!-- Información destacada con diseño diferente -->
               <div class="flex-auto">
                 <div class="text-xl font-poppins font-bold text-brown hover:text-green transition-colors ">
                   {job.jobTitle}

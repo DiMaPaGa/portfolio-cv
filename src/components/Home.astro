@@ -3,19 +3,19 @@
 const { home } = Astro.props;  // Recibimos el idioma desde Layout
 
 ---
-
+<!-- Se elige generar un section -->
 <section 
   id="home" 
   class="relative py-10 px-4 text-center min-h-[70vh] md:min-h-screen flex flex-col justify-center animate-slide-up bg-home-background bg-cover bg-center bg-no-repeat"
   >
 
-  <!-- Título de la sección -->
+  <!-- Título de la sección, unico H1 -->
   <h1 
     class="text-3xl md:text-5xl font-bold mb-4 text-rose font-poppins drop-shadow-lg">
     {home?.title || "Bienvenido"}
   </h1>
 
-  <!-- Botón para LinkedIn -->
+  <!-- Enlace para LinkedIn animado -->
   <a 
     href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" 
     target="_blank" 
@@ -41,7 +41,7 @@ const { home } = Astro.props;  // Recibimos el idioma desde Layout
     {home?.subtitle || "Desarrolladora Full Stack"}
   </p>
 
-  <!-- Descripción -->
+  <!-- Descripción generado con json y usando un map para cada linea -->
   <p class="font-montserrat text-rose mt-4 text-lg md:text-xl drop-shadow-lg">
     {home?.description.split('\n').map((line:string) => (
       <>

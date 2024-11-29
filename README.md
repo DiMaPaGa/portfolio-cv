@@ -55,6 +55,8 @@ Del mismo modo, tiene una motivación práctica. En el contexto actual, tener un
 - Permitir la búsqueda de proyectos por tecnología.
 - Creación de formulario de contacto con validaciones.
 - Formulario de login con validación de entrada y funcionalidad de logout.
+- Diseño amigable de la web, previo estudio, que ajuste la estructura de la información tal y como se solicita.
+- Uso de recursos diferentes, sin repetir soluciones, para el desarrollo de la web. 
 
 
 
@@ -73,6 +75,8 @@ La motivación de este proyecto surge de la necesidad de tener una herramienta q
 
 ### Secciones implementadas
 
+- **Seleccion de Idioma**: Permite al usuario elegir el idioma del CV que desea visualizar.
+- **Navbar**: Navegación principal con enlaces a diferentes secciones de la web y solución responsiva. Se ajusta al tamaño de la ventana del navegador cambiando a una barra de navegación vertical en dispositivos medianos y pequeños.
 - **About Me**: Información básica sobre el autor (nombre, foto, profesión y descripción).
 - **Education**: Detalle de la formación académica.
 - **WorkExperience**: Historial laboral con descripciones de las experiencias profesionales.
@@ -80,8 +84,25 @@ La motivación de este proyecto surge de la necesidad de tener una herramienta q
 - **Projects**: Listado dinámico de proyectos consumidos desde una API REST. Paginación y búsqueda con validación mínima de entradas.
 Filtro por tecnología usada en los proyectos.
 - **Reference**: Listado de contactos que pueden dar referencias profesionales.
-- **Contact**: Formulario de contacto validado en tiempo real (nombre, email y texto). Restricciones: nombre con formato adecuado, email válido, texto de al menos 20 caracteres.
-- **Caracteristicas Técnicas**: Multilenguaje: Información gestionada desde JSON en inglés y español. Intento de un Diseño Responsivo.Buenas Prácticas: Uso de comentarios, manejo de errores y estructura de proyecto clara.
+- **Contact**: Formulario de contacto validado en tiempo real (nombre, apellido,email y texto). Restricciones: nombre y apellido con formato adecuado, email válido, texto de al menos 20 caracteres. Botón solo habilitado si el formulario está completo y validado.
+- **Login**: Formulario de login con validación de entrada (correo y contrasena). Botón de logout.
+- **Administración**: Tras el login, se llega al panel de control, pero se encuentra actualmente en fase de construcción. Permite volver a la pantalla de inicio.
+- **Footer**: Muestra nombre y derechos de autor. Enlace a Linkedin, GitHub y correo (con copiado de dirección al portapapeles).
+
+### Otros detalles de interés:
+
+- **Caracteristicas Técnicas**: 
+    - **Multilenguaje:** Información gestionada desde JSON en inglés y español. Hay dos grupos de archivos json: Unos alojados en public/data/lang, que controlan la traducción de los títulos de las secciones y otros en public/data, que controlan los contenidos completos de cada sección.
+    
+    - **Properties:** Este json alojado en public/data contiene el control centralizado del valor del Test Mode.
+
+    - **Types:** La carpeta public/data/types contiene las interfaces de todos los tipos de datos del proyecto descritos para Typescript.
+    
+    - **Buenas Prácticas:** Uso de comentarios, manejo de errores y estructura de proyecto clara con un intento de diseño responsivo.
+
+
+
+
 
 
 
@@ -111,12 +132,12 @@ Filtro por tecnología usada en los proyectos.
 
 
 
-### Pasos para instalar
+### Pasos para instalar en local
 
-**1.** Clona el repositorio:
+**1.** Clonar el repositorio:
 
    ```bash
-   git clone https://github.com/DiMaPaGa/**************************servidorporfolio.git**************************
+   git clone https://github.com/DiMaPaGa/portfolio-cv
    ```
 
 **2.** Navega al directorio del proyecto:
@@ -125,111 +146,149 @@ Filtro por tecnología usada en los proyectos.
    cd servidorporfolio
    ```
 
-**3.** Instala las dependencias y compila el proyecto con Maven :
- **ATENCION**: Asegurate de tener Maven instalado en tu sistema.
+**3.** Instala las dependencias:
+
+ **ATENCION**: Asegúrate de estar en el directorio del proyecto y luego instala las dependencias necesarias ejecutando el siguiente comando:
+
    ```bash
-   mvn clean install
+   npm install
    ```
-**4.** Ejecuta la aplicación:
+    Esto instalara todas las dependencias necesarias para que el proyecto funcione correctamente.
+
+**4.** Verifica la configuración de TypeScript:
+    Como el proyecto utiliza TypeScript, hay que asegurarse de que la configuración es correcta en **tsconfig.json**
+   
+   Debe aparecer algo similar a lo siguiente:
+
+   - **extends:** Extiende la configuración estricta de Astro (astro/tsconfigs/strict).
+   - **compilerOptions:** Establece opciones como el uso de react-jsx para trabajar con React y una correcta resolución de módulos.
+   - **include:** Asegura que todos los archivos en el directorio src/ y el archivo astro.config.ts estén incluidos.
+    Si no necesitas cambios, esta configuración es adecuada para comenzar.
+
+**5.** Configura Tailwind CSS:
+
+   - Abre el archivo **tailwind.config.js**.
+   - Agrega la siguiente configuración si no la encuentras ya para este proyecto:
+
    ```bash
-   mvn spring-boot:run
+/** @type {import('tailwindcss').Config} */
+export default {
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	theme: {
+		extend: {
+		  fontFamily: {
+			poppins: ['Poppins', 'sans-serif'],
+			montserrat: ['Montserrat', 'sans-serif'],
+		  },
+		  colors: {
+			greenLight: {
+			  DEFAULT: '#D3EBE5', // Para detalles secundarios
+			},
+			rose: {
+			  DEFAULT: '#EBD9D3', // Color de fondo principal
+			},
+			brown: {
+			  DEFAULT: '#6B3B2B', // Para textos principales
+			},
+			green: {
+			  DEFAULT: '#559687', // Para detalles o enlaces destacados
+			},
+			brownLight: {
+			  DEFAULT: '#AB7E6F', // Para acentos secundarios
+			},
+		  },
+		  backgroundImage: {
+			'home-background': "url('/images/fondoHome.png'), linear-gradient(to bottom, rgba(235, 217, 211, 0.8), rgba(235, 217, 211, 0.4))",
+			'education-background': "url('/images/Pizarra.png'), linear-gradient(to bottom, rgba(235, 217, 211, 0.8), rgba(235, 217, 211, 0.4))",
+		  },
+
+		  transitionTimingFunction: {
+			'ease-custom': 'cubic-bezier(0.4, 0, 0.2, 1)',
+		  },
+		  transitionDuration: {
+			'custom': '300ms',
+		  },
+		  transform: {
+			'pop-down': 'translateY(0)',
+			'pop-up': 'translateY(-5px)',
+		  },
+		  
+		},
+	  },
+	  plugins: [
+		function ({ addUtilities }) {
+		  addUtilities({
+			'.pop-down-child': {
+			  transform: 'translateY(0)',
+			  transition: 'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+			},
+			'.pop-down-child:hover': {
+			  transform: 'translateY(-5px)',
+			},
+			'.option-hover-green': {
+          		'&:hover': {
+            		'background-color': '#559687',
+            		'color': '#EBD9D3',
+		  		},
+		  	},
+			
+		  });
+		},
+	  ],
+	};
    ```
 
----
-
-
+   
 
 ## GUÍA DE USO
 
 
 
-### Ejecución del Script de Base de Datos
+### Inicio del servidor de desarrollo
 
-Una vez que la aplicación está lista para ejecutarse, se proporciona un archivo **schema.sql** ubicado en la carpeta **src/main/resources** del proyecto. Este archivo contiene las instrucciones necesarias para crear las tablas de la base de datos y poblarlas con los datos de prueba.
+Una vez que todo esté configurado, puedes iniciar el servidor de desarrollo local con:
 
-**1.** Abrir MySQL Workbench:
-
-    Asegúrate de haber configurado una conexión a tu servidor de base de datos MySQL.
-
-**2.** Cargar el script **schema.sql**:
-
-    Abre MySQL Workbench y selecciona la opción **File > Open SQL Script**.
-    
-    Carga el archivo schema.sql.
-
-**3.** Ejecutar el script:
-
-    Una vez que el archivo esté cargado en el editor, selecciona toda su contenido o simplemente haz clic en el botón Run (ícono del rayo) para ejecutarlo. Esto creará automáticamente las tablas necesarias y las poblará con datos de prueba.
-
-**4.** Verificar la base de datos:
-
-    Ve a la pestaña Schemas en MySQL Workbench y selecciona la base de datos donde ejecutaste el script.
-    
-    Navega por las tablas para verificar que se crearon correctamente y que los datos de prueba están disponibles.
-
-
-
-### Acceso a la Documentación de la API
-
-Con la aplicación esté en ejecución, se puede acceder a la API documentada mediante Swagger. Abre el navegador y accede a la documentación interactiva en:
-
-```bash
-http://localhost:8080/swagger-ui.html
+```bash	
+npm run dev
 ```
 
-Aquí puedes explorar y probar los endpoints de la API, así como ver los DTOs y sus respuestas. Aunque la documentación se encuentra en inglés, la información proporcionada es clara y comprensible.
+Esto lo arrancará  y se podrá acceder al proyecto desde el navegador a la dirección indicada en la terminal.
 
+### ¿Como construir el proyecto para ser desplegado?
 
+Puedes crearlo en la terminal con:
 
-### Endpoints realizados
+```bash	
+npm run build
+```
 
+Esto ejecutará los comandos de Astro para comprobar y construir el proyecto en la carpeta dist/, que estará lista para ser desplegada.
 
-
-#### Proyectos
-
-    1. PUT /api/v1/projects/{id}: Actualizar un proyecto por su ID.
-    2. DELETE /api/v1/projects/{id}: Eliminar un proyecto por su ID.
-    3. GET /api/v1/projects: Obtener todos los proyectos.
-    4. POST /api/v1/projects: Crear un nuevo proyecto.
-    5. POST /api/v1/projects/{projectId}/technologies/{techId}: Asociar una tecnología a un proyecto.
-    6. PATCH /api/v1/projects/{id}/totesting: Cambiar el estado de un proyecto a "toTesting".
-    7. PATCH /api/v1/projects/{id}/toprod: Cambiar el estado de un proyecto a "In production".
-    8. GET /api/v1/projects/{word}: Obtener un proyecto por la palabra clave en su nombre.
-    9. GET /api/v1/projects/tec/{tech}: Obtener proyectos por tecnología.
-
-
-
-
-#### Tecnologías
-
-    1. POST /api/v1/technologies: Crear una nueva tecnología.
-    2. POST /api/v1/technologies/used: Asociar una tecnología a un proyecto.
-    3. DELETE /api/v1/technologies/{techId}: Eliminar una tecnología por su ID.
-
-
-
-
-#### Desarrolladores
-
-    1. POST /api/v1/developers: Crear un nuevo desarrollador.
-    2. POST /api/v1/developers/worked: Asociar un proyecto a un desarrollador.
-    3. DELETE /api/v1/developers/{devId}: Eliminar un desarrollador por su ID.
-
-
-
+*************************************************
 ## ENLACE A FIGMA
 
-***NOTA:*** Este proyecto no tiene una interfaz visual creada en Figma. Sin embargo, como se ha indicado, puede acceder a la interfaz de desarrollo de la API en Swagger para explorar los endpoints y sus respuestas.
+El enlace a FIGMA es:
+```bash	
+https://www.figma.com/design/PohCscsdnrp5CkQj4cTBwc/PascualGarcia-Portfolio?node-id=0-1&t=8KCfS2F9WtxBP5dd-1
+```	
 
 
 
 ## CONCLUSIÓN
 
-El proyecto proporciona a los desarrolladores una plataforma eficiente para gestionar su portafolio de proyectos y tecnologías. A través de esta herramienta, cualquier desarrollador pueden organizar y presentar de manera clara y profesional sus logros, lo que facilita su búsqueda de empleo y mejora su visibilidad frente a posibles empleadores.
+Este proyecto se aproxima hacia la construcción de una página de portfolio profesional. A través de la implementación de Astro, codigo JS, y Tailwind CSS, se logra un sitio atractivo y accesible. 
 
-Incluso esta idea de proyecto podría extenderse a ser el portafolio de proyectos de una empresa de desarrollo de software. Este sistema permite almacenar, consultar, actualizar y eliminar información relacionada con proyectos, desarrolladores y tecnologías utilizadas. Se podrían ampliar la funcionalidad con los endpoints que puedan resultar necesarios, trabajar en la seguridad de los datos, mejorar la calidad del código, su despliegue en la nube con una interfaz de usuario amigable, etc. 
+Durante el desarrollo, se abordaron varios aspectos clave:
 
-Esta iniciativa puede emplearse como un punto de partida para crear una plataforma completa de gestión. En este caso, quizás apostaría por el uso de WebClient en el caso de que estemos tratando con más volumen de datos, bases de datos externas e incluso con microservicios (para proyectos, usuarios o tecnologías).
+***Estructuración del Proyecto:*** Una organización coherente de carpetas y archivos que facilita el mantenimiento y la escalabilidad.
+
+***Consumo de Datos Dinámicos:*** La integración de datos desde un archivo JSON y una API REST demostró el manejo eficiente de datos dinámicos y consumibles en múltiples idiomas.
+
+***Interactividad y Validaciones:*** Se añadieron funcionalidades avanzadas, como la validación en tiempo real del formulario de contacto y la paginación en la sección de proyectos, mejorando la experiencia del usuario.
+
+***Mejores Prácticas de Desarrollo:*** Se aplicaron conceptos como modularidad, reutilización de componentes y documentación completa, garantizando un código limpio y funcional.
+
+Aunque el proyecto cumple con la mayoría de los requisitos establecidos, se identificaron áreas de mejora, como la implementación de la consola de administración y la creación de un WebComponent. Estos puntos pueden ser trabajados en un futuro para completar el alcance total del proyecto.
 
 
 
@@ -237,40 +296,36 @@ Esta iniciativa puede emplearse como un punto de partida para crear una platafor
 
 ### Contribuciones:
 
-Este proyecto fue desarrollado de manera individual, aunque cuenta con la influencia y el aprendizaje obtenido durante las clases y actividades a lo largo del curso.
+Este proyecto fue desarrollado de manera individual. A los aprendizajes obtenidos en las clases y actividades, tuve que sumarle algunas horas más de estudio de tutoriales para un correcto manejo de algunas de las tecnologías utilizadas.
     
-Me lanzo ya a ir incorporando **mappers** en mis tareas y proyectos gracias a las explicaciones de **Moisés Pastrana**. Es programador además de compañero de vida, y aunque reconozco que no soy fácil a la hora de dejarme orientar, este descubrimiento me ha resultado de gran ayuda en esta tarea.
+Gracias a ello, actualmente creo manejarme un poco mejor con las especificaciones de **TypeScript** y con algunas estrategias de **Tailwind CSS**. Me parece de gran utilidad manejarse en los cambios del *tailwind.config.js*, para personalizar el proyecto de acuerdo a sus necesidades.
 
 ### Agradecimientos:
 
-Agradezco a mi profesor **Joaquín Borrego** la oportunidad de presentarnos este reto, su paciencia para orientarnos y su comprensión.
-A **Jorge Juan**, por creer en mi capacidad cuando me fallaron las fuerzas a finales del curso pasado.
-A **Ramón Galdón**, que siempre dejaba sus mensajes de ánimo en sus tareas y boletines de notas, tanto... que me acabé creyendo que valía para esto.
-Y de este sector,me reservo algunos agradecimientos para el siguiente proyecto.
+Agradezco a **José Carlos Moreno** su actitud de continuo apoyo cuando el estrés ha empezado a aparecer en la recta final de este periodo de proyectos.
 
-A mis compañeros de clase, **Alejandro Navarro** porque siempre se presta a ser mi compañero de fatigas y parece que aún no se arrepiente.
-A **Laura Padilla**, que siempre escucha mis explicaciones aunque me enrolle y si me nota agobiada, le falta tiempo para ofrecerme ayuda.
-A **Luna García-Arcicóllar**, que sabe cómo subir los ánimos hasta en los momentos más difíciles.
+Por este mismo motivo, tengo que volver a mencionar a **Joaquin Borrego**, que incluso ha resistido de manera estoica mis críticas ante la propuesta de crear una web dinámica en un entorno ideado para generar web estáticas.
+
+A **Rafael Mancina**, que con sus tareas me ha hecho ver que cualquier proyecto es susceptible de ser desplegado, incluso en el más inhóspito de los entornos. 
+
+De mis compañeros de clase, al trío **Laura Padilla**, **Alejandro Navarro** y **Luna García-Arcicóllar**,porque como ya he comentado en otras ocasiones, siempre saben cómo apoyar y despertar mi creatividad.
+
+Pero en esta ocasión, agrego también a **Miguel Ángel Reyes**, con sus recomendaciones y consejos de aspectos a tener en cuenta en el despliegue, ya que sin duda ello ha agilizado muchísimo la experiencia.
 
 
 ### Referencias:
 
-https://programandoenjava.com/junit-5-pruebas-unitarias/
+https://docs.astro.build/es/getting-started
 
-https://www.baeldung.com/junit-5
+https://tailwindcss.com/docs/installation
 
-https://bell-sw.com/blog/documenting-rest-api-with-swagger-in-spring-boot-3/#mcetoc_1heq9ft3o1j
-
-https://www.bezkoder.com/spring-boot-restcontrolleradvice/#google_vignette
-
-https://medium.com/@himani.prasad016/validations-in-spring-boot-e9948aa6286b
-
+https://www.typescriptlang.org/docs/
 
 
 
 ## LICENCIAS
 
-This project is licensed under the **GNU General Public License (GPL) v2** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GNU General Public License (GPL) v3** - see the [LICENSE](LICENSE) file for details.
 
 
 

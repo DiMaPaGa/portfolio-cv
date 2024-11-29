@@ -4,7 +4,7 @@ import type { Translations } from '../types/Translations';
 // Desestructuración de las props definiendo el subtipo de skill explícitamente desde el componente principal
 const { skill } = Astro.props as { skill: Translations['skill'] };  
 ---
-
+<!-- Sección de Habilidades -->
 <section id="skill" class="py-24 bg-greenLight">
   <!-- Título de la sección de Habilidades -->
   <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown">{skill.title}</h2>
@@ -24,7 +24,7 @@ const { skill } = Astro.props as { skill: Translations['skill'] };
               alt={item.name}
               class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"
             />
-            <!-- LNombre de la tecnología-->
+            <!-- Nombre de la tecnología-->
             <p class="font-semibold text-lg text-brown">{item.name}</p>
 
             <!-- Barra de progreso -->

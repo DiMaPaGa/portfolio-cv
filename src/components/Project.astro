@@ -18,7 +18,7 @@ const pageSize = 4;
 let projects: ProjectModel[] = [];
 let totalPages = 0;
 
-// Función para obtener proyectos desde la API con paginación 
+// Función para obtener proyectos desde la API con paginación con control de errores
 const fetchProjects = async (
   page: number
 ): Promise<ApiResponse<ProjectModel>> => {
@@ -63,7 +63,7 @@ const loadProjects = async () => {
 };
 await loadProjects();
 ---
-
+<!-- Sección de proyectos -->
 <section
   id="project"
   class="py-24 text-center bg-rose text-brown min-h-[70vh] md:min-h-screen"
@@ -72,6 +72,7 @@ await loadProjects();
   data-page-size={pageSize}
   data-test-mode={testMode}
 >
+  <!-- Título general de la sección de proyectos -->
   <h2 class="text-4xl font-poppins font-bold mb-6 text-center text-brown">{project.title}</h2>
 
   <!-- Contenedor de los filtros -->
@@ -122,6 +123,8 @@ await loadProjects();
       </button>
     </div>
   </div>
+
+  <!-- Contenedor de proyectos -->
   <div id="projectsContainer">
     {
       projects.length === 0 ? (
@@ -237,7 +240,7 @@ await loadProjects();
       clearSearch();
     });
 
-    // Actualizar proyectos según el filtro seleccionado
+    // Actualizar proyectos según el filtro seleccionado: Constante TYPE y categorias según buenas prácticas
     const updateWithfilter = async (TYPE) => {
     let filterQuery = "";
     let filterText = "";
