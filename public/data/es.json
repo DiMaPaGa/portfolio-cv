@@ -2,7 +2,7 @@
     "home": {
     "title": "¡BIENVENIDO A MI PORTAFOLIO!",
     "subtitle": "Desarrolladora Web",
-    "description": "Soy una apasionada del mundo de la programación y las nuevas tecnologías.\n\n¿Quiéres conocer mis habilidades y proyectos?",
+    "description": "Soy una apasionada del mundo de la programación y las nuevas tecnologías.\n\n¿Quieres conocer mis habilidades y proyectos?",
     "disponibility": "Disponible para trabajar"
     },
     "aboutMe": {
@@ -127,7 +127,7 @@
         "items": 
         [
             {
-                "name": "Joaquin Borrego Fernandez",
+                "name": "Joaquin Borrego Fernández",
                 "relationship": "Profesor en IES Vedruna y Desarrollador de Software en Babel",
                 "contact": "joaquin.borrego@vedruna.es",
                 "photo": "../../public/images/joaquin.png",

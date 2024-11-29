@@ -6,13 +6,13 @@
     "disponibility": "Available for work"
     },
     "aboutMe": {
-      "title": "About Me",
+      "title": "ABOUT ME",
       "name": "Diana Pascual García",
       "profession": "Web Developer",
       "description": "I am seeking opportunities to apply my skills in web development and new technologies. My diverse experience and focus on quality and problem-solving prepare me to contribute effectively to web development projects. I bring dedication, commitment, professionalism, and teamwork experience, ready to adapt and prove my value in this field."
     },
     "education": {
-        "title": "Education",
+        "title": "EDUCATION",
         "items": [
         {
             "institution": "IES.Vedruna. Seville",
@@ -32,37 +32,41 @@
         ]
     },
     "workExperience": {
-      "title": "Work Experience",
+      "title": "WORK EXPERIENCE",
       "items": 
         [
           {
               "jobTitle": "DUAL Internship in Web Application Development",
               "company": "NTT DATA",
+              "image":"../../public/images/nttdata.png",
               "years": "2024-Present",
               "description": "Advanced Java programming, Configuration and management of Maven. Implementation of SLF4J + Logback. Testing with JUnit and Mockito. Code quality validation with SonarLint. Environment and tool updates."
           },
           {
               "jobTitle": "Residence Director",
               "company": "ATUREM",
+              "image":"../../public/images/aturem.png",
               "years": "2017-2023",
               "description": "Staff seleccion and management. Training design and delivery. Customer service and issue resolution."
           },
           {
               "jobTitle": "Psychologist",
               "company": "ATUREM",
+              "image":"../../public/images/aturem.png",
               "years": "2014-2017",
               "description": "Quality team member. Trainer for family and self-management programs. Responsible for the Equality Plan. Data analysis and publication writer."
           },
           {
               "jobTitle": "Research Staff",
               "company": "University of Seville and Oregon State University",
+              "image":"../../public/images/oregon.jpg",
               "years": "2008-2012",
               "description": "Design of training and intervention programs. Various research tasks, including reference and database management. Participation in published documents. Family consultant and research assistant. "
           }
         ]
     },
     "skill": {
-        "title": "Skills",
+        "title": "SKILLS",
         "categories": {
             "frontend": {
               "title": "Front-end",
@@ -96,7 +100,7 @@
         }
     },
     "project":{
-        "title": "Projects", 
+    "title": "PROJECTS", 
         "items":[]
     },
     "contact": {
@@ -119,7 +123,7 @@
         }
     },
     "reference": {
-        "title": "References",
+        "title": "REFERENCES",
         "items":
         [
             {
