@@ -1,7 +1,5 @@
 ---
-// Importación de tipado
 import type { Translations } from '../types/Translations.ts';
-// Desestructuración de las props y extraemos el subtipo de Translations para workExperience
 const { workExperience } = Astro.props as { workExperience: Translations['workExperience'] };  // Recibimos el idioma desde Layout
 ---
 <!-- Sección de Experiencia Laboral -->

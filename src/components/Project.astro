@@ -1,24 +1,16 @@
 ---
-// Importaciones de tipado para las respuestas de la API
 import type { ProjectModel, ApiResponse } from "../types/ProjectModel";
-
-// Importación del componente ProjectCard para mostrar cada proyecto
 import ProjectCard from "./ProjectCard.astro";
-
-// Desestructuramos la propiedad 'project' que contiene los datos del proyecto
 const { project } = Astro.props;
 
-// Importación de la propiedad 'testMode' y carga de su valor.
 const properties = await import("../../public/data/properties.json");
 const testMode = properties.testMode;
 
-// Variables de estado iniciales
 let currentPage = 0;
 const pageSize = 4;
 let projects: ProjectModel[] = [];
 let totalPages = 0;
 
-// Función para obtener proyectos desde la API con paginación con control de errores
 const fetchProjects = async (
   page: number
 ): Promise<ApiResponse<ProjectModel>> => {
@@ -55,7 +47,6 @@ const fetchProjects = async (
   }
 };
 
-// Función para cargar proyectos desde la API
 const loadProjects = async () => {
   const response = await fetchProjects(currentPage);
   projects = response.data.content;
@@ -63,7 +54,7 @@ const loadProjects = async () => {
 };
 await loadProjects();
 ---
-<!-- Sección de proyectos -->
+
 <section
   id="project"
   class="py-24 text-center bg-rose text-brown min-h-[70vh] md:min-h-screen"

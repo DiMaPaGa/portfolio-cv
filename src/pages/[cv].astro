@@ -1,5 +1,4 @@
 ---
-// Importación de componentes
 import Layout from '../layouts/Layout.astro';
 import Home from '../components/Home.astro';
 import AboutMe from '../components/AboutMe.astro';
@@ -10,15 +9,9 @@ import Project from '../components/Project.astro';
 import Reference from '../components/Reference.astro';
 import Contact from '../components/Contact.astro';
 
-// Importación de los tipos para las traducciones (definidos en los archivos .ts)
 import type { Translations } from '../types/Translations.ts'; 
 import type { TranslationsLayout } from '../types/TranslationsLayout';
 
-/**
- * Función para obtener las rutas estáticas.
- * Devuelven las rutas de los idiomas disponibles (es, en)
- * 
- * */ 
 export async function getStaticPaths() {
   return [
     { params: { cv: 'es' } }, // Ruta /es
@@ -26,37 +19,27 @@ export async function getStaticPaths() {
   ];
 }
 
-// Se obtiene el idioma de la URL (params)
 const { cv } = Astro.params;
-// Se valida que el idioma sea español o inglés, y se asigna un valor por defecto en caso contrario
 const lang = (cv === 'es' || cv === 'en') ? cv : 'es';
 
-// Declaración de la variable para almacenar las traducciones
 let translations = {} as Translations;
 
-// Cargar las traducciones basadas en el idioma detectado (español o inglés)
 if (lang === 'es') {
-  // Si el idioma es español, se importa el archivo de traducciones en español
   const module = await import('../../public/data/es.json');
   translations = module.default;
 } else if (lang === 'en') {
-  // Si el idioma es inglés, se importa el archivo de traducciones en inglés
   const module = await import('../../public/data/en.json');
   translations = module.default;
 }
 
-// Cargar las traducciones específicas del layout (cabecera y pie de página)
 let translationsLayout = {} as TranslationsLayout;
 if (lang === 'es') {
-  // Si el idioma es español, se importan las traducciones del layout en español
   const module = await import('../../public/data/lang/es.json'); 
   translationsLayout = module.default;
 } else if (lang === 'en') {
-  // Si el idioma es inglés, se importan las traducciones del layout en inglés
   const module = await import('../../public/data/lang/en.json'); 
   translationsLayout = module.default;
 }
-
 ---
 
 <!-- Renderizado del contenido con las traducciones cargadas -->

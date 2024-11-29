@@ -1,9 +1,6 @@
 ---
-// Importación de tipado
 import type { Translations } from '../types/Translations';
-// Desestructuración de las props y extraemos el subtipo de Translations
 const { reference } = Astro.props as { reference: Translations['reference'] };
-
 ---
 <!-- Seccion de Referencias -->
 <section id="reference" class="py-24 px-4 bg-greenLight">
