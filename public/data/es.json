@@ -1,89 +1,144 @@
 {
     "home": {
-    "title": "Bienvenido a mi Portafolio",
-    "subtitle": "Desarrollador de Software",
-    "description": "Soy un apasionado desarrollador de software con un enfoque en crear soluciones innovadoras."
+    "title": "¡BIENVENIDO A MI PORTAFOLIO!",
+    "subtitle": "Desarrolladora Web",
+    "description": "Soy una apasionada del mundo de la programación y las nuevas tecnologías.\n\n¿Quiéres conocer mis habilidades y proyectos?",
+    "disponibility": "Disponible para trabajar"
     },
     "aboutMe": {
-      "title": "Sobre Mi",
-      "name": "Tu Nombre",
-      "photo": "/path/to/photo.jpg",
-      "profession": "Desarrollador de Software",
-      "description": "Un apasionado desarrollador con un amor por crear soluciones innovadoras."
+      "title": "SOBRE MI",
+      "name": "Diana Pascual García",
+      "photo": "../../public/images/dianaAnime.jpeg",
+      "profession": "Desarrolladora de Software",
+      "description": "Busco oportunidades para demostrar mis habilidades en el desarrollo web y las nuevas tecnologías. Mi experiencia diversa y enfoque en calidad y resolución de problemas, me preparan para contribuir efectivamente en proyectos de desarrollo web. Ofrezco mi entrega, compromiso, profesionalidad y experiencia en trabajo en equipo. Me encuentro lista para adaptar y demostrar mi valía en este campo."
     },
     "education": {
-        "title": "Educación",
+        "title": "EDUCACIÓN",
         "items": [
         {
-            "institution": "Universidad de Ejemplo",
-            "degree": "Licenciatura en Ciencias de la Computación",
-            "years": "2020-2024"
+            "institution": "IES.Vedruna. Sevilla",
+            "degree": "Técnico Superior en Desarrollo de Aplicaciones Web",
+            "years": "2023-2025"
         },
         {
-            "institution": "Escuela Secundaria Ejemplo",
-            "degree": "Diploma de Secundaria",
-            "years": "2015-2020"
+            "institution": "Universidad de Sevilla",
+            "degree": "Máster Universitario en Psicología de la Salud",
+            "years": "2011-2013"
+        },
+        {
+            "institution": "Universidad de Sevilla",
+            "degree": "Licenciada en Psicología",
+            "years": "2002-2007"
         }
         ]
     },
     "workExperience":{
-        "title": "Experiencia Laboral",
+        "title": "EXPERIENCIA LABORAL",
         "items": [
-        {
-            "jobTitle": "Desarrollador Frontend",
-            "company": "Compañía Ejemplo",
-            "years": "2023-Presente",
-            "description": "Desarrollé interfaces de usuario utilizando React y Tailwind CSS."
+          {
+            "jobTitle": "DUAL en Desarrollo de Aplicaciones Web",
+            "company": "NTT DATA",
+            "image":"../../public/images/nttdata.png",
+            "years": "2024-Presente",
+            "description": "Java avanzado. \nConfiguración y gestión de Maven. \nImplementación de SLF4J + Logback. \nPruebas con JUnit y Mockito. \nValidación de calidad con SonarLint. \nActualización de entorno y herramientas."
         },
         {
-            "jobTitle": "Becario",
-            "company": "Startup Tecnológica",
-            "years": "2022-2023",
-            "description": "Asistí en la creación de un sitio web y trabajé en APIs backend."
+            "jobTitle": "Directora de Residencia",
+            "company": "ATUREM",
+            "image":"../../public/images/aturem.png",
+            "years": "2017-2023",
+            "description": "Seleccion y gestión de personal. \nDiseño y entrega de programas de formación. \nServicio al cliente y resolución de problemas."
+        },
+        {
+            "jobTitle": "Psicologa",
+            "company": "ATUREM",
+            "image":"../../public/images/aturem.png",
+            "years": "2014-2017",
+            "description": "Miembro del equipo de calidad. \nFormadora de programas de familia y autocontrol. \nResponsable del Plan de Igualdad. \nAnálisis de datos y edición de publicaciones."
+        },
+        {
+            "jobTitle": "Personal de Investigación",
+            "company": "University of Sevilla y Oregon State University",
+            "image":"../../public/images/US.png",
+            "years": "2008-2012",
+            "description": "Diseño de programas de formación. \nTareas de investigación, incluyendo gestión y manipulación de bases de datos. \nParticipación en publicaciones. Consultora y asistente de investigación."
         }
     ]
     },  
     "skill": {
-        "title": "Habilidades",
-        "items": 
-        [
-            {
-                "name": "JavaScript",
-                "level": "Avanzado"
+        "title": "HABILIDADES",
+        "categories": {
+            "frontend": {
+              "title": "Front-end",
+              "items": [
+                { "name": "HTML", "level": 3, "logo":"../../public/images/html.png"},
+                { "name": "CSS", "level": 3, "logo":"../../public/images/css.png"},
+                { "name": "JavaScript", "level": 2, "logo":"../../public/images/js.png"},
+                { "name": "Tailwind CSS", "level": 2, "logo":"../../public/images/tailwind.png"},
+                { "name": "Astro", "level": 1, "logo":"../../public/images/astro.png"}
+              ]
             },
-            {
-                "name": "React",
-                "level": "Intermedio"
+            "backend": {
+              "title": "Back-end",
+              "items": [
+                { "name": "Node.js", "level": 2,"logo":"../../public/images/node.png"},
+                { "name": "Java", "level": 2, "logo":"../../public/images/java.png"},
+                { "name": "PHP ", "level": 2, "logo":"../../public/images/php.png"},
+                { "name": "Spring Boot", "level": 2, "logo":"../../public/images/spring.png"},
+                { "name": "MySQL", "level": 2, "logo":"../../public/images/mySQL.png"},
+                { "name": "REST APIs", "level": 2, "logo":"../../public/images/api.png"}
+              ]
             },
-            {
-                "name": "Tailwind CSS",
-                "level": "Avanzado"
+            "devops": {
+              "title": "DevOps",
+              "items": [
+                { "name": "GitHub Actions", "level": 1, "logo":"../../public/images/github.png"},
+                { "name": "Microsoft Azure", "level": 1, "logo":"../../public/images/azure.png"},
+                { "name": "Git", "level": 2, "logo":"../../public/images/git.png"}
+              ]
             }
-        ]
+        }
     },
-    "project": [],
+    "project":{
+        "title": "PROYECTOS", 
+        "items":[]
+    },
     "contact": {
-      "title": "Contacto",
-      "email": "tu.email@ejemplo.com",
-      "linkedin": "https://www.linkedin.com/in/tunombre"
+      "form": {
+            "title": "Contacta conmigo",
+            "nameLabel": "Nombre",
+            "namePlaceholder": "Introduce tu nombre",
+            "surnameLabel": "Apellido",
+            "surnamePlaceholder": "Introduce tu apellido",
+            "emailLabel": "Email",
+            "emailPlaceholder": "Introduce tu email",
+            "messageLabel": "Mensaje",
+            "messagePlaceholder": "Escribe tu mensaje",
+            "submitButton": "Enviar",
+            "nameError": "El nombre debe comenzar con mayúscula y el resto en minúsculas.",
+            "surnameError": "El apellido debe comenzar con mayúscula y el resto en minúsculas.",
+            "emailError": "Introduce un email válido.",
+            "messageError": "El mensaje debe tener al menos 20 caracteres.",
+            "confirmationMessage": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
+    }
     },
     "reference": {
-        "title": "Referencias",
+        "title": "REFERENCIAS",
         "items": 
         [
             {
-                "name": "Juan Pérez",
-                "relationship": "Ex Jefe",
-                "contact": "juan.perez@ejemplo.com",
-                "photo": "/path/to/photo_juan.jpg",
-                "description": "Juan fue mi jefe en Compañía Ejemplo y puede hablar sobre mis habilidades como desarrollador frontend."
+                "name": "Joaquin Borrego Fernandez",
+                "relationship": "Profesor en IES Vedruna y Desarrollador de Software en Babel",
+                "contact": "joaquin.borrego@vedruna.es",
+                "photo": "../../public/images/joaquin.png",
+                "description": "Joaquin fue mi profesor y tutor en el segundo curso del Ciclo Superior de Desarrollo de Aplicaciones Web y puede hablarle sobre mis habilidades como desarrolladora de software."
             },
             {
-                "name": "Ana Gómez",
-                "relationship": "Profesora Universitaria",
-                "contact": "ana.gomez@ejemplo.com",
-                "photo": "/path/to/photo_ana.jpg",
-                "description": "Ana fue mi profesora en varias asignaturas de Ciencias de la Computación y puede hablar sobre mis capacidades académicas."
+                "name": "José Carlos Moreno Martín",
+                "relationship": "Profesor en IES Vedruna",
+                "contact": "josecarlos.moreno@vedruna.es",
+                "photo": "../../public/images/josecarlos.png",
+                "description": "José Carlos fue mi profesor en el Ciclo Superior de Desarrollo de Aplicaciones Web y puede hablarle sobre mis evoluciones en este campo."
             }
         ]
     }

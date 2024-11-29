@@ -1,4 +1,17 @@
+// Importación de los tipos para el modelo de proyecto (definidos en los archivos .ts)
+import type { ProjectModel } from "./ProjectModel";
 
+/**
+ * Interfaz que define el tipado de las traducciones del cv completo:
+ *    home: Interfaz que define el tipado de las traducciones del componente Home.
+ *    aboutMe: Interfaz que define el tipado de las traducciones del componente AboutMe.
+ *    education: Interfaz que define el tipado de las traducciones del componente Education.
+ *    workExperience: Interfaz que define el tipado de las traducciones del componente WorkExperience.
+ *    skill: Interfaz que define el tipado de las traducciones del componente Skill.
+ *    project: Interfaz que define el tipado de las traducciones del componente Project.
+ *    contact: Interfaz que define el tipado de las traducciones del componente Contact.
+ *    reference: Interfaz que define el tipado de las traducciones del componente Reference.
+ **/
 export interface Translations {
     home: {
       title: string;
@@ -25,23 +38,64 @@ export interface Translations {
       items: Array<{
         jobTitle: string;
         company: string;
+        image?: string;
         years: string;
         description: string;
       }>;
     };
     skill: {
       title: string;
-      items: Array<{
-        name: string;
-        level: string;
-      }>;
+      categories: {
+        frontend: {
+          title: string;
+          items: Array<{
+            name: string;
+            level: number;
+            logo?: string;
+          }>;
+        };
+        backend: {
+          title: string;
+          items: Array<{
+            name: string;
+            level: number;
+            logo?: string;
+          }>;
+        };
+        devops: {
+          title: string;
+          items: Array<{
+            name: string;
+            level: number;
+            logo?: string;
+          }>;
+        };
+      };
     };
-    project: any[]; // Deja esto como un array vacío si no tienes proyectos definidos.
+    project:{
+        title: string; 
+        items: Array<ProjectModel
+          >
+    };
     contact: {
-      title: string;
-      email: string;
-      linkedin: string;
-    };
+        form: {
+            title: string;
+            nameLabel: string;
+            namePlaceholder: string;
+            surnameLabel: string;
+            surnamePlaceholder: string;
+            emailLabel: string;
+            emailPlaceholder: string;
+            messageLabel: string;
+            messagePlaceholder: string;
+            submitButton: string;
+            nameError: string;
+            surnameError: string;
+            emailError: string;
+            messageError: string;
+            confirmationMessage: string;
+    }
+    },
     reference: {
       title: string;
       items: Array<{

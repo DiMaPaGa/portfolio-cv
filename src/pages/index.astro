@@ -1,38 +1,67 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Home from '../components/Home.astro';
-import AboutMe from '../components/AboutMe.astro';
-import Education from '../components/Education.astro';
-import WorkExperience from '../components/WorkExperience.astro';
-import Skill from '../components/Skill.astro';
-import Project from '../components/Project.astro';
-import Reference from '../components/Reference.astro';
-import Contact from '../components/Contact.astro';
 
-import type { Translations } from '../types/Translations.ts'; 
-
-
-// Determinar el idioma (por ejemplo, "es" para español o "en" para inglés)
-const lang = "es"; // Puedes cambiarlo aquí o hacerlo dinámico según la selección del usuario
-
-// Importar datos directamente según el idioma
-let translations = {} as Translations;
-if (lang === "es") {
-  const module= await import('../../public/data/es.json');
-  translations = module.default;
-} else if (lang === "en") {
-  const module= await import('../../public/data/en.json');
-  translations = module.default;
-}
 ---
 
-<Layout layoutLang={lang}>
-  <Home home={translations.home} />
-  <AboutMe aboutMe={translations.aboutMe} />
-  <Education education={translations.education} />
-  <WorkExperience workExperience={translations.workExperience} />
-  <Skill skill={translations.skill} />
-  <Project project={translations.project} />
-  <Reference reference={translations.reference} />
-  <Contact contact={translations.contact} />
-</Layout>
+<html>
+  <head>
+    <!-- Título de la página-->
+    <title>Selección de Idioma</title>
+    <!-- Vincula Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <!-- Vincula la hoja de estilo de Tailwind CSS desde un CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Definición de la codificación de caracteres para soportar caracteres especiales -->
+    <meta charset="UTF-8" />
+    <!-- Configura la vista para dispositivos móviles (hace que la página sea adaptable a diferentes tamaños de pantalla) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Descripción de la página para motores de búsqueda (SEO) -->
+    <meta name="description" content="Selecciona un idioma para visualizar el CV." />
+    
+  </head>
+  <body class="min-h-screen flex items-center justify-center bg-cover bg-center [background-image:url('/images/mapa2.jpg')]">
+    <!-- Contenedor principal para el contenido -->
+    <div class="max-w-4xl w-full px-4 py-10 bg-rose bg-opacity-50 backdrop-blur-md rounded-lg shadow-lg">
+     
+      <!-- Utilizamos una cuadrícula (grid) para distribuir dos columnas -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Columna para Español -->
+        <div class="text-center">
+            <!-- Título de la sección en español -->
+            <h2 class="text-3xl font-bold text-center mb-8 font-poppins text-brown">BIENVENIDO</h2>
+            <!-- Descripción para la opción en español -->
+            <p class="text-lg text-center mb-12 font-montserrat text-brown">Para ver el currículum en Español</p>
+            <!-- Instrucción para hacer clic en la imagen -->
+            <p class="text-lg font-semibold mb-4 font-poppins text-brown">Pulsa la imagen:</p>
+            <!-- Enlace para redirigir a la versión en español del CV -->
+            <a href="/es">
+              <!-- Imagen de la bandera de España, con efectos de transición en hover -->
+              <img
+                src='/images/España.png'
+                alt="Bandera de España para acceder al CV en español"
+                class="w-32 h-20 mx-auto rounded-md shadow-md hover:shadow-lg hover:scale-105 transition"
+              />
+            </a>
+        </div>
+
+        <!-- Columna para Inglés -->
+        <div class="text-center">
+          <!-- Título de la sección en inglés -->
+            <h2 class="text-3xl font-bold text-center mb-8 font-poppins text-[#6B3B2B]">WELCOME</h2>
+            <!-- Descripción para la opción en inglés -->
+            <p class="text-lg text-center mb-12 font-montserrat text-[#6B3B2B]">To view the CV in English</p>
+            <!-- Instrucción para hacer clic en la imagen -->
+            <p class="text-lg font-semibold mb-4 font-poppins text-[#6B3B2B]">Clic on picture:</p>
+            <!-- Enlace para redirigir a la versión inglés del CV -->
+            <a href="/en">
+              <img
+                src='/images/Inglaterra.png'
+                alt="Flag of the United Kingdom"
+                class="w-32 h-20 mx-auto rounded-md shadow-md hover:shadow-lg hover:scale-105 transition"
+              />
+            </a>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>

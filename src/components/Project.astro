@@ -1,37 +1,424 @@
 ---
-import type { ProjectModel, PaginatedResponse } from "../types/ProjectModel";
+// Importaciones de tipado para las respuestas de la API
+import type { ProjectModel, ApiResponse } from "../types/ProjectModel";
+
+// Importación del componente ProjectCard para mostrar cada proyecto
 import ProjectCard from "./ProjectCard.astro";
-const { project } = Astro.props;  // Recibimos el idioma desde Layout
-console.log("Idioma en project:", project); // Agrega esto para depurar
 
-const currentPage = 1; 
-const pageSize = 4; 
+// Desestructuramos la propiedad 'project' que contiene los datos del proyecto
+const { project } = Astro.props;
 
- // Aquí hacemos la llamada a la API en el servidor durante la construcción de la página
- const response: PaginatedResponse<ProjectModel> = await fetch(`http://localhost:8080/api/v1/projects?page=${currentPage}&pageSize=${pageSize}`)
-  .then(response => response.json());
+// Importación de la propiedad 'testMode' y carga de su valor.
+const properties = await import("../../public/data/properties.json");
+const testMode = properties.testMode;
 
-// Extraer los datos y la paginación
-const { data, total, page, pageSize: size } = response;
+// Variables de estado iniciales
+let currentPage = 0;
+const pageSize = 4;
+let projects: ProjectModel[] = [];
+let totalPages = 0;
 
-// Calcular el total de páginas
-const totalPages = Math.ceil(total / size);
- 
+// Función para obtener proyectos desde la API con paginación con control de errores
+const fetchProjects = async (
+  page: number
+): Promise<ApiResponse<ProjectModel>> => {
+  try {
+    const res = await fetch(
+      `http://localhost:8080/api/v1/projects?page=${page}&size=${pageSize}`
+    );
+    if (!res.ok) throw new Error(`Error: ${res.status}`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return {
+      message: "Error",
+      data: {
+        content: [],
+        pageable: {
+          pageNumber: 0,
+          pageSize: 0,
+          offset: 0,
+          paged: false,
+          unpaged: true,
+        },
+        last: true,
+        totalPages: 0,
+        totalElements: 0,
+        size: 0,
+        number: 0,
+        sort: { empty: true, unsorted: true, sorted: false },
+        numberOfElements: 0,
+        first: true,
+        empty: true,
+      },
+    };
+  }
+};
 
-
+// Función para cargar proyectos desde la API
+const loadProjects = async () => {
+  const response = await fetchProjects(currentPage);
+  projects = response.data.content;
+  totalPages = response.data.totalPages;
+};
+await loadProjects();
 ---
+<!-- Sección de proyectos -->
+<section
+  id="project"
+  class="py-24 text-center bg-rose text-brown min-h-[70vh] md:min-h-screen"
+  data-current-page={currentPage}
+  data-total-pages={totalPages}
+  data-page-size={pageSize}
+  data-test-mode={testMode}
+>
+  <!-- Título general de la sección de proyectos -->
+  <h2 class="text-4xl font-poppins font-bold mb-6 text-center text-brown">{project.title}</h2>
 
-<section id="project" class="py-10 text-center bg-gray-200">
-  <h1 class="text-5xl font-bold mb-4">{project.title}</h1>
+  <!-- Contenedor de los filtros -->
+  <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
+    <!-- Filtro por tipo de búsqueda -->
+    <div class="flex items-center gap-3">
+      <select
+        id="filterSelect"
+        name="filterType"
+        class="w-full md:w-auto h-10 border-2 border-green focus:outline-none focus:border-green text-green rounded px-3 tracking-wider"
+      >
+        <option value="PROJECT" selected>Project</option>
+        <option value="TECH">Technology</option>
+      </select>
+    </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    
-      {data.map((projectContent: ProjectModel) => (
-      <ProjectCard projectContent={projectContent} />
-      ))}
-    
+    <!-- Filtro por nombre de proyecto -->
+    <div id="projectFilter" class="flex items-center gap-0">
+      <input
+        id="projectSearchInput"
+        type="text"
+        placeholder="Search by projects"
+        class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-green focus:outline-none focus:border-green"
+      />
+      <button
+        id="searchButton"
+        type="button"
+        class="bg-green text-rose rounded-r px-4 py-2"
+      >
+        Search
+      </button>
+    </div>
+
+    <!-- Filtro por tecnología -->
+    <div id="techFilter" class="flex items-center gap-3" style="display: none;">
+      <input
+        id="techSearchInput"
+        type="text"
+        placeholder="Search by technologies"
+        class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-green focus:outline-none focus:border-green"
+      />
+      <button
+        id="techSearchButton"
+        type="button"
+        class="bg-green text-rose rounded-r px-4 py-2"
+      >
+        Buscar
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor de proyectos -->
+  <div id="projectsContainer">
+    {
+      projects.length === 0 ? (
+        <p>No hay proyectos disponibles.</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 gap-x-0">
+          {projects.map((project: ProjectModel) => {
+            return <ProjectCard projectContent={project} testMode={testMode} />;
+          })}
+        </div>
+      )
+    }
+  </div>
+
+  <!-- Paginación -->
+  <div class="mt-10 flex justify-center gap-4">
+    <!-- Botón Anterior -->
+    <button
+      id="prevButton"
+      disabled={currentPage === 0}
+      class={`py-2 px-4 rounded ${currentPage === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-green hover:bg-greenLight text-rose"}`}
+    >
+      Anterior
+    </button>
+
+    <p class="py-2">
+      Página <span id="currentPageDisplay">{currentPage + 1}</span> de <span
+        id="totalPagesDisplay">{totalPages}</span
+      >
+    </p>
+
+    <!-- Botón Siguiente -->
+    <button
+      id="nextButton"
+      disabled={currentPage + 1 >= totalPages}
+      class={`py-2 px-4 rounded ${currentPage + 1 >= totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-green hover:bg-greenLight text-rose"}`}
+    >
+      Siguiente
+    </button>
   </div>
 </section>
 
+<script is:inline>
+  // Variables para interactuar con la interfaz de usuario
+  const BASIC_URL = "http://localhost:8080/api/v1/projects";
+  const projectSection = document.getElementById("project");
+  let currentPage = parseInt(projectSection.dataset.currentPage, 10);
+  const pageSize = parseInt(projectSection.dataset.pageSize, 10);
+  const testMode = projectSection.dataset.testMode === "true";
+  let totalPages = parseInt(projectSection.dataset.totalPages, 10);
+  const projectsContainer = document.getElementById("projectsContainer");
+  const prevButton = document.getElementById("prevButton");
+  const nextButton = document.getElementById("nextButton");
+  const currentPageDisplay = document.getElementById("currentPageDisplay");
+  const totalPagesDisplay = document.getElementById("totalPagesDisplay");
+  const searchInput = document.getElementById("projectSearchInput");
+  const techSearchInput = document.getElementById("techSearchInput");
+  const projectFilter = document.getElementById("projectFilter");
+  const techFilter = document.getElementById("techFilter");
 
 
+  // Inicializar el estado de los botones
+  prevButton.disabled = currentPage === 0;
+  nextButton.disabled = currentPage + 1 >= totalPages;
+
+  // Manejadores de eventos para interacciones de usuario
+  document.addEventListener("click", (event) => {
+    const idName = event.target.id;
+    
+    //Actualizar proyectos al cambiar de página
+
+    //botón anterior
+    if (idName && idName === "prevButton") {
+      if (currentPage > 0) updateProjects(currentPage - 1, "");
+    }
+
+    //botón siguiente
+    if (idName && idName === "nextButton") {
+      if (currentPage + 1 < totalPages) updateProjects(currentPage + 1, "");
+    }
+
+    //Filtros de búsqueda
+    if (idName && idName === "searchButton") {
+      updateWithfilter("PROJECT");
+    }
+
+    //botón de busqueda por tecnologia
+    if (idName && idName === "techSearchButton") {
+      updateWithfilter("TECH");
+    }
+
+    //Botón de borrado
+    if (idName && idName.startsWith("deleteButton-")) {
+      const projectId = event.target.id.split("-")[1]; // Extrae el ID del proyecto
+      deleteProject(projectId);
+      //limpio el buscador y vuelvo a cargar
+      clearSearch();
+      window.location.reload();
+    }
+  });
+
+    // Event listener para cambiar entre filtros de proyecto y tecnología
+    filterSelect.addEventListener("change", (event) => {
+      if (event.target.value === "PROJECT") {
+        // Mostrar el filtro de proyecto y ocultar el de tecnología
+        projectFilter.style.display = "block";
+        techFilter.style.display = "none";
+      } else if (event.target.value === "TECH") {
+        // Mostrar el filtro de tecnología y ocultar el de proyecto
+        projectFilter.style.display = "none";
+        techFilter.style.display = "block";
+      }
+      clearSearch();
+    });
+
+    // Actualizar proyectos según el filtro seleccionado: Constante TYPE y categorias según buenas prácticas
+    const updateWithfilter = async (TYPE) => {
+    let filterQuery = "";
+    let filterText = "";
+    if (TYPE === "PROJECT") {
+      filterText = searchInput.value.trim();
+      if (filterText.length >= 3) {
+        filterQuery = "/" + filterText;
+      }
+    }
+
+    if (TYPE === "TECH") {
+      filterText = techSearchInput.value.trim();
+      if (filterText.length >= 3) {
+        filterQuery = "/tec/" + filterText;
+      }
+    }
+
+    if (filterText.length >= 3 || filterText.length === 0) {
+      updateProjects(0, filterQuery);
+    } else {
+      alert(
+        "Por favor, ingresa al menos 3 caracteres para realizar la búsqueda."
+      );
+      clearSearch();
+    }
+  };
+
+// Función para actualizar los proyectos
+const updateProjects = async (page, filter) => {
+    try {
+      prevButton.disabled = true;
+      nextButton.disabled = true;
+
+      let url = BASIC_URL + filter + "?page=" + page + "&size=" + pageSize;
+
+      // Realizar la llamada a la API
+      const response = await fetch(url);
+      const data = await response.json();
+      const projects = data.data.content;
+
+      // Limpiar y actualizar el contenedor de proyectos
+  projectsContainer.innerHTML = "";
+  if (projects.length === 0) {
+    projectsContainer.innerHTML = "<p>No hay proyectos disponibles.</p>";
+  } else {
+  const grid = document.createElement("div");
+  grid.className = "px-20 justify-center grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-20";
+
+  // Crear cards dinámicamente
+  projects.forEach((project) => {
+    const card = document.createElement("div");
+    const imgDisplay = project.picture ? "block" : "none";
+    const showDeleteButton = testMode ? "inline" : "none";
+    card.className = "relative rounded-lg overflow-hidden shadow-lg group";
+
+    card.innerHTML = `
+      <section id="project" class="py-10" id="project-${project.projectId}">
+        
+        <!-- Imagen del Proyecto como fondo (cubre toda la card) -->
+        <div class="relative w-full h-48">
+          <img
+            style="display: ${imgDisplay};"
+            src="${project.picture}"
+            alt="Imagen de ${project.projectName}"
+            class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"
+          />
+        </div>
+
+        <!-- Título del Proyecto (sobre la imagen) -->
+        <div class="absolute inset-0 flex flex-col justify-center items-start text-greenLight bg-brown bg-opacity-60 p-4">
+          <h2 class="text-3xl font-semibold font-poppins">${project.projectName}</h2>
+        </div>
+
+        <!-- Información adicional que aparece al hacer hover -->
+        <div class="absolute inset-0 flex flex-col justify-start items-start bg-greenLight opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300">
+          <!-- Descripción del Proyecto -->
+          <p class="text-brown text-lg font-montserrat mb-4">${project.description || "No description"}</p>
+
+          <!-- Tecnologías usadas -->
+          <p class="text-md text-brown font-montserrat mb-4"><strong>Tech:</strong> ${project.technologies.length > 0 ? project.technologies.join(", ") : "No includes"}</p>
+
+          <!-- Enlace al repositorio -->
+          ${project.repositoryUrl ? `<a class="text-green hover:underline text-md font-montserrat" href="${project.repositoryUrl}">Repository URL</a>` : ""}
+
+          <!-- Botón de eliminación si es necesario -->
+          ${testMode ? `
+            <button
+              id="deleteButton-${project.projectId}"
+              class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+              aria-label="Eliminar proyecto ${project.projectName}"
+            >
+              Eliminar Proyecto
+            </button>
+          ` : ""}
+        </div>
+      </section>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  projectsContainer.appendChild(grid);
+}
+
+
+      // Aquí después de agregar los nuevos proyectos, volver a asignar el evento a los botones de eliminar
+      projects.forEach((project) => {
+        const deleteButton = document.getElementById(
+          `deleteButton-${project.projectId}`
+        );
+        if (deleteButton) {
+          deleteButton.addEventListener("click", () => {
+            handleDelete(project.projectId);
+          });
+        }
+      });
+
+      // Actualizar estado de los botones y la UI
+      currentPage = page;
+      currentPageDisplay.textContent = currentPage + 1;
+      totalPages = data.data.totalPages;
+      totalPagesDisplay.textContent = totalPages;
+
+      updateButtonStyles();
+    } catch (error) {
+      console.error("Error al actualizar proyectos:", error);
+    } finally {
+      prevButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage + 1 >= totalPages;
+    }
+  };
+
+  // Función para eliminar un proyecto de la API validando el ID
+  const deleteProject = async (id) => {
+    
+    try {
+      //convierte el Id a número y lo valida
+      const numericId = Number(id);
+      if (isNaN(numericId)) {
+        alert("El ID del proyecto no es un número.");
+        return;
+      }
+
+      //Construye la URL para eliminar el proyecto
+      const url = `${BASIC_URL}/${numericId}`;
+    
+      // Realizar la llamada DELETE a la API
+      const response = await fetch(url, { method: "DELETE"});
+      const data = await response.json();
+      alert(data.message);
+      
+    } catch (error) {
+      alert("Error al intentar eliminar el proyecto");
+    }
+  };
+
+  // Función para limpiar el buscador
+  const clearSearch = async () => {
+    searchInput.value = "";
+    techSearchInput.value = "";
+  };
+
+  // Función para actualizar los estilos de los botones según la página actual.
+  const updateButtonStyles = () => {
+    
+    if (prevButton) {
+      prevButton.className =
+        currentPage === 0
+          ? "py-2 px-4 rounded bg-gray-400 cursor-not-allowed"
+          : "py-2 px-4 rounded bg-green hover:bg-greenLight text-rose";
+    }
+
+    if (nextButton) {
+      nextButton.className =
+        currentPage + 1 >= totalPages
+          ? "py-2 px-4 rounded bg-gray-400 cursor-not-allowed"
+          : "py-2 px-4 rounded bg-green hover:bg-greenLight text-rose";
+    }
+  };
+
+</script>

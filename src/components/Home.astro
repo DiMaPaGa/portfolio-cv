@@ -1,14 +1,74 @@
-
 ---
+// Desestructuramos la propiedad 'home' desde 'Astro.props' para acceder a la información
 const { home } = Astro.props;  // Recibimos el idioma desde Layout
-console.log("Idioma en Home:", home); // Agrega esto para depurar
----
 
-<section id="home" class="py-10 text-center bg-gray-200">
-  <h1 class="text-5xl font-bold mb-4">{home.title}</h1>
-  <p class="text-lg">{home.subtitle}</p>
-  <p>{home.description}</p> <!-- Agregué la descripción si quieres mostrarla también -->
+---
+<!-- Se elige generar un section -->
+<section 
+  id="home" 
+  class="relative py-10 px-4 text-center min-h-[70vh] md:min-h-screen flex flex-col justify-center animate-slide-up bg-home-background bg-cover bg-center bg-no-repeat"
+  >
+
+  <!-- Título de la sección, unico H1 -->
+  <h1 
+    class="text-3xl md:text-5xl font-bold mb-4 text-rose font-poppins drop-shadow-lg">
+    {home?.title || "Bienvenido"}
+  </h1>
+
+  <!-- Enlace para LinkedIn animado -->
+  <a 
+    href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" 
+    target="_blank" 
+    rel="noopener" 
+    class="flex justify-center items-center transition-transform hover:scale-105"
+  >
+    <div class="flex items-center">
+      <span class="relative inline-flex overflow-hidden rounded-full p-[1px]">
+        <span 
+          class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#51E4B8_0%,#21554E_50%,#51E4B8_100%)]"
+        ></span>
+        <div 
+          class="inline-flex items-center justify-center w-full px-3 py-1 text-sm md:text-base text-green font-poppins bg-rose rounded-full cursor-pointer dark:bg-brown dark:text-white/80 backdrop-blur-3xl whitespace-nowrap"
+        >
+          {home?.disponibility || "Disponible para trabajar"}
+        </div>
+      </span>
+    </div>
+  </a>
+  
+  <!-- Subtítulo -->
+  <p class="text-lg md:text-3xl font-bold font-poppins text-rose mt-6 drop-shadow-lg">
+    {home?.subtitle || "Desarrolladora Full Stack"}
+  </p>
+
+  <!-- Descripción generado con json y usando un map para cada linea -->
+  <p class="font-montserrat text-rose mt-4 text-lg md:text-xl drop-shadow-lg">
+    {home?.description.split('\n').map((line:string) => (
+      <>
+        {line}
+        <br />
+      </>
+    )) || "Desarrolladora entusiasmada con el mundo de la programación"}
+  </p>
 </section>
 
+<style>
+  /* Animación de deslizamiento desde abajo usando Tailwind */
+  @keyframes slideUp {
+  /* Animación de deslizamiento desde abajo */
+  0% {
+    transform: translateY(50%); /* Empieza más cerca para móviles */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
+  /* Clase de animación personalizada */
+  .animate-slide-up {
+    animation: slideUp 1s ease-out; /* Duración de 1 segundo y animación suave */
+  }
+</style>
 

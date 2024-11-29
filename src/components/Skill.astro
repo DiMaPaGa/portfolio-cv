@@ -1,26 +1,60 @@
-
 ---
+// Importación de tipado
 import type { Translations } from '../types/Translations';
-
-const { skill } = Astro.props as { skill: Translations['skill'] };  // Definimos el tipo de `skill` explícitamente
-console.log("Idioma en Skill:", skill); // Depuración opcional
+// Desestructuración de las props definiendo el subtipo de skill explícitamente desde el componente principal
+const { skill } = Astro.props as { skill: Translations['skill'] };  
 ---
+<!-- Sección de Habilidades -->
+<section id="skill" class="py-24 bg-greenLight">
+  <!-- Título de la sección de Habilidades -->
+  <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown">{skill.title}</h2>
 
-<section id="skill" class="py-10">
-  <h2 class="text-3xl font-bold mb-4">
-    {skill.title}
-  </h2>
-  <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
-    {skill.items.map((item: Translations['skill']['items'][0]) => (
-      <li
-        data-key={item.name}
-        class="border rounded p-4 bg-white shadow hover:shadow-md transition"
-      >
-        <p class="font-semibold text-lg">{item.name}</p>
-        <p class="text-sm text-gray-600 italic">{item.level}</p>
-      </li>
-    ))}
-  </ul>
+   <!-- Iteración sobre las categorías de habilidades -->
+  {skill.categories && Object.entries(skill.categories).map(([key, category]) => (
+    <div data-key={key} class="mb-16 p-6 bg-rose rounded-lg shadow-md">
+      <h3 class="text-2xl font-semibold mb-8 text-center text-brown font-poppins">{category.title}</h3>
+
+      <!-- Lista de ítems dentro de la categoría -->
+      <ul class="flex flex-wrap justify-center gap-6 mt-8">
+        {category.items.map((item) => (
+          <li data-key={item.name} class="flex flex-col items-center text-center sm:w-full md:w-auto group">
+            <!-- Logo de la tecnología -->
+            <img
+              src={item.logo}
+              alt={item.name}
+              class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"
+            />
+            <!-- Nombre de la tecnología-->
+            <p class="font-semibold text-lg text-brown">{item.name}</p>
+
+            <!-- Barra de progreso -->
+            <div class="relative mt-4 w-28">
+              <!-- Contenedor de la barra de progreso -->
+              <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden">
+                <!-- Barra de progreso con ancho dinámico basado en `item.level` -->
+                <div
+                  class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110"
+                  style={{ width: `${item.level * 25}%` }}
+                ></div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
 </section>
+
+
+
+
+    
+
+
+
+
+
+
+
 
 

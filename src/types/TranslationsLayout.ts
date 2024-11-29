@@ -1,6 +1,12 @@
+/**
+ * Interfaz que define el tipado de las traducciones del layout del cv:
+ *    navbar: Interfaz que define el tipado de las traducciones del navbar.
+ *    footer: Interfaz que define el tipado de las traducciones del footer.
+ */
+
 export interface TranslationsLayout {
     navbar: {
-      aboutMe: string; // Cambiado de "about" a "aboutMe"
+      aboutMe: string; 
       education: string;
       workExperience: string;
       skill: string;
@@ -9,7 +15,7 @@ export interface TranslationsLayout {
       contact: string;
     };
     footer: {
-      copyright: string; // Cambiado de "text" a "copyright"
+      copyright: string; 
     };
   }
   

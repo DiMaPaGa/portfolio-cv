@@ -1,0 +1,107 @@
+---
+
+---
+
+<!-- Define el idioma de la página para accesibilidad y SEO -->
+<html lang="es">
+  <head>
+    <!-- Codificación de caracteres para soportar caracteres especiales -->
+    <meta charset="UTF-8" />
+    <!-- Ajusta la página para dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Título de la página -->
+    <title>Login</title>
+  </head>
+
+  <body class="bg-[url('/images/fondoDeg.png')] flex items-center justify-center min-h-screen">
+    <!-- Contenedor principal del formulario de login -->
+    <div class="bg-[url('/images/fondoDeg.png')] p-8 rounded-lg shadow-lg w-full max-w-md">
+      <!-- Título de la página de inicio de sesión -->
+      <h2 class="text-2xl font-poppins font-bold text-brown mb-6 text-center">Login</h2>
+
+      <!-- Formulario de inicio de sesión -->
+      <form id="loginForm">
+        <!-- Campo para ingresar el nombre de usuario -->
+        <input
+          type="text"
+          id="username"
+          class="w-full p-3 mb-4 placeholder:text-brown font-montserrat border border-greenLight rounded-md focus:outline-none focus:ring-2 focus:ring-green"
+          placeholder="Usuario"
+          required
+        />
+
+        <!-- Campo para ingresar la contraseña -->
+        <input
+          type="password"
+          id="password"
+          class="w-full p-3 mb-4 placeholder:text-brown font-montserrat border border-greenLight rounded-md focus:outline-none focus:ring-2 focus:ring-green"
+          placeholder="Contraseña"
+          required
+        />
+
+        <!-- Botón para enviar el formulario -->
+        <button
+          id="loginButton"
+          class="w-full py-3 bg-green text-rose rounded-md hover:bg-brown focus:outline-none"
+        >
+          Iniciar sesión
+        </button>
+      </form>
+
+      <!-- Mensaje de error para usuario o contraseña incorrectos -->
+      <p id="errorMessage" class="text-red-500 mt-4 text-center hidden">
+        Usuario o contraseña incorrectos
+      </p>
+    </div>
+
+    <!-- Script para manejar la lógica de inicio de sesión -->
+    <script is:inline>
+      // Variables estáticas de usuario y contraseña
+      const validUsername = "admin";
+      const validPassword = "Abcd1234";
+
+      /**
+       * Maneja el evento de submit del formulario.
+       * Valida el usuario y la contraseña ingresados.
+       */
+      document
+        .getElementById("loginForm")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+          // Obtener valores de los campos de usuario y contraseña
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          // Verificar si las credenciales coinciden con las válidas
+          if (username === validUsername && password === validPassword) {
+            // Calcular la fecha de expiración (15 minutos después de ahora)
+            const expirationTime = new Date().getTime() + 15 * 60000;
+            //const expirationTime = new Date().getTime() + 60000; // 1 minuto para pruebas
+
+            /**
+             * Creamos el objeto para guardar en localStorage:
+             * sub: ID del usuario
+             * name: Nombre del usuario
+             * exp: Fecha de expiración
+             * 
+             **/ 
+            const tokenData = {
+              sub: "1", 
+              name: username, 
+              exp: expirationTime,
+            };
+
+            // Guardamos el objeto en localStorage como string
+            localStorage.setItem("fakeToken", JSON.stringify(tokenData));
+
+            // Redirigir a la página de administracion
+            window.location.href = "/admin/console"; 
+          } else {
+            // Si las credenciales son incorrectas, mostrar un mensaje de error
+            document.getElementById("errorMessage").classList.remove("hidden");
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -6,9 +6,11 @@
       "skill": "Skills",
       "project": "Projects",
       "reference": "References",
-      "contact": "Contact"
+      "contact": "Contact",
+      "lang": "Language Selection",
+      "admin":"Admin"
     },
     "footer": {
-      "copyright": "© 2024 Your Name. All rights reserved."
+      "copyright": "© 2024 Diana Pascual García. All rights reserved."
     }
 }
