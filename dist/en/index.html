@@ -1,0 +1,346 @@
+<!DOCTYPE html><!-- Renderizado del contenido con las traducciones cargadas --><!-- Define el idioma de la página para accesibilidad y SEO --><html lang="en"> <head><!-- Especifica la codificación de caracteres para soportar caracteres especiales --><meta charset="UTF-8"><!-- Permite que la página se adapte correctamente a dispositivos móviles --><meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- Título dinámico de la página, se obtiene de las props --><title>Portfolio CV</title><link rel="stylesheet" href="/_astro/_cv_.DfT_CfYK.css">
+<style>@keyframes slideUp{0%{transform:translateY(50%);opacity:0}to{transform:translateY(0);opacity:1}}.animate-slide-up[data-astro-cid-xhaoqxbd]{animation:slideUp 1s ease-out}
+</style><script type="module">const t=document.getElementById("contactForm"),n=document.getElementById("submitButton"),d=document.getElementById("confirmationMessage"),l=e=>/^[A-Z][a-z]*$/.test(e),g=e=>/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(e),f=e=>e.length>=20,I=e=>{e.preventDefault(),o()&&(d&&(d.classList.remove("hidden"),setTimeout(()=>{d.classList.add("hidden")},5e3)),t&&(t.reset(),n&&(n.disabled=!0)))},o=()=>{if(!t||!n)return!1;const e=document.getElementById("name"),a=document.getElementById("surname"),m=document.getElementById("email"),i=document.getElementById("message");if(!e||!a||!m||!i)return!1;const r=e.value,c=a.value,u=m.value,E=i.value;let s=!0;return l(r)?document.getElementById("nameError").classList.add("hidden"):(document.getElementById("nameError").classList.remove("hidden"),s=!1),l(c)?document.getElementById("surnameError").classList.add("hidden"):(document.getElementById("surnameError").classList.remove("hidden"),s=!1),g(u)?document.getElementById("emailError").classList.add("hidden"):(document.getElementById("emailError").classList.remove("hidden"),s=!1),f(E)?document.getElementById("messageError").classList.add("hidden"):(document.getElementById("messageError").classList.remove("hidden"),s=!1),n&&(n.disabled=!s),s};t&&t.addEventListener("input",o);t&&t.addEventListener("submit",I);
+</script></head> <body class="bg-gray-100 font-poppins"> <!-- Barra de navegación: Importa y renderiza el componente Navbar, que recibe los datos desde las props --> <!-- Se elige generar un nav --><nav class="bg-green text-greenLight fixed top-0 left-0 w-full z-10 shadow-md"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex justify-between items-center h-16"> <!-- Espacio para Logo o Título --> <div class="flex-shrink-0 text-xl font-bold font-poppins"> <!-- Enlace que vuelve al inicio de la página --> <a href="#" id="logo-link" class="text-greenLight hover:text-greenLight ">CV</a> </div> <!-- Menú hamburguesa (solo visible en pantallas pequeñas y medianas hasta 1020 px) --> <div class="-mr-2 flex lg:hidden"> <button id="hamburger-btn" class="inline-flex items-center justify-center p-2 rounded-md text-greenLight hover:bg-rose focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-greenLight focus:ring-greenLight" aria-expanded="false"> <!-- sr-only: Oculta este texto, pero los lectores de pantalla lo leen, para mejorar la accesibilidad --> <span class="sr-only">Abrir menú</span> <!-- Ícono de hamburguesa --> <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> <!-- Menú de navegación (solo visible en pantallas grandes) --> <div id="navbar" class="hidden lg:flex lg:items-center lg:space-x-6 font-poppins"> <a href="#aboutMe" class="hover:underline">About Me</a> <a href="#education" class="hover:underline">Education</a> <a href="#workExperience" class="hover:underline">Work Experience</a> <a href="#skill" class="hover:underline">Skills</a> <a href="#project" class="hover:underline">Projects</a> <a href="#reference" class="hover:underline">References</a> <a href="#contact" class="hover:underline">Contact</a> <a href="/" class="hover:underline">Language Selection</a> <a href="/admin/login" class="hover:underline">Admin</a> </div> </div> </div> <!-- Menú desplegable para dispositivos pequeños (solo visible en pantallas pequeñas) --> <div id="mobile-menu" class="lg:hidden bg-green space-y-2 py-2 px-4 hidden font-poppins"> <a href="#aboutMe" class="block hover:underline">About Me</a> <a href="#education" class="block hover:underline">Education</a> <a href="#workExperience" class="block hover:underline">Work Experience</a> <a href="#skill" class="block hover:underline">Skills</a> <a href="#project" class="block hover:underline">Projects</a> <a href="#reference" class="block hover:underline">References</a> <a href="#contact" class="block hover:underline">Contact</a> <a href="/" class="block hover:underline">Language Selection</a> <a href="/admin/login" class="block hover:underline">Admin</a> </div> </nav> <!-- Script de manejo de menú hamburguesa --> <script type="module" astro-client:load>
+  // Obtener elementos del DOM
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navbar = document.getElementById('navbar');
+  const logoLink = document.getElementById('logo-link');  // Enlace "CV"
+
+  // Escuchar clic en el botón de hamburguesa
+  hamburgerBtn.addEventListener('click', function() {
+    // Alternar visibilidad del menú móvil
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Desplazamiento suave al hacer clic en los enlaces del menú móvil (solo enlaces internos)
+  const links = document.querySelectorAll('#mobile-menu a');
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = link.getAttribute('href');
+
+      // Verificar si el enlace es interno (es decir, solo empieza con '#')
+      if (href.startsWith('#')) {
+        e.preventDefault();  // Prevenir el comportamiento por defecto del enlace
+
+        const targetElement = document.querySelector(href);
+
+        // Desplazar el contenido de forma suave
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+
+          // Cerrar el menú móvil después de hacer clic en una opción
+          mobileMenu.classList.add('hidden');
+        }
+      }
+      // Si el enlace no es interno (es decir, es externo como el idioma o el login),
+      // no prevenimos el comportamiento por defecto y no ocultamos el menú
+    });
+  });
+
+  // Desplazamiento suave al hacer clic en el logo "CV" para volver al inicio
+  logoLink.addEventListener('click', function(e) {
+    e.preventDefault();  // Prevenir que el enlace realice su acción predeterminada
+    window.scrollTo({
+      top: 0,  // Desplazarnos a la parte superior de la página
+      behavior: 'smooth'  // Desplazamiento suave
+    });
+  });
+</script> <!-- Contenido principal: Aquí se inserta el contenido dinámico de las páginas hijas --> <main>   <!-- Se elige generar un section --><section id="home" class="relative py-10 px-4 text-center min-h-[70vh] md:min-h-screen flex flex-col justify-center animate-slide-up bg-home-background bg-cover bg-center bg-no-repeat" data-astro-cid-xhaoqxbd> <!-- Título de la sección, unico H1 --> <h1 class="text-3xl md:text-5xl font-bold mb-4 text-rose font-poppins drop-shadow-lg" data-astro-cid-xhaoqxbd> Welcome to My Portfolio </h1> <!-- Enlace para LinkedIn animado --> <a href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" target="_blank" rel="noopener" class="flex justify-center items-center transition-transform hover:scale-105" data-astro-cid-xhaoqxbd> <div class="flex items-center" data-astro-cid-xhaoqxbd> <span class="relative inline-flex overflow-hidden rounded-full p-[1px]" data-astro-cid-xhaoqxbd> <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#51E4B8_0%,#21554E_50%,#51E4B8_100%)]" data-astro-cid-xhaoqxbd></span> <div class="inline-flex items-center justify-center w-full px-3 py-1 text-sm md:text-base text-green font-poppins bg-rose rounded-full cursor-pointer dark:bg-brown dark:text-white/80 backdrop-blur-3xl whitespace-nowrap" data-astro-cid-xhaoqxbd> Available for work </div> </span> </div> </a> <!-- Subtítulo --> <p class="text-lg md:text-3xl font-bold font-poppins text-rose mt-6 drop-shadow-lg" data-astro-cid-xhaoqxbd> Web Developer </p> <!-- Descripción generado con json y usando un map para cada linea --> <p class="font-montserrat text-rose mt-4 text-lg md:text-xl drop-shadow-lg" data-astro-cid-xhaoqxbd> I am a passionate software developer with a focus on creating innovative solutions.<br data-astro-cid-xhaoqxbd>  </p> </section>  <!-- Se elige generar un section --><section id="aboutMe" class="py-24 bg-rose text-center md:text-left"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center md:items-start gap-10"> <!-- Columna de la imagen -->  <!-- Columna del texto --> <div> <!-- Título --> <h2 class="text-4xl font-poppins font-bold text-brown mb-6"> About Me </h2> <!-- Nombre --> <h3 class="text-2xl font-poppins font-semibold text-green mb-4"> Diana Pascual García </h3> <!-- Profesión --> <p class="text-xl font-bold font-poppins text-brown mb-4"> Web Developer </p> <!-- Descripción --> <p class="text-lg md:text-xl font-montserrat text-brown text-justify leading-relaxed"> I am seeking opportunities to apply my skills in web development and new technologies. My diverse experience and focus on quality and problem-solving prepare me to contribute effectively to web development projects. I bring dedication, commitment, professionalism, and teamwork experience, ready to adapt and prove my value in this field. </p> </div> </div> </section> <!-- Eleccion de section --><section id="education" class="py-24 bg-greenLight"> <!-- Título de la sección de Educación --> <h2 class="text-4xl font-poppins font-bold text-brown mb-6 text-center"> Education </h2> <!-- Comprobamos si hay elementos en 'education.items' para mostrar. Si los hay, se muestran, si no, se muestra 'No information.' --> <div class="relative max-w-4xl mx-auto"> <!--Contenedor para cada hito--> <div class="space-y-8"> <div data-key="IES.Vedruna. Seville" class="flex items-start"> <!-- Punto de la línea de tiempo --> <div class="w-6 h-6 rounded-full bg-green text-rose border-2 border-rose dark:border-brown relative z-1">  </div> <!-- Información de la Institución y Título --> <div class="ml-6"> <h4 class="text-xl font-semibold mb-1.5 font-poppins text-brown">IES.Vedruna. Seville</h4> <p class="text-lg md:text-xl font-montserrat text-brown text-justify leading-relaxed">Higher Technician in Web Application Development. </p> <p class="text-sm text-brown dark:text-rose font-montserrat leading-relaxed">2023-2025</p> </div> </div><div data-key="University of Seville" class="flex items-start"> <!-- Punto de la línea de tiempo --> <div class="w-6 h-6 rounded-full bg-green text-rose border-2 border-rose dark:border-brown relative z-1">  </div> <!-- Información de la Institución y Título --> <div class="ml-6"> <h4 class="text-xl font-semibold mb-1.5 font-poppins text-brown">University of Seville</h4> <p class="text-lg md:text-xl font-montserrat text-brown text-justify leading-relaxed">Master&#39;s Degree in Health Psychology.</p> <p class="text-sm text-brown dark:text-rose font-montserrat leading-relaxed">2011-2013</p> </div> </div><div data-key="University of Seville" class="flex items-start"> <!-- Punto de la línea de tiempo --> <div class="w-6 h-6 rounded-full bg-green text-rose border-2 border-rose dark:border-brown relative z-1">  </div> <!-- Información de la Institución y Título --> <div class="ml-6"> <h4 class="text-xl font-semibold mb-1.5 font-poppins text-brown">University of Seville</h4> <p class="text-lg md:text-xl font-montserrat text-brown text-justify leading-relaxed">Bachelor’s Degree in Psychology.</p> <p class="text-sm text-brown dark:text-rose font-montserrat leading-relaxed">2002-2007</p> </div> </div> </div> </div> </section> <!-- Sección de Experiencia Laboral --><section id="workExperience" class="py-24 bg-rose"> <!-- Título de la sección de Experiencia Laboral --> <h2 class="text-4xl font-poppins font-bold mb-6 text-center text-brown"> Work Experience </h2> <!-- Comprobamos si hay elementos en 'workExperience.items' para mostrar. Si los hay, se muestran, si no, se muestra 'No information.' --> <div class="max-w-4xl mx-auto space-y-8"> <div data-key="NTT DATA-2024-Present" class="pop-down-child text-sm leading-6 mx-auto max-w-[90%] sm:max-w-[70%] bg-greenLight rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300"> <figure class="relative flex flex-col-reverse"> <!-- Descripción con salto de linea --> <p class="mt-6 md:text-xl text-brown font-montserrat"> <span data-key="0"> Advanced Java programming, Configuration and management of Maven. Implementation of SLF4J + Logback. Testing with JUnit and Mockito. Code quality validation with SonarLint. Environment and tool updates. <br> </span> </p> <!-- Figcaption --> <figcaption class="flex items-center space-x-4 mt-4"> <!-- Imagen con carga lazy y asincrónica para mejora de rendimiento en la carga--> <img alt="NTT DATA" class="flex-none w-14 h-14 rounded-full object-contain" loading="lazy" decoding="async"> <!-- Información destacada con diseño diferente --> <div class="flex-auto"> <div class="text-xl font-poppins font-bold text-brown hover:text-green transition-colors "> DUAL Internship in Web Application Development </div> <div class="mt-1 text-base text-brownLight hover:text-green transition-colors"> NTT DATA - 2024-Present </div> </div> </figcaption> </figure> </div><div data-key="ATUREM-2017-2023" class="pop-down-child text-sm leading-6 mx-auto max-w-[90%] sm:max-w-[70%] bg-greenLight rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300"> <figure class="relative flex flex-col-reverse"> <!-- Descripción con salto de linea --> <p class="mt-6 md:text-xl text-brown font-montserrat"> <span data-key="0"> Staff seleccion and management. Training design and delivery. Customer service and issue resolution. <br> </span> </p> <!-- Figcaption --> <figcaption class="flex items-center space-x-4 mt-4"> <!-- Imagen con carga lazy y asincrónica para mejora de rendimiento en la carga--> <img alt="ATUREM" class="flex-none w-14 h-14 rounded-full object-contain" loading="lazy" decoding="async"> <!-- Información destacada con diseño diferente --> <div class="flex-auto"> <div class="text-xl font-poppins font-bold text-brown hover:text-green transition-colors "> Residence Director </div> <div class="mt-1 text-base text-brownLight hover:text-green transition-colors"> ATUREM - 2017-2023 </div> </div> </figcaption> </figure> </div><div data-key="ATUREM-2014-2017" class="pop-down-child text-sm leading-6 mx-auto max-w-[90%] sm:max-w-[70%] bg-greenLight rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300"> <figure class="relative flex flex-col-reverse"> <!-- Descripción con salto de linea --> <p class="mt-6 md:text-xl text-brown font-montserrat"> <span data-key="0"> Quality team member. Trainer for family and self-management programs. Responsible for the Equality Plan. Data analysis and publication writer. <br> </span> </p> <!-- Figcaption --> <figcaption class="flex items-center space-x-4 mt-4"> <!-- Imagen con carga lazy y asincrónica para mejora de rendimiento en la carga--> <img alt="ATUREM" class="flex-none w-14 h-14 rounded-full object-contain" loading="lazy" decoding="async"> <!-- Información destacada con diseño diferente --> <div class="flex-auto"> <div class="text-xl font-poppins font-bold text-brown hover:text-green transition-colors "> Psychologist </div> <div class="mt-1 text-base text-brownLight hover:text-green transition-colors"> ATUREM - 2014-2017 </div> </div> </figcaption> </figure> </div><div data-key="University of Seville and Oregon State University-2008-2012" class="pop-down-child text-sm leading-6 mx-auto max-w-[90%] sm:max-w-[70%] bg-greenLight rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300"> <figure class="relative flex flex-col-reverse"> <!-- Descripción con salto de linea --> <p class="mt-6 md:text-xl text-brown font-montserrat"> <span data-key="0"> Design of training and intervention programs. Various research tasks, including reference and database management. Participation in published documents. Family consultant and research assistant.  <br> </span> </p> <!-- Figcaption --> <figcaption class="flex items-center space-x-4 mt-4"> <!-- Imagen con carga lazy y asincrónica para mejora de rendimiento en la carga--> <img alt="University of Seville and Oregon State University" class="flex-none w-14 h-14 rounded-full object-contain" loading="lazy" decoding="async"> <!-- Información destacada con diseño diferente --> <div class="flex-auto"> <div class="text-xl font-poppins font-bold text-brown hover:text-green transition-colors "> Research Staff </div> <div class="mt-1 text-base text-brownLight hover:text-green transition-colors"> University of Seville and Oregon State University - 2008-2012 </div> </div> </figcaption> </figure> </div> </div> </section> <!-- Sección de Habilidades --><section id="skill" class="py-24 bg-greenLight"> <!-- Título de la sección de Habilidades --> <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown">Skills</h2> <!-- Iteración sobre las categorías de habilidades --> <div data-key="frontend" class="mb-16 p-6 bg-rose rounded-lg shadow-md"> <h3 class="text-2xl font-semibold mb-8 text-center text-brown font-poppins">Front-end</h3> <!-- Lista de ítems dentro de la categoría --> <ul class="flex flex-wrap justify-center gap-6 mt-8"> <li data-key="HTML" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/html.png" alt="HTML" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">HTML</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:75%"></div> </div> </div> </li><li data-key="CSS" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/css.png" alt="CSS" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">CSS</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:75%"></div> </div> </div> </li><li data-key="JavaScript" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/js.png" alt="JavaScript" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">JavaScript</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li><li data-key="Tailwind CSS" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/tailwind.png" alt="Tailwind CSS" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">Tailwind CSS</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li><li data-key="Astro" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/astro.png" alt="Astro" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">Astro</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:25%"></div> </div> </div> </li> </ul> </div><div data-key="backend" class="mb-16 p-6 bg-rose rounded-lg shadow-md"> <h3 class="text-2xl font-semibold mb-8 text-center text-brown font-poppins">Back-end</h3> <!-- Lista de ítems dentro de la categoría --> <ul class="flex flex-wrap justify-center gap-6 mt-8"> <li data-key="Node.js" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/node.png" alt="Node.js" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">Node.js</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li><li data-key="Java" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/java.png" alt="Java" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">Java</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li><li data-key="PHP " class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/php.png" alt="PHP " class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">PHP </p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li><li data-key="Spring Boot" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/spring.png" alt="Spring Boot" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">Spring Boot</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li><li data-key="MySQL" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/mySQL.png" alt="MySQL" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">MySQL</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li><li data-key="REST APIs" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/api.png" alt="REST APIs" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">REST APIs</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li> </ul> </div><div data-key="devops" class="mb-16 p-6 bg-rose rounded-lg shadow-md"> <h3 class="text-2xl font-semibold mb-8 text-center text-brown font-poppins">DevOps</h3> <!-- Lista de ítems dentro de la categoría --> <ul class="flex flex-wrap justify-center gap-6 mt-8"> <li data-key="GitHub Actions" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/github.png" alt="GitHub Actions" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">GitHub Actions</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:25%"></div> </div> </div> </li><li data-key="Microsoft Azure" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/azure.png" alt="Microsoft Azure" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">Microsoft Azure</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:25%"></div> </div> </div> </li><li data-key="Git" class="flex flex-col items-center text-center sm:w-full md:w-auto group"> <!-- Logo de la tecnología --> <img src="../../public/images/git.png" alt="Git" class="w-16 h-16 mb-4 object-contain transition-transform group-hover:scale-110"> <!-- Nombre de la tecnología--> <p class="font-semibold text-lg text-brown">Git</p> <!-- Barra de progreso --> <div class="relative mt-4 w-28"> <!-- Contenedor de la barra de progreso --> <div class="w-full h-4 bg-gray-300 rounded-full shadow-md overflow-hidden"> <!-- Barra de progreso con ancho dinámico basado en `item.level` --> <div class="h-4 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-transform duration-500 group-hover:scale-x-110" style="width:50%"></div> </div> </div> </li> </ul> </div> </section> <!-- Sección de proyectos --><section id="project" class="py-24 text-center bg-rose text-brown min-h-[70vh] md:min-h-screen" data-current-page="0" data-total-pages="2" data-page-size="4" data-test-mode="true"> <!-- Título general de la sección de proyectos --> <h2 class="text-4xl font-poppins font-bold mb-6 text-center text-brown">Projects</h2> <!-- Contenedor de los filtros --> <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-6"> <!-- Filtro por tipo de búsqueda --> <div class="flex items-center gap-3"> <select id="filterSelect" name="filterType" class="w-full md:w-auto h-10 border-2 border-green focus:outline-none focus:border-green text-green rounded px-3 tracking-wider"> <option value="PROJECT" selected>Project</option> <option value="TECH">Technology</option> </select> </div> <!-- Filtro por nombre de proyecto --> <div id="projectFilter" class="flex items-center gap-0"> <input id="projectSearchInput" type="text" placeholder="Search by projects" class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-green focus:outline-none focus:border-green"> <button id="searchButton" type="button" class="bg-green text-rose rounded-r px-4 py-2">
+Search
+</button> </div> <!-- Filtro por tecnología --> <div id="techFilter" class="flex items-center gap-3" style="display: none;"> <input id="techSearchInput" type="text" placeholder="Search by technologies" class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-green focus:outline-none focus:border-green"> <button id="techSearchButton" type="button" class="bg-green text-rose rounded-r px-4 py-2">
+Buscar
+</button> </div> </div> <!-- Contenedor de proyectos --> <div id="projectsContainer"> <div class="grid grid-cols-1 md:grid-cols-2 gap-3 gap-x-0"> <section id="project" class="py-0 px-0 relative overflow-hidden group"> <!-- Card contenedor --> <div class="relative rounded-lg overflow-hidden shadow-lg w-[90%] h-[100%] group mx-auto"> <!-- Imagen del Proyecto como fondo (cubre toda la card) --> <div class="relative w-full h-64"> <img src="../../public/images/twitter.png" alt="Imagen de TwitterProyect" class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"> </div> <!-- Título del Proyecto (sobre la imagen) --> <div class="absolute inset-0 flex flex-col justify-center items-start text-greenLight bg-brown bg-opacity-60 p-4"> <h2 class="text-3xl font-semibold font-poppins">TwitterProyect</h2> </div> <!-- Información adicional que aparece al hacer hover --> <div class="absolute inset-0 flex flex-col justify-start items-start bg-greenLight opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300"> <!-- Descripción del Proyecto --> <p class="text-brown text-lg font-montserrat mb-4">Este proyecto es una red social donde los usuarios pueden enviarse mensajes (publicos o privados), seguir o no a otros, así como ver sus seguidores.</p> <!-- Tecnologías usadas --> <p class="text-md text-brown font-montserrat mb-4"> <strong>Tech:</strong> No includes </p> <!-- Enlace al repositorio --> <a class="text-green hover:underline text-md font-montserrat" href="https://github.com/DiMaPaGa/TwitterProyect" target="_blank" rel="noopener noreferrer">
+Repository URL
+</a> <!-- Botón de eliminación si es necesario --> <button id="deleteButton-84" class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600" aria-label="Eliminar proyecto TwitterProyect">
+Eliminar Proyecto
+</button> </div> </div> </section><section id="project" class="py-0 px-0 relative overflow-hidden group"> <!-- Card contenedor --> <div class="relative rounded-lg overflow-hidden shadow-lg w-[90%] h-[100%] group mx-auto"> <!-- Imagen del Proyecto como fondo (cubre toda la card) --> <div class="relative w-full h-64"> <img src="../../public/images/projectNode.jpg" alt="Imagen de Agencias viajes Node" class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"> </div> <!-- Título del Proyecto (sobre la imagen) --> <div class="absolute inset-0 flex flex-col justify-center items-start text-greenLight bg-brown bg-opacity-60 p-4"> <h2 class="text-3xl font-semibold font-poppins">Agencias viajes Node</h2> </div> <!-- Información adicional que aparece al hacer hover --> <div class="absolute inset-0 flex flex-col justify-start items-start bg-greenLight opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300"> <!-- Descripción del Proyecto --> <p class="text-brown text-lg font-montserrat mb-4">Proyecto de Agencia de Viajes -Introducción a Node.js, Express Pug y Sequelize</p> <!-- Tecnologías usadas --> <p class="text-md text-brown font-montserrat mb-4"> <strong>Tech:</strong> No includes </p> <!-- Enlace al repositorio --> <a class="text-green hover:underline text-md font-montserrat" href="https://github.com/DiMaPaGa/agenciaviajesnode.png" target="_blank" rel="noopener noreferrer">
+Repository URL
+</a> <!-- Botón de eliminación si es necesario --> <button id="deleteButton-85" class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600" aria-label="Eliminar proyecto Agencias viajes Node">
+Eliminar Proyecto
+</button> </div> </div> </section><section id="project" class="py-0 px-0 relative overflow-hidden group"> <!-- Card contenedor --> <div class="relative rounded-lg overflow-hidden shadow-lg w-[90%] h-[100%] group mx-auto"> <!-- Imagen del Proyecto como fondo (cubre toda la card) --> <div class="relative w-full h-64"> <img src="../../public/images/projectNode.jpg" alt="Imagen de 1234567" class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"> </div> <!-- Título del Proyecto (sobre la imagen) --> <div class="absolute inset-0 flex flex-col justify-center items-start text-greenLight bg-brown bg-opacity-60 p-4"> <h2 class="text-3xl font-semibold font-poppins">1234567</h2> </div> <!-- Información adicional que aparece al hacer hover --> <div class="absolute inset-0 flex flex-col justify-start items-start bg-greenLight opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300"> <!-- Descripción del Proyecto --> <p class="text-brown text-lg font-montserrat mb-4">Proyecto de Agencia de Viajes -Introducción a Node.js, Express Pug y Sequelize</p> <!-- Tecnologías usadas --> <p class="text-md text-brown font-montserrat mb-4"> <strong>Tech:</strong> No includes </p> <!-- Enlace al repositorio --> <a class="text-green hover:underline text-md font-montserrat" href="https://github.com/DiMaPaGa/agenciaviajesnode.png" target="_blank" rel="noopener noreferrer">
+Repository URL
+</a> <!-- Botón de eliminación si es necesario --> <button id="deleteButton-91" class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600" aria-label="Eliminar proyecto 1234567">
+Eliminar Proyecto
+</button> </div> </div> </section><section id="project" class="py-0 px-0 relative overflow-hidden group"> <!-- Card contenedor --> <div class="relative rounded-lg overflow-hidden shadow-lg w-[90%] h-[100%] group mx-auto"> <!-- Imagen del Proyecto como fondo (cubre toda la card) --> <div class="relative w-full h-64"> <img src="../../public/images/projectNode.jpg" alt="Imagen de 12354" class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"> </div> <!-- Título del Proyecto (sobre la imagen) --> <div class="absolute inset-0 flex flex-col justify-center items-start text-greenLight bg-brown bg-opacity-60 p-4"> <h2 class="text-3xl font-semibold font-poppins">12354</h2> </div> <!-- Información adicional que aparece al hacer hover --> <div class="absolute inset-0 flex flex-col justify-start items-start bg-greenLight opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300"> <!-- Descripción del Proyecto --> <p class="text-brown text-lg font-montserrat mb-4">Proyecto de Agencia de Viajes -Introducción a Node.js, Express Pug y Sequelize</p> <!-- Tecnologías usadas --> <p class="text-md text-brown font-montserrat mb-4"> <strong>Tech:</strong> No includes </p> <!-- Enlace al repositorio --> <a class="text-green hover:underline text-md font-montserrat" href="https://github.com/DiMaPaGa/agenciaviajesnode.png" target="_blank" rel="noopener noreferrer">
+Repository URL
+</a> <!-- Botón de eliminación si es necesario --> <button id="deleteButton-107" class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600" aria-label="Eliminar proyecto 12354">
+Eliminar Proyecto
+</button> </div> </div> </section> </div> </div> <!-- Paginación --> <div class="mt-10 flex justify-center gap-4"> <!-- Botón Anterior --> <button id="prevButton" disabled class="py-2 px-4 rounded bg-gray-400 cursor-not-allowed">
+Anterior
+</button> <p class="py-2">
+Página <span id="currentPageDisplay">1</span> de <span id="totalPagesDisplay">2</span> </p> <!-- Botón Siguiente --> <button id="nextButton" class="py-2 px-4 rounded bg-green hover:bg-greenLight text-rose">
+Siguiente
+</button> </div> </section> <script>
+  // Variables para interactuar con la interfaz de usuario
+  const BASIC_URL = "http://localhost:8080/api/v1/projects";
+  const projectSection = document.getElementById("project");
+  let currentPage = parseInt(projectSection.dataset.currentPage, 10);
+  const pageSize = parseInt(projectSection.dataset.pageSize, 10);
+  const testMode = projectSection.dataset.testMode === "true";
+  let totalPages = parseInt(projectSection.dataset.totalPages, 10);
+  const projectsContainer = document.getElementById("projectsContainer");
+  const prevButton = document.getElementById("prevButton");
+  const nextButton = document.getElementById("nextButton");
+  const currentPageDisplay = document.getElementById("currentPageDisplay");
+  const totalPagesDisplay = document.getElementById("totalPagesDisplay");
+  const searchInput = document.getElementById("projectSearchInput");
+  const techSearchInput = document.getElementById("techSearchInput");
+  const projectFilter = document.getElementById("projectFilter");
+  const techFilter = document.getElementById("techFilter");
+
+
+  // Inicializar el estado de los botones
+  prevButton.disabled = currentPage === 0;
+  nextButton.disabled = currentPage + 1 >= totalPages;
+
+  // Manejadores de eventos para interacciones de usuario
+  document.addEventListener("click", (event) => {
+    const idName = event.target.id;
+    
+    //Actualizar proyectos al cambiar de página
+
+    //botón anterior
+    if (idName && idName === "prevButton") {
+      if (currentPage > 0) updateProjects(currentPage - 1, "");
+    }
+
+    //botón siguiente
+    if (idName && idName === "nextButton") {
+      if (currentPage + 1 < totalPages) updateProjects(currentPage + 1, "");
+    }
+
+    //Filtros de búsqueda
+    if (idName && idName === "searchButton") {
+      updateWithfilter("PROJECT");
+    }
+
+    //botón de busqueda por tecnologia
+    if (idName && idName === "techSearchButton") {
+      updateWithfilter("TECH");
+    }
+
+    //Botón de borrado
+    if (idName && idName.startsWith("deleteButton-")) {
+      const projectId = event.target.id.split("-")[1]; // Extrae el ID del proyecto
+      deleteProject(projectId);
+      //limpio el buscador y vuelvo a cargar
+      clearSearch();
+      window.location.reload();
+    }
+  });
+
+    // Event listener para cambiar entre filtros de proyecto y tecnología
+    filterSelect.addEventListener("change", (event) => {
+      if (event.target.value === "PROJECT") {
+        // Mostrar el filtro de proyecto y ocultar el de tecnología
+        projectFilter.style.display = "block";
+        techFilter.style.display = "none";
+      } else if (event.target.value === "TECH") {
+        // Mostrar el filtro de tecnología y ocultar el de proyecto
+        projectFilter.style.display = "none";
+        techFilter.style.display = "block";
+      }
+      clearSearch();
+    });
+
+    // Actualizar proyectos según el filtro seleccionado: Constante TYPE y categorias según buenas prácticas
+    const updateWithfilter = async (TYPE) => {
+    let filterQuery = "";
+    let filterText = "";
+    if (TYPE === "PROJECT") {
+      filterText = searchInput.value.trim();
+      if (filterText.length >= 3) {
+        filterQuery = "/" + filterText;
+      }
+    }
+
+    if (TYPE === "TECH") {
+      filterText = techSearchInput.value.trim();
+      if (filterText.length >= 3) {
+        filterQuery = "/tec/" + filterText;
+      }
+    }
+
+    if (filterText.length >= 3 || filterText.length === 0) {
+      updateProjects(0, filterQuery);
+    } else {
+      alert(
+        "Por favor, ingresa al menos 3 caracteres para realizar la búsqueda."
+      );
+      clearSearch();
+    }
+  };
+
+// Función para actualizar los proyectos
+const updateProjects = async (page, filter) => {
+    try {
+      prevButton.disabled = true;
+      nextButton.disabled = true;
+
+      let url = BASIC_URL + filter + "?page=" + page + "&size=" + pageSize;
+
+      // Realizar la llamada a la API
+      const response = await fetch(url);
+      const data = await response.json();
+      const projects = data.data.content;
+
+      // Limpiar y actualizar el contenedor de proyectos
+  projectsContainer.innerHTML = "";
+  if (projects.length === 0) {
+    projectsContainer.innerHTML = "<p>No hay proyectos disponibles.</p>";
+  } else {
+  const grid = document.createElement("div");
+  grid.className = "px-20 justify-center grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-20";
+
+  // Crear cards dinámicamente
+  projects.forEach((project) => {
+    const card = document.createElement("div");
+    const imgDisplay = project.picture ? "block" : "none";
+    const showDeleteButton = testMode ? "inline" : "none";
+    card.className = "relative rounded-lg overflow-hidden shadow-lg group";
+
+    card.innerHTML = `
+      <section id="project" class="py-10" id="project-${project.projectId}">
+        
+        <!-- Imagen del Proyecto como fondo (cubre toda la card) -->
+        <div class="relative w-full h-48">
+          <img
+            style="display: ${imgDisplay};"
+            src="${project.picture}"
+            alt="Imagen de ${project.projectName}"
+            class="w-full h-full object-cover group-hover:opacity-50 transition-opacity duration-300"
+          />
+        </div>
+
+        <!-- Título del Proyecto (sobre la imagen) -->
+        <div class="absolute inset-0 flex flex-col justify-center items-start text-greenLight bg-brown bg-opacity-60 p-4">
+          <h2 class="text-3xl font-semibold font-poppins">${project.projectName}</h2>
+        </div>
+
+        <!-- Información adicional que aparece al hacer hover -->
+        <div class="absolute inset-0 flex flex-col justify-start items-start bg-greenLight opacity-0 group-hover:opacity-100 p-4 transition-opacity duration-300">
+          <!-- Descripción del Proyecto -->
+          <p class="text-brown text-lg font-montserrat mb-4">${project.description || "No description"}</p>
+
+          <!-- Tecnologías usadas -->
+          <p class="text-md text-brown font-montserrat mb-4"><strong>Tech:</strong> ${project.technologies.length > 0 ? project.technologies.join(", ") : "No includes"}</p>
+
+          <!-- Enlace al repositorio -->
+          ${project.repositoryUrl ? `<a class="text-green hover:underline text-md font-montserrat" href="${project.repositoryUrl}">Repository URL</a>` : ""}
+
+          <!-- Botón de eliminación si es necesario -->
+          ${testMode ? `
+            <button
+              id="deleteButton-${project.projectId}"
+              class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+              aria-label="Eliminar proyecto ${project.projectName}"
+            >
+              Eliminar Proyecto
+            </button>
+          ` : ""}
+        </div>
+      </section>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  projectsContainer.appendChild(grid);
+}
+
+
+      // Aquí después de agregar los nuevos proyectos, volver a asignar el evento a los botones de eliminar
+      projects.forEach((project) => {
+        const deleteButton = document.getElementById(
+          `deleteButton-${project.projectId}`
+        );
+        if (deleteButton) {
+          deleteButton.addEventListener("click", () => {
+            handleDelete(project.projectId);
+          });
+        }
+      });
+
+      // Actualizar estado de los botones y la UI
+      currentPage = page;
+      currentPageDisplay.textContent = currentPage + 1;
+      totalPages = data.data.totalPages;
+      totalPagesDisplay.textContent = totalPages;
+
+      updateButtonStyles();
+    } catch (error) {
+      console.error("Error al actualizar proyectos:", error);
+    } finally {
+      prevButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage + 1 >= totalPages;
+    }
+  };
+
+  // Función para eliminar un proyecto de la API validando el ID
+  const deleteProject = async (id) => {
+    
+    try {
+      //convierte el Id a número y lo valida
+      const numericId = Number(id);
+      if (isNaN(numericId)) {
+        alert("El ID del proyecto no es un número.");
+        return;
+      }
+
+      //Construye la URL para eliminar el proyecto
+      const url = `${BASIC_URL}/${numericId}`;
+    
+      // Realizar la llamada DELETE a la API
+      const response = await fetch(url, { method: "DELETE"});
+      const data = await response.json();
+      alert(data.message);
+      
+    } catch (error) {
+      alert("Error al intentar eliminar el proyecto");
+    }
+  };
+
+  // Función para limpiar el buscador
+  const clearSearch = async () => {
+    searchInput.value = "";
+    techSearchInput.value = "";
+  };
+
+  // Función para actualizar los estilos de los botones según la página actual.
+  const updateButtonStyles = () => {
+    
+    if (prevButton) {
+      prevButton.className =
+        currentPage === 0
+          ? "py-2 px-4 rounded bg-gray-400 cursor-not-allowed"
+          : "py-2 px-4 rounded bg-green hover:bg-greenLight text-rose";
+    }
+
+    if (nextButton) {
+      nextButton.className =
+        currentPage + 1 >= totalPages
+          ? "py-2 px-4 rounded bg-gray-400 cursor-not-allowed"
+          : "py-2 px-4 rounded bg-green hover:bg-greenLight text-rose";
+    }
+  };
+
+</script> <!-- Seccion de Referencias --><section id="reference" class="py-24 px-4 bg-greenLight"> <!-- Título de la sección --> <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown"> References </h2> <!-- Lista no ordenada de referencias --> <ul class="space-y-12 flex flex-col items-center"> <li data-key="Joaquin Borrego Fernandez" class="relative bg-green text-greenLight p-6 rounded-lg shadow-md overflow-visible max-w-xl w-full"> <!-- Comillas decorativas --> <div class="absolute top-4 right-4 text-8xl font-bold opacity-20">
+“
+</div> <!-- Foto sobresaliendo del borde -->  <!-- Texto de la cita --> <div class="pl-24"> <p class="text-2xl text-rose leading-relaxed font-montserrat"> Joaquin was my teacher and tutor in the second course of Higher Technician in Web Application Development and can speak to my skills as a web developer. </p> <p class="mt-4 font-semibold"> Joaquin Borrego Fernandez,  <span class="text-md text-greenLightfont-montserrat">Teacher at IES Vedruna and Software Developer at Babel</span> </p> <!-- Correo electrónico --> <p class="mt-4"> <a href="mailto:joaquin.borrego@vedruna.es" class="text-rose underline hover:text-greenLight text-md font-montserrat"> joaquin.borrego@vedruna.es </a> </p> </div> </li><li data-key="José Carlos Moreno Martín" class="relative bg-green text-greenLight p-6 rounded-lg shadow-md overflow-visible max-w-xl w-full"> <!-- Comillas decorativas --> <div class="absolute top-4 right-4 text-8xl font-bold opacity-20">
+“
+</div> <!-- Foto sobresaliendo del borde -->  <!-- Texto de la cita --> <div class="pl-24"> <p class="text-2xl text-rose leading-relaxed font-montserrat"> José Carlos was my professor throughout the Higher Technician in Web Application Development and can tell you about my evolution in this field </p> <p class="mt-4 font-semibold"> José Carlos Moreno Martín,  <span class="text-md text-greenLightfont-montserrat">Teacher at IES Vedruna</span> </p> <!-- Correo electrónico --> <p class="mt-4"> <a href="mailto:josecarlos.moreno@vedruna.es" class="text-rose underline hover:text-greenLight text-md font-montserrat"> josecarlos.moreno@vedruna.es </a> </p> </div> </li> </ul> </section> <!-- Se elige generar un section --><section id="contact" class="py-24 bg-greenLight"> <div id="contact" class="max-w-lg mx-auto p-8 bg-rose shadow-lg rounded-md border border-greenLight"> <!-- Título del formulario de contacto --> <h2 class="text-4xl font-poppins font-bold mb-12 text-center text-brown">Contact Me</h2> <!-- Inicio del formulario de contacto --> <form id="contactForm" class="space-y-6"> <!-- Campo de Nombre --> <div class="flex gap-4"> <div class="w-1/2"> <label for="name" class="block mb-1 text-sm font-semibold text-brown font-poppins"> Name </label> <input type="text" id="name" name="name" class="w-full border-b-2 border-brown focus:outline-none p-1 bg-rose" placeholder="Introduce your name" required> <!-- Mensaje de error --> <small id="nameError" class="text-red-500 text-xs hidden"> The name must begin with a capital letter and the rest in lowercase. </small> </div> <!-- Campo de Apellido --> <div class="w-1/2"> <label for="surname" class="block mb-1 text-sm font-semibold text-brown font-poppins"> Surname </label> <input type="text" id="surname" name="surname" class="w-full border-b-2 border-brown focus:outline-none p-1 bg-rose" placeholder="Introduce your surname"> <!-- Mensaje de error --> <small id="surnameError" class="text-red-500 text-xs hidden"> The surname must begin with a capital letter and the rest in lowercase. </small> </div> </div> <!-- Campo de Email --> <div> <label for="email" class="block mb-1 text-sm font-semibold text-brown font-poppins"> Email </label> <input type="email" id="email" name="email" class="w-full border-b-2 border-brown focus:outline-none p-1 bg-rose" placeholder="Introduce your email" required> <!-- Mensaje de error --> <small id="emailError" class="text-red-500 text-xs hidden"> Enter a valid email. </small> </div> <!-- Campo de Mensaje --> <div> <label for="message" class="block mb-1 text-sm font-semibold text-brown font-poppins"> Message </label> <textarea id="message" name="message" class="w-full border-b-2 border-brown focus:border-black focus:outline-none p-1 h-24 resize-none bg-rose" placeholder="Write your message" required>        </textarea> <!-- Mensaje de error --> <small id="messageError" class="text-red-500 text-xs hidden"> The message must have at least 20 characters. </small> </div> <!-- Botón de Enviar --> <button type="submit" id="submitButton" class="w-full bg-brown text-rose font-semibold font-poppins py-3 rounded-md hover:bg-brownLight disabled:bg-gray-400 transition" disabled> Send </button> </form> <!-- Mensaje de confirmación --> <div id="confirmationMessage" class="hidden text-center text-green mt-4"> <p>Thank you for your message! We will contact you soon.</p> </div> </div> </section>   </main> <!-- Pie de página: Importa y renderiza el componente Footer, que también recibe datos desde las props --> <!-- Pie de página --><footer class="bg-green p-4 text-rose flex justify-between items-center"> <!-- Parte izquierda: Nombre y copyright --> <div class="flex items-center"> <p class="text-sm font-bold font-montserrat">© 2024 Diana Pascual García. All rights reserved.</p> </div> <!-- Parte derecha: Iconos sociales y de correo --> <div class="flex gap-6"> <!-- Icono de GitHub --> <a href="https://github.com/DiMaPaGa/portfolio-cv" target="_blank" rel="noopener noreferrer"> <img src="../../public/images/giticon.png" alt="GitHub" class="w-6 h-6 hover:opacity-80 transition-opacity"> </a> <!-- Icono de LinkedIn --> <a href="https://www.linkedin.com/in/diana-pascual-garc%C3%ADa-47209431/" target="_blank" rel="noopener noreferrer"> <img src="../../public/images/linkedin.png" alt="LinkedIn" class="w-6 h-6 hover:opacity-80 transition-opacity"> </a> <!-- Icono de Correo (copiar email y abrir cliente de correo) --> <button id="emailButton" class="w-6 h-6 hover:opacity-80 transition-opacity"> <img src="/images/correo.png" alt="Correo" class="w-6 h-6"> </button> </div> </footer> <script>
+  // Función para copiar el correo al portapapeles y abrir el cliente de correo
+  document.getElementById('emailButton').addEventListener('click', () => {
+    const email = 'dianamariapascual@gmail.com';
+
+    // Copiar el correo al portapapeles
+    navigator.clipboard.writeText(email).then(() => {
+      alert('Correo copiado: ' + email); // Alerta de confirmación
+      window.location.href = `mailto:${email}`; // Abre el cliente de correo
+    }).catch(err => {
+      console.error('Error al copiar al portapapeles: ', err);
+    });
+  });
+</script> </body></html>

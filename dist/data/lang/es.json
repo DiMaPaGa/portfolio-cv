@@ -1,0 +1,16 @@
+{
+    "navbar": {
+      "aboutMe": "Sobre Mí",
+      "education": "Educación",
+      "workExperience": "Experiencia",
+      "skill": "Habilidades",
+      "project": "Proyectos",
+      "reference": "Referencias",
+      "contact": "Contacto",
+      "lang": "Selecciona Idioma",
+      "admin":"Administración"
+    },
+    "footer": {
+      "copyright": "© 2024 Diana Pascual García. Todos los derechos reservados."
+    }
+}
