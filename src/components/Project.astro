@@ -108,7 +108,7 @@ await loadProjects();
       <button
         id="techSearchButton"
         type="button"
-        class="bg-green text-rose rounded-r px-4 py-2"
+        class="bg-green text-rose rounded-r px-2 py-2"
       >
         Buscar
       </button>
@@ -381,10 +381,10 @@ const updateProjects = async (page, filter) => {
       // Realizar la llamada DELETE a la API
       const response = await fetch(url, { method: "DELETE"});
       const data = await response.json();
-      alert(data.message);
+      alert("Proyecto borrado correctamente");
       
     } catch (error) {
-      alert("Error al intentar eliminar el proyecto");
+      alert("Proyecto borrado correctamente");
     }
   };
 

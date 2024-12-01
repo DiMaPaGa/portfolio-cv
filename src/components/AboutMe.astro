@@ -9,13 +9,13 @@ const { aboutMe } = Astro.props;
       <div class="relative flex-shrink-0">
         <!-- Imagen por defecto -->
         <img
-          src={aboutMe.photo || "../../public/images/iconUser.png"} 
+          src={aboutMe.photo || "/images/iconUser.png"} 
           alt={`Foto de ${aboutMe.name}`}
           class="rounded-full w-48 h-48 sm:w-60 sm:h-60 object-cover shadow-lg transition-all duration-300 ease-in-out"
         />
         <!-- Imagen que aparece al hacer hover -->
         <img
-          src="../../public/images/diana2.png" 
+          src="/images/diana2.png" 
           alt={`Foto alternativa de ${aboutMe.name}`}
           class="absolute inset-0 rounded-full w-full h-full object-cover opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100"
         />
