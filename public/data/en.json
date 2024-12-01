@@ -38,28 +38,28 @@
           {
               "jobTitle": "DUAL Internship in Web Application Development",
               "company": "NTT DATA",
-              "image":"../../public/images/nttdata.png",
+              "image":"/images/nttdata.png",
               "years": "2024-Present",
               "description": "Advanced Java programming, Configuration and management of Maven. Implementation of SLF4J + Logback. Testing with JUnit and Mockito. Code quality validation with SonarLint. Environment and tool updates."
           },
           {
               "jobTitle": "Residence Director",
               "company": "ATUREM",
-              "image":"../../public/images/aturem.png",
+              "image":"/images/aturem.png",
               "years": "2017-2023",
               "description": "Staff seleccion and management. Training design and delivery. Customer service and issue resolution."
           },
           {
               "jobTitle": "Psychologist",
               "company": "ATUREM",
-              "image":"../../public/images/aturem.png",
+              "image":"/images/aturem.png",
               "years": "2014-2017",
               "description": "Quality team member. Trainer for family and self-management programs. Responsible for the Equality Plan. Data analysis and publication writer."
           },
           {
               "jobTitle": "Research Staff",
               "company": "University of Seville and Oregon State University",
-              "image":"../../public/images/oregon.jpg",
+              "image":"/images/oregon.jpg",
               "years": "2008-2012",
               "description": "Design of training and intervention programs. Various research tasks, including reference and database management. Participation in published documents. Family consultant and research assistant. "
           }
@@ -71,30 +71,30 @@
             "frontend": {
               "title": "Front-end",
               "items": [
-                { "name": "HTML", "level": 3, "logo":"../../public/images/html.png"},
-                { "name": "CSS", "level": 3, "logo":"../../public/images/css.png"},
-                { "name": "JavaScript", "level": 2, "logo":"../../public/images/js.png"},
-                { "name": "Tailwind CSS", "level": 2, "logo":"../../public/images/tailwind.png"},
-                { "name": "Astro", "level": 1, "logo":"../../public/images/astro.png"}
+                { "name": "HTML", "level": 3, "logo":"/images/html.png"},
+                { "name": "CSS", "level": 3, "logo":"/images/css.png"},
+                { "name": "JavaScript", "level": 2, "logo":"/images/js.png"},
+                { "name": "Tailwind CSS", "level": 2, "logo":"/images/tailwind.png"},
+                { "name": "Astro", "level": 1, "logo":"/images/astro.png"}
               ]
             },
             "backend": {
               "title": "Back-end",
               "items": [
-                { "name": "Node.js", "level": 2,"logo":"../../public/images/node.png"},
-                { "name": "Java", "level": 2, "logo":"../../public/images/java.png"},
-                { "name": "PHP ", "level": 2, "logo":"../../public/images/php.png"},
-                { "name": "Spring Boot", "level": 2, "logo":"../../public/images/spring.png"},
-                { "name": "MySQL", "level": 2, "logo":"../../public/images/mySQL.png"},
-                { "name": "REST APIs", "level": 2, "logo":"../../public/images/api.png"}
+                { "name": "Node.js", "level": 2,"logo":"/images/node.png"},
+                { "name": "Java", "level": 2, "logo":"/images/java.png"},
+                { "name": "PHP ", "level": 2, "logo":"/images/php.png"},
+                { "name": "Spring Boot", "level": 2, "logo":"/images/spring.png"},
+                { "name": "MySQL", "level": 2, "logo":"/images/mySQL.png"},
+                { "name": "REST APIs", "level": 2, "logo":"/images/api.png"}
               ]
             },
             "devops": {
               "title": "DevOps",
               "items": [
-                { "name": "GitHub Actions", "level": 1, "logo":"../../public/images/github.png"},
-                { "name": "Microsoft Azure", "level": 1, "logo":"../../public/images/azure.png"},
-                { "name": "Git", "level": 2, "logo":"../../public/images/git.png"}
+                { "name": "GitHub Actions", "level": 1, "logo":"/images/github.png"},
+                { "name": "Microsoft Azure", "level": 1, "logo":"/images/azure.png"},
+                { "name": "Git", "level": 2, "logo":"/images/git.png"}
               ]
             }
         }
